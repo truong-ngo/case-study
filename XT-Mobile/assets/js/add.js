@@ -40,7 +40,7 @@ function addModal() {
                 let newTab = new Product(addName,addCategory,addBrand,addPrice,addImage)
                 GalaxyTabArr.push(newTab);
         }
-        reDisplay(editBrandOut);
+        reDisplay(addBrand);
         closeAddModal();
     }
 }
