@@ -218,6 +218,9 @@ html {
     width: 20%;
     height: 30px;
 }
+.modify-btn.hidden {
+    display: none;
+}
  /*Footer*/
 #footer {
     border-top: 1px solid #ccc;

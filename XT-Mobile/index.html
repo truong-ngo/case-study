@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="./assets/font/themify-icons/themify-icons.css">
     <title>XT Mobile</title>
 </head>
-<body>;
+<body onload="displayIPhone()">;
     <!--Header-->
     <div id="header">
         <!--Navigation Bar-->
@@ -65,9 +65,9 @@
                 </a>
             </li>
             <li id="sign-in">
-                <a href="#!" class="header-item">
+                <a onclick="login()" href="#!" class="header-item">
                     <i class="item-icon fa-solid fa-user"></i>
-                    <div class="one-line">Đăng nhập</div>
+                    <div id="user" class="one-line">Đăng nhập</div>
                 </a>
             </li>
         </ul>
@@ -109,7 +109,7 @@
                         </ul>
                     </li>
                     <li class="add-btn">
-                        <button onclick="addProduct()">
+                        <button class="modify-btn hidden" onclick="addProduct()">
                             Thêm sản phẩm
                         </button>
                     </li>
@@ -229,29 +229,30 @@
         </div>
     </div>
 
-<!--    &lt;!&ndash;Modal Login&ndash;&gt;-->
-<!--    <div id="login-modal" class="modal">-->
-<!--        <div class="modal-content">-->
-<!--            <div class="modal-header">-->
-<!--                <img src="./assets/img/logo/logo.png" alt="logo">-->
-<!--            </div>-->
-<!--            <div class="modal-body">-->
-<!--                <label for="username"><p>User:</p></label>-->
-<!--                <input id="username" type="text"><br><br>-->
-<!--                <label for="password"><p>Password:</p></label>-->
-<!--                <input id="password" type="password"><br><br>-->
-<!--            </div>-->
-<!--            <div class="modal-footer">-->
-<!--                <button onclick="editModal()">Login</button>-->
-<!--                <button onclick="closeLoginModal()">Cancel</button>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
+    <!--Modal Login-->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img width="30%" src="./assets/img/logo/logo.png" alt="logo">
+            </div>
+            <div class="modal-body">
+                <label for="username"><p>User:</p></label>
+                <input id="username" type="text"><br><br>
+                <label for="password"><p>Password:</p></label>
+                <input id="password" type="password"><br><br>
+            </div>
+            <div class="modal-footer">
+                <button onclick="validateLogin()">Login</button>
+                <button onclick="closeLoginModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
 </body>
 <script src="assets/js/product.js"></script>
 <script src="assets/js/display.js"></script>
 <script src="assets/js/delete.js"></script>
 <script src="assets/js/edit.js"></script>
 <script src="assets/js/add.js"></script>
+<script src="assets/js/login.js"></script>
 <script src="assets/js/main.js"></script>
 </html>
