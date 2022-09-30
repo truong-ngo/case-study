@@ -22,11 +22,12 @@
                 </a>
             </li>
             <li id="search-bar">
+                <div id="red-dot-number"></div>
                 <a href="#!" class="header-item">
+                    <input onkeydown="searchKeyPress()" id="search-content" type="text">
                     <label for="search-content">
                         <i onclick="searchProduct()" class="item-icon fa-solid fa-magnifying-glass"></i>
                     </label>
-                    <input onkeydown="searchKeyPress()" id="search-content" type="text">
                 </a>
             </li>
             <li id="contact">
@@ -57,7 +58,8 @@
                 </a>
             </li>
             <li id="cart">
-                <a href="#!" class="header-item">
+                <span id="cart-number"></span>
+                <a onclick="openCartModal()" href="#!" class="header-item">
                     <i class="item-icon fa-solid fa-cart-shopping"></i>
                     <div class="one-line">
                         Giỏ hàng
@@ -246,12 +248,30 @@
             </div>
         </div>
     </div>
+
+    <!--Cart Modal-->
+    <div id="cart-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span onclick="closeCartModal()" class="close">&times;</span>
+            <h2 class="modal-heading">Giỏ hàng</h2>
+        </div>
+        <div id="cart-container" class="modal-body">
+
+        </div>
+        <div class="modal-footer">
+            <button onclick="closeCartModal()">Close</button>
+            <button onclick="clearCart()">Clear</button>
+        </div>
+    </div>
+</div>
 </body>
 <script src="assets/js/product.js"></script>
 <script src="assets/js/display.js"></script>
 <script src="assets/js/delete.js"></script>
 <script src="assets/js/edit.js"></script>
 <script src="assets/js/add.js"></script>
+<script src="assets/js/cart.js"></script>
 <script src="assets/js/login.js"></script>
 <script src="assets/js/search.js"></script>
 <script src="assets/js/main.js"></script>

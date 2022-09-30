@@ -68,3 +68,5 @@ let GalaxyTabS7 = new Product("Galaxy Tab S7","Tablet","Galaxy-Tab","18000000","
 let GalaxyTabS8 = new Product("Galaxy Tab S8","Tablet","Galaxy-Tab","26000000","assets/img/product/tablet/samsung/samsung-galaxy-tab-s8.jpg")
 
 let GalaxyTabArr = [GalaxyTabS7,GalaxyTabS8];
+
+let cart = [];

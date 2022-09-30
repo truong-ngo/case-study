@@ -73,7 +73,6 @@ html {
     outline: none;
     border: none;
     width: 100%;
-
 }
 #nav-bar #search-bar input {
     text-align: left;
@@ -84,8 +83,25 @@ html {
 #nav-bar #contact div {
     display: inline-block;
 }
-#nav-bar #sign-in {
-    border-radius: 10px;
+#nav-bar #cart {
+    position: relative;
+}
+#nav-bar #cart #cart-number {
+    border-radius: 50%;
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: red;
+    width: 25px;
+    height: 25px;
+    transform: translateX(50%);
+    line-height: 25px;
+}
+#nav-bar #cart:hover {
+    background-color: orange;
+}
+#nav-bar #sign-in:hover {
     background-color: orange;
     display: inline-block;
 }
@@ -216,6 +232,8 @@ html {
 #content-box .product-cart button {
     width: 40px;
     height: 40px;
+    cursor: pointer;
+    font-size: 20px;
 }
 #content-box .product-item:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
@@ -233,6 +251,7 @@ html {
     margin: 4px;
     width: 20%;
     height: 30px;
+    cursor: pointer;
 }
 .modify-btn.hidden {
     display: none;
@@ -405,4 +424,54 @@ html {
 .modal-footer button {
     height: 32px;
     width: 100px;
+    cursor: pointer;
+}
+
+/*Cart modal*/
+#cart-modal .modal-content {
+    /*top: 50%;*/
+    /*transform: translateY(-50%);*/
+    /*position: relative;*/
+    /*background-color: #fefefe;*/
+    /*margin: auto;*/
+    /*padding: 0;*/
+    /*border: 1px solid #888;*/
+    /*width: 50%;*/
+    /*box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);*/
+}
+#cart-container .product-box {
+    display: flex;
+    align-items: center;
+}
+#cart-container .cart-image {
+    width: 25%;
+}
+#cart-container .product-desc {
+    width: 50%;
+}
+#cart-container .remove-product {
+    width: 25%;
+}
+.cart-image,.product-desc,.remove-product {
+    display: inline-block;
+}
+#cart-container p {
+    display: block;
+}
+#cart-container .cart-image img {
+    width: 80%;
+    text-align: right;
+}
+#cart-container .price {
+    color: red;
+}
+#cart-container .bold {
+    font-weight: bold;
+    font-size: 20px;
+}
+#cart-container button {
+    width: 70px;
+    height: 70px;
+    font-size: 35px;
+    cursor: pointer;
 }
