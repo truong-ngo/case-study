@@ -20,6 +20,8 @@ function addToCart(i,brand) {
     if (cart.length >=1 ) {
         document.getElementById("cart-number").innerHTML = cart.length.toString();
         document.getElementById("cart-number").style.display = "block";
+    } else {
+        document.getElementById("cart-number").style.display = "none";
     }
 }
 function displayCart(cart) {
@@ -43,8 +45,9 @@ function displayCart(cart) {
 }
 function clearCart() {
     document.getElementById("cart-container").innerHTML = '';
+    document.getElementById("cart-number").innerHTML = '';
+    document.getElementById("cart-number").style.display = "none";
     cart = [];
-    console.log(cart);
 }
 function removeProduct(i) {
     if (cart.length === 1) {
