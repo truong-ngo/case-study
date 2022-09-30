@@ -3,6 +3,7 @@ function displayProduct(arrayProduct) {
     if (document.getElementById("user").innerHTML === 'Admin') {
         for (let i = 0; i < arrayProduct.length; i++) {
             dataHtml += '<div class="product-item">';
+            dataHtml += `<div class="product-cart" id="addProductToCart(${i},'${arrayProduct[i].getBrand()}')"><button><i class="fa-solid fa-cart-shopping"></i></button></div>`
             dataHtml += `<div class="image-container"><img class="product-image" alt="Product Image" src=${arrayProduct[i].getImage()}></div>`;
             dataHtml += `<p class="product-name">${arrayProduct[i].getName()}</p>`;
             dataHtml += `<p class="product-price">${convertPrice(arrayProduct[i].getPrice())} VNĐ</p>`;
@@ -13,6 +14,7 @@ function displayProduct(arrayProduct) {
     } else {
         for (let i = 0; i < arrayProduct.length; i++) {
             dataHtml += '<div class="product-item">';
+            dataHtml += `<div class="product-cart" id="addProductToCart(${i},'${arrayProduct[i].getBrand()}')"><button><i class="fa-solid fa-cart-shopping"></i></button></div>`
             dataHtml += `<div class="image-container"><img class="product-image" alt="Product Image" src=${arrayProduct[i].getImage()}></div>`;
             dataHtml += `<p class="product-name">${arrayProduct[i].getName()}</p>`;
             dataHtml += `<p class="product-price">${convertPrice(arrayProduct[i].getPrice())} VNĐ</p>`;
