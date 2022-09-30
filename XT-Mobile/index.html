@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/font/fontawesome-free-6.2.0-web/css/all.css">
+    <link rel="stylesheet" href="./assets/font/themify-icons/themify-icons.css">
+    <title>XT Mobile</title>
+</head>
+<body>;
+    <!--Header-->
+    <div id="header">
+        <!--Navigation Bar-->
+
+        <ul id="nav-bar">
+            <li id="logo">
+                <a href="">
+                    <img src="./assets/img/logo/logo.png" alt="logo">
+                </a>
+            </li>
+            <li id="search-bar">
+                <a href="#!" class="header-item">
+                    <label for="search-content">
+                        <i class="item-icon fa-solid fa-magnifying-glass"></i>
+                    </label>
+                    <input id="search-content" type="text">
+                </a>
+            </li>
+            <li id="contact">
+                <a href="#!" class="header-item">
+                    <i class="item-icon fa-solid fa-phone"></i>
+                    <div class="two-line">
+                        <p>Gọi mua hàng</p>
+                        <p>19001993</p>
+                    </div>
+                </a>
+            </li>
+            <li id="location">
+                <a href="#!" class="header-item">
+                    <i class="item-icon fa-solid fa-location-dot"></i>
+                    <div class="two-line">
+                        <p>Cửa hàng</p>
+                        <p>gần bạn</p>
+                    </div>
+                </a>
+            </li>
+            <li id="shipment">
+                <a href="#!" class="header-item">
+                    <i class="item-icon fa-solid fa-truck-fast"></i>
+                    <div class="two-line">
+                        <p>Tra cứu</p>
+                        <p>đơn hàng</p>
+                    </div>
+                </a>
+            </li>
+            <li id="cart">
+                <a href="#!" class="header-item">
+                    <i class="item-icon fa-solid fa-cart-shopping"></i>
+                    <div class="one-line">
+                        Giỏ hàng
+                    </div>
+                </a>
+            </li>
+            <li id="sign-in">
+                <a href="#!" class="header-item">
+                    <i class="item-icon fa-solid fa-user"></i>
+                    <div class="one-line">Đăng nhập</div>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!--Content-->
+    <div id="content">
+    <!--Slider-->
+        <div id="slider">
+            <img class="sliders" src="./assets/img/slider/slide1.jpg" alt="slider">
+            <img class="sliders" src="./assets/img/slider/slide2.jpg" alt="slider">
+            <img class="sliders" src="./assets/img/slider/slide3.jpg" alt="slider">
+            <img class="sliders" src="./assets/img/slider/slide4.jpg" alt="slider">
+        </div>
+        <!--Content cover-->
+        <div id="content-cover">
+            <!--Size-bar-->
+            <div id="side-bar">
+                <ul id="side-bar-menu">
+                    <li>
+                        <a class="sub-menu-top" href="#!">
+                            <i class="side-bar-icon fa-solid fa-mobile-screen-button"></i>
+                            <p>Điện thoại</p>
+                        </a>
+                        <ul id="sub-menu-1" class="sub-item">
+                            <li><a onclick="displayIPhone()" href="#!">iPhone</a></li>
+                            <li><a onclick="displaySamsung()" href="#!">Samsung</a></li>
+                            <li><a onclick="displayPixel()" href="#!">Pixel</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="sub-menu-bottom" href="#!">
+                            <i class="side-bar-icon fa-solid fa-tablet-screen-button"></i>
+                            <p>Máy tính bảng</p>
+                        </a>
+                        <ul id="sub-menu-2" class="sub-item">
+                            <li><a onclick="displayIpad()" href="#!">iPad</a></li>
+                            <li><a onclick="displayGalaxyTab()" href="#!">Samsung Tab</a></li>
+                        </ul>
+                    </li>
+                    <li class="add-btn">
+                        <button onclick="addProduct()">
+                            Thêm sản phẩm
+                        </button>
+                    </li>
+                </ul>
+                <div id="side-banner">
+
+                </div>
+            </div>
+            <!--Content Box-->
+            <div id="content-box"></div>
+        </div>
+    </div>
+
+    <!--Footer-->
+    <div id="footer">
+        <div class="footer-item" id="shop-system">
+            <p class="footer-heading">HỆ THỐNG CỬA HÀNG</p>
+            <p class="sub-heading">KHU VỰC HÀ NỘI</p>
+            <div class="shop-info">
+                <i class="footer-icon fa-solid fa-location-dot"></i>
+                <p class="address">Phù Lỗ, Sóc Sơn, Hà Nội</p>
+                <p class="tel">Tel: 0123 456 789</p>
+            </div>
+            <p class="sub-heading">KHU VỰC HCM</p>
+            <div class="shop-info">
+                <i class="footer-icon fa-solid fa-location-dot"></i>
+                <p class="address">Quang Trung, P.10, Gò Vấp, Hồ Chí Minh</p>
+                <p class="tel">Tel: 0987 654 321</p>
+            </div>
+            <p class="sub-heading">HOTLINE: <span>0978 645.231</span></p>
+        </div>
+        <div class="footer-item" id="customer-care">
+            <p class="footer-heading">CHĂM SÓC KHÁCH HÀNG</p>
+            <ul>
+                <li>Giới thiệu</li>
+                <li>Liên hệ</li>
+                <li>Tuyển dụng</li>
+                <li>Mua trả góp</li>
+                <li>Hướng dẫn mua hàng - thanh toán</li>
+                <li>Chính sách bảo hành - đổi trả</li>
+                <li>Chính sách giao hàng</li>
+                <li>Chính sách bảo mật thông tin khách hàng</li>
+                <li>Khiếu nại dịch vụ: <span>0789 456 123</span> (8:00 - 21:30)</li>
+                <li>Hợp tác kinh doanh: <span>0456 123 789</span></li>
+            </ul>
+        </div>
+        <div class="footer-item" id="contact-us">
+            <p class="footer-heading">ĐĂNG KÝ NHẬN TIN</p>
+            <p class="contact-desc">Mỗi tháng chúng tôi đều có những đợt giảm giá dịch vụ và sản phẩm nhằm tri ân khách hàng. Để có thể cập nhật kịp thời những đợt giảm giá này, vui lòng nhập địa chỉ email của bạn vào ô dưới đây.</p>
+            <div class="input-email">
+                <input type="text" placeholder="Nhập địa chỉ email của bạn">
+                <button><i class="send-icon fa-solid fa-paper-plane"></i></button></div>
+            <div class="media">
+
+            </div>
+            <div class="social">
+                <img class="social-img" src="./assets/img/social-icon/social-icon.png" alt="social">
+            </div>
+            <p class="sub-heading">HỖ TRỢ TRẢ GÓP</p>
+            <div class="footer-image">
+                <img class="bank-support" src="./assets/img/footer-icon/logobank.png" alt="bank">
+                <img class="certificate" src="./assets/img/footer-icon/logoSaleNoti.png" alt="">
+                <img class="dcma" src="./assets/img/footer-icon/logodcma.png">
+            </div>
+        </div>
+    </div>
+
+    <!--Modal edit-->
+    <div id="edit-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span onclick="closeEditModal()" class="close">&times;</span>
+                <h2 class="modal-heading">Chỉnh sửa sản phẩm</h2>
+
+            </div>
+            <div class="modal-body">
+                <label for="edit-name"><p>Tên sản phẩm:</p></label>
+                <input id="edit-name" type="text"><br><br>
+                <label for="edit-brand"><p>Thương hiệu:</p></label>
+                <input id="edit-brand" type="text"><br><br>
+                <label for="edit-category"><p>Chủng loại:</p></label>
+                <input id="edit-category" type="text"><br><br>
+                <label for="edit-price"><p>Giá:</p></label>
+                <input id="edit-price" type="number"><br><br>
+                <label for="edit-image"><p>Hình ảnh (url):</p></label>
+                <input id="edit-image" type="text">
+            </div>
+            <div class="modal-footer">
+                <button onclick="editModal()">Chỉnh sửa</button>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal add product-->
+    <div id="add-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span onclick="closeAddModal()" class="close">&times;</span>
+                <h2 class="modal-heading">Thêm sản phẩm</h2>
+
+            </div>
+            <div class="modal-body">
+                <label for="add-name"><p>Tên sản phẩm:</p></label>
+                <input id="add-name" type="text"><br><br>
+                <label for="add-brand"><p>Thương hiệu:</p></label>
+                <input id="add-brand" type="text"><br><br>
+                <label for="add-category"><p>Chủng loại:</p></label>
+                <input id="add-category" type="text"><br><br>
+                <label for="add-price"><p>Giá:</p></label>
+                <input id="add-price" type="number"><br><br>
+                <label for="add-image"><p>Hình ảnh (url):</p></label>
+                <input id="add-image" type="text">
+            </div>
+            <div class="modal-footer">
+                <button onclick="addModal()">Thêm</button>
+            </div>
+        </div>
+    </div>
+
+<!--    &lt;!&ndash;Modal Login&ndash;&gt;-->
+<!--    <div id="login-modal" class="modal">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <img src="./assets/img/logo/logo.png" alt="logo">-->
+<!--            </div>-->
+<!--            <div class="modal-body">-->
+<!--                <label for="username"><p>User:</p></label>-->
+<!--                <input id="username" type="text"><br><br>-->
+<!--                <label for="password"><p>Password:</p></label>-->
+<!--                <input id="password" type="password"><br><br>-->
+<!--            </div>-->
+<!--            <div class="modal-footer">-->
+<!--                <button onclick="editModal()">Login</button>-->
+<!--                <button onclick="closeLoginModal()">Cancel</button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+</body>
+<script src="assets/js/product.js"></script>
+<script src="assets/js/display.js"></script>
+<script src="assets/js/delete.js"></script>
+<script src="assets/js/edit.js"></script>
+<script src="assets/js/add.js"></script>
+<script src="assets/js/main.js"></script>
+</html>
