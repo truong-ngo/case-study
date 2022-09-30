@@ -27,7 +27,7 @@ let iPhone11Pro = new Product("iPhone 11 Pro","Phone","iPhone",12000000,'assets/
 let iPhone11ProMax = new Product("iPhone 11 Pro Max","Phone","iPhone",13000000,'assets/img/product/phone/iphone/iphone-11-pro-max.jpg')
 let iPhone12 = new Product("iPhone 12","Phone","iPhone",15000000,'assets/img/product/phone/iphone/iphone-12.jpg')
 let iPhone12Mini = new Product("iPhone 12 Mini","Phone","iPhone",11000000,'assets/img/product/phone/iphone/iphone-12-mini.jpg')
-let iPhone12Pro = new Product("iPhone12 Pro","Phone","iPhone",176000000,'assets/img/product/phone/iphone/iphone-12-pro.jpg')
+let iPhone12Pro = new Product("iPhone12 Pro","Phone","iPhone",17600000,'assets/img/product/phone/iphone/iphone-12-pro.jpg')
 let iPhone12ProMax = new Product("iPhone 12 Pro Max","Phone","iPhone",19000000,'assets/img/product/phone/iphone/iphone-12-pro-max.jpg')
 let iPhone13 = new Product("iPhone 13","Phone","iPhone",18000000,'assets/img/product/phone/iphone/iphone-13.jpg')
 let iPhone13Mini = new Product("iPhone 13 Mini","Phone","iPhone",11000000,'assets/img/product/phone/iphone/iphone-13-mini.jpg')
@@ -43,7 +43,7 @@ let samsungS21 = new Product("Galaxy S21","Phone","Samsung",11000000,'assets/img
 let samsungS21Plus = new Product("Galaxy S21 Plus","Phone","Samsung",13000000,'assets/img/product/phone/samsung/galaxy-s21+.jpg')
 let samsungS21Ultra = new Product("Galaxy S21 Ultra","Phone","Samsung",15000000,'assets/img/product/phone/samsung/galaxy-s21ultra.jpg')
 let samsungS22 = new Product("Galaxy S22","Phone","Samsung",16000000,'assets/img/product/phone/samsung/galaxy-s22.jpg')
-let samsungS22Plus = new Product("Galaxy S22 Plus","Phone","Samsung",1900000,'assets/img/product/phone/samsung/galaxy-s22+.jpg')
+let samsungS22Plus = new Product("Galaxy S22 Plus","Phone","Samsung",19000000,'assets/img/product/phone/samsung/galaxy-s22+.jpg')
 let samsungS22Ultra = new Product("Galaxy S22 Ultra","Phone","Samsung",24000000,'assets/img/product/phone/samsung/galaxy-s22ultra.jpg')
 
 let samsungPhoneArr = [samsungS20,samsungS20Plus,samsungS20Ultra,samsungS21,samsungS21Plus,samsungS21Ultra,samsungS22,samsungS22Plus,samsungS22Ultra];

@@ -1,7 +1,9 @@
 const DEFAULT_USERNAME = "admin";
 const DEFAULT_PASSWORD = "123456";
 function login() {
-    openLoginModal()
+    if (document.getElementById("user").innerHTML === 'Admin') {} else {
+        openLoginModal()
+    }
 }
 function openLoginModal() {
     let modal = document.getElementById("login-modal");
@@ -21,5 +23,7 @@ function validateLogin() {
             btn.classList.remove('hidden');
         }
         closeLoginModal();
+    } else {
+        alert("Sai mật khẩu");
     }
 }

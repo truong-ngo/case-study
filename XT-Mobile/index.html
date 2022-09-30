@@ -24,9 +24,9 @@
             <li id="search-bar">
                 <a href="#!" class="header-item">
                     <label for="search-content">
-                        <i class="item-icon fa-solid fa-magnifying-glass"></i>
+                        <i onclick="searchProduct()" class="item-icon fa-solid fa-magnifying-glass"></i>
                     </label>
-                    <input id="search-content" type="text">
+                    <input onkeydown="searchKeyPress()" id="search-content" type="text">
                 </a>
             </li>
             <li id="contact">
@@ -183,7 +183,6 @@
             <div class="modal-header">
                 <span onclick="closeEditModal()" class="close">&times;</span>
                 <h2 class="modal-heading">Chỉnh sửa sản phẩm</h2>
-
             </div>
             <div class="modal-body">
                 <label for="edit-name"><p>Tên sản phẩm:</p></label>
@@ -254,5 +253,6 @@
 <script src="assets/js/edit.js"></script>
 <script src="assets/js/add.js"></script>
 <script src="assets/js/login.js"></script>
+<script src="assets/js/search.js"></script>
 <script src="assets/js/main.js"></script>
 </html>

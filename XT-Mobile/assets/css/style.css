@@ -185,7 +185,7 @@ html {
     display: block;
 }
 .sub-item > li:hover > a {
-    background-color: #5f6062;
+    background-color: #cccccc;
 }
 #side-banner {
     background-image: url("https://i.vietgiaitri.com/2018/12/9/20-mau-thiet-ke-nut-banner-truyen-cam-hung-cho-cac-thuong-hieu-99ed4e.jpg");
@@ -211,7 +211,12 @@ html {
 }
 #content-box .product-name,#content-box .product-price {
     font-size: 20px;
-    margin: 3px;
+    margin: 8px;
+}
+#content-box .product-price {
+    color: red;
+    font-size: 20px;
+    font-weight: bold;
 }
 #content-box .modify-btn {
     margin: 4px;
