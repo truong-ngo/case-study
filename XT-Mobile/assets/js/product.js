@@ -64,8 +64,8 @@ let iPadProM1 = new Product("Ipad Pro M1","Tablet","iPad",19000000,"assets/img/p
 
 let iPadArr = [iPadGen10,iPadAir5,iPadMini6,iPadProM1];
 
-let GalaxyTabS7 = new Product("Galaxy Tab S7","Tablet","Galaxy-Tab","18000000","assets/img/product/tablet/samsung/samsung-galaxy-tab-s7.jpg")
-let GalaxyTabS8 = new Product("Galaxy Tab S8","Tablet","Galaxy-Tab","26000000","assets/img/product/tablet/samsung/samsung-galaxy-tab-s8.jpg")
+let GalaxyTabS7 = new Product("Galaxy Tab S7","Tablet","Galaxy-Tab",18000000,"assets/img/product/tablet/samsung/samsung-galaxy-tab-s7.jpg")
+let GalaxyTabS8 = new Product("Galaxy Tab S8","Tablet","Galaxy-Tab",26000000,"assets/img/product/tablet/samsung/samsung-galaxy-tab-s8.jpg")
 
 let GalaxyTabArr = [GalaxyTabS7,GalaxyTabS8];
 
