@@ -18,7 +18,7 @@ public class UserMenuPrinter {
     public void printCartManager(User user) {
         String format = "│ %-45s │\n";
         System.out.println("┌─────────────────[User Page]───────────────────┐");
-        System.out.printf(format, "USER: " + user.getUserName() + "cart");
+        System.out.printf(format, "USER: " + user.getUserName());
         System.out.println("├───────────────────────────────────────────────┤");
         System.out.printf(format, "▶[1]. Display Cart.");
         System.out.printf(format, "▶[2]. Return.");
@@ -29,11 +29,12 @@ public class UserMenuPrinter {
     public void printViewProductMenu(User user) {
         String format = "│ %-45s │\n";
         System.out.println("┌─────────────────[User Page]───────────────────┐");
-        System.out.printf(format, "USER: " + user.getUserName() + "cart");
+        System.out.printf(format, "USER: " + user.getUserName());
         System.out.println("├───────────────────────────────────────────────┤");
         System.out.printf(format, "▶[1]. Add Product to Cart.");
         System.out.printf(format, "▶[0]. Return.");
         System.out.println("└───────────────────────────────────────────────┘");
+        System.out.println("☞ Enter your choice:");
     }
 
 }

@@ -47,6 +47,10 @@ public class UserMenu {
                     resource.manager.getProductManager().displayAll(resource);
                     runAddToCartMenu(scanner, resource, user);
                     break;
+                case 2:
+                    runSearchMenu(scanner, resource);
+                    runAddToCartMenu(scanner, resource, user);
+                    break;
                 case 0:
                     check = false;
             }
@@ -57,7 +61,7 @@ public class UserMenu {
         boolean check = true;
         while (check) {
             resource.printer.userMenuPrinter.printViewProductMenu(user);
-            String string = resource.input.cartInput.addToCartInput(scanner);
+            String string = scanner.nextLine();
             int choice = -1;
             if (resource.input.validateMenuChoice.validateAddToCartChoice(string)) {
                 choice = Integer.parseInt(string);
@@ -66,18 +70,18 @@ public class UserMenu {
             }
             switch (choice) {
                 case 1:
-                    while (true) {
-                        int addChoice = -1;
-                        String str = resource.input.cartInput.addToCartInput(scanner);
-                        if (resource.input.validateMenuChoice.validateIdChoice(str)) {
-                            int id = Integer.parseInt(str);
-                            if (resource.manager.getProductManager().checkId(id)) {
-
-                            }
+                    String str = resource.input.cartInput.addToCartInput(scanner);
+                    if (resource.input.validateMenuChoice.validateIdChoice(str)) {
+                        int id = Integer.parseInt(str);
+                        if (resource.manager.getProductManager().checkId(id)) {
+                            System.out.println("✅ Add to cart successfully");
                         } else {
-                            resource.printer.reChoice();
+                            System.out.println("⛔ Id doesnt exist");
                         }
+                    } else {
+                        resource.printer.reChoice();
                     }
+                    break;
                 case 0:
                     check = false;
             }
