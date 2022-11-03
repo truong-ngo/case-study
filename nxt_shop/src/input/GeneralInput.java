@@ -4,7 +4,6 @@ public class GeneralInput {
     public ValidateMenuChoice validateMenuChoice;
     public LoginInput loginInput;
     public ProductInput productInput;
-
     public CartInput cartInput;
 
     public GeneralInput() {

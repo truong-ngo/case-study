@@ -2,7 +2,7 @@ package product;
 
 import java.io.Serializable;
 
-public abstract class Product implements Comparable<Product>, Serializable {
+public abstract class Product implements Serializable,Comparable<Product> {
     private Integer id;
     private String name;
     private String brand;

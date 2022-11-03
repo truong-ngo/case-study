@@ -36,8 +36,9 @@ public class MainMenuPrinter {
         System.out.println("├───────────────────────────────────────────────┤");
         System.out.printf(format, "▶[1]. View All Product.");
         System.out.printf(format, "▶[2]. Search Product.");
-        System.out.printf(format, "▶[3]. Cart Manager.");
-        System.out.printf(format, "▶[4]. Account.");
+        System.out.printf(format, "▶[3]. Sort by Price.");
+        System.out.printf(format, "▶[4]. Cart Manager.");
+        System.out.printf(format, "▶[5]. Account Manager.");
         System.out.printf(format, "▶[0]. Sign Out.");
         System.out.println("└───────────────────────────────────────────────┘");
         System.out.println("☞ Enter your choice:");

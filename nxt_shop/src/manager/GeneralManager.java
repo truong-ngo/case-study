@@ -2,13 +2,17 @@ package manager;
 
 import user.User;
 
-public class GeneralManager {
+import java.io.Serializable;
+
+public class GeneralManager implements Serializable {
     private ProductManager productManager;
     private UserManager userManager;
+    private CartManager cartManager;
 
     public GeneralManager() {
         productManager = new ProductManager();
         userManager = new UserManager();
+        cartManager = new CartManager();
     }
 
     public ProductManager getProductManager() {
@@ -17,5 +21,9 @@ public class GeneralManager {
 
     public UserManager getUserManager() {
         return userManager;
+    }
+
+    public CartManager getCartManager() {
+        return cartManager;
     }
 }

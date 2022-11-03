@@ -6,6 +6,7 @@ public class GeneralPrinter {
     public final ProductManagerPrinter productManagerPrinter;
     public final UserManagerPrinter userManagerPrinter;
     public final UserMenuPrinter userMenuPrinter;
+    public final CartManagerPrinter cartManagerPrinter;
 
     public GeneralPrinter() {
         menuPrinter = new MainMenuPrinter();
@@ -13,10 +14,11 @@ public class GeneralPrinter {
         productManagerPrinter = new ProductManagerPrinter();
         userManagerPrinter = new UserManagerPrinter();
         userMenuPrinter = new UserMenuPrinter();
+        cartManagerPrinter = new CartManagerPrinter();
     }
 
     public void reChoice() {
-        System.out.println("⛔ Wrong input, please re-choice.");
+        System.out.println("⛔ Invalid choice, please re-select.");
     }
 
 }

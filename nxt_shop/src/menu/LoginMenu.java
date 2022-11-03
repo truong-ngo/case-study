@@ -1,5 +1,6 @@
 package menu;
 
+import user.Cart;
 import user.User;
 
 import java.util.Scanner;
@@ -28,7 +29,7 @@ public class LoginMenu {
                     if (resource.input.loginInput.validateUser(data, resource.manager.getUserManager().getUsers())) {
                         resource.printer.loginMenuPrinter.logInSuccessful();
                         User user = resource.manager.getUserManager().getUserByName(data[0]);
-                        userMenu.runCartMenu(scanner, resource, user);
+                        userMenu.runUserMenu(scanner, resource, user);
                     } else {
                         resource.printer.loginMenuPrinter.logInFail();
                     }
@@ -68,7 +69,9 @@ public class LoginMenu {
                         resource.printer.loginMenuPrinter.userNameExist();
                     } else {
                         User newUser = new User(data[0], data[1]);
+                        Cart newCart = new Cart(newUser);
                         resource.manager.getUserManager().add(newUser);
+                        resource.manager.getCartManager().add(newCart);
                         resource.printer.loginMenuPrinter.signUpSuccessful();
                     }
                     break;

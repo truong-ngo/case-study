@@ -6,7 +6,6 @@ public class GeneralMenu {
     public MainMenu mainMenu;
     public Resource resource;
 
-
     public GeneralMenu() {
         mainMenu = new MainMenu();
         resource = new Resource();

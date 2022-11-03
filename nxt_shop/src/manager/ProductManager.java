@@ -52,25 +52,29 @@ public class ProductManager implements ManagerList<Product>, Serializable {
         resource.printer.productManagerPrinter.printProduct(sortedList);
     }
 
-    public void searchByName(String name, Resource resource) {
+    public boolean searchByName(String name, Resource resource) {
         List<Product> lists = products;
         List<Product> searchLists = resource.input.productInput.checkName(name, lists);
         if (searchLists.isEmpty()) {
             System.out.println("⛔ No match product");
+            return false;
         } else {
             System.out.println("☑ Search result: ");
             resource.printer.productManagerPrinter.printProduct(searchLists);
+            return true;
         }
     }
 
-    public void searchByBrand(String name, Resource resource) {
+    public boolean searchByBrand(String name, Resource resource) {
         List<Product> lists = products;
         List<Product> searchLists = resource.input.productInput.checkBrand(name, lists);
         if (searchLists.isEmpty()) {
             System.out.println("⛔ No match product");
+            return false;
         } else {
             System.out.println("☑ Search result: ");
             resource.printer.productManagerPrinter.printProduct(searchLists);
+            return true;
         }
     }
 
@@ -81,5 +85,14 @@ public class ProductManager implements ManagerList<Product>, Serializable {
             }
         }
         return false;
+    }
+
+    public Product getProductById(int id) {
+        for (Product product : products) {
+            if (product.getId() == id) {
+                return product;
+            }
+        }
+        return null;
     }
 }

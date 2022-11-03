@@ -5,11 +5,8 @@ import java.io.Serializable;
 public class User implements Serializable {
     private String userName;
     private String password;
-
     private String email;
-
     private String phoneNumber;
-
     private String role;
 
     public User() {

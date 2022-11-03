@@ -18,14 +18,26 @@ public class ValidateMenuChoice extends Input {
     }
 
     public boolean validateCartChoice(String choice) {
-        return validate(choice, Regex.CART_CHOICE);
+        return validate(choice, Regex.USER_CHOICE);
     }
 
     public boolean validateAddToCartChoice(String choice) {
         return validate(choice, Regex.ADD_TO_CART_CHOICE);
     }
 
-    public boolean validateIdChoice(String choice) {
-        return validate(choice, Regex.ID_CHOICE);
+    public boolean validateIdInput(String choice) {
+        return validate(choice, Regex.ID_INPUT);
+    }
+
+    public boolean validateQuantityInput(String choice) {
+        return validate(choice, Regex.QUANTITY_INPUT);
+    }
+
+    public boolean validateCartManagerChoice(String choice) {
+        return validate(choice, Regex.CART_MANAGER_CHOICE);
+    }
+
+    public boolean validateAccountManagerChoice(String choice) {
+        return validate(choice, Regex.ACCOUNT_MANAGER_CHOICE);
     }
 }

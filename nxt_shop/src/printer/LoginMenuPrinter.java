@@ -39,4 +39,12 @@ public class LoginMenuPrinter {
     public void userNameExist() {
         System.out.println("⛔ Username already exist");
     }
+
+    public void passWordChanged() {
+        System.out.println("✅ Password changed");
+    }
+
+    public void passWordNotChanged() {
+        System.out.println("⛔ Password not change");
+    }
 }

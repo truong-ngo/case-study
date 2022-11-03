@@ -4,7 +4,6 @@ import io_file.IOFile;
 import user.User;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserManager implements ManagerList<User>, Serializable {

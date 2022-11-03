@@ -40,4 +40,9 @@ public class LoginInput {
         }
         return false;
     }
+
+    public String changePasswordInput(Scanner scanner) {
+        System.out.println("▶ Enter Password:");
+        return scanner.nextLine();
+    }
 }
