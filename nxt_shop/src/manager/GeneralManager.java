@@ -1,9 +1,5 @@
 package manager;
 
-import user.User;
-
-import java.io.Serializable;
-
 public class GeneralManager {
     private ProductManager productManager;
     private UserManager userManager;

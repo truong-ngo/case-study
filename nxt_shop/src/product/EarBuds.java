@@ -8,8 +8,8 @@ public class EarBuds extends Product implements Serializable {
     private String connectType;
     boolean waterResistance;
 
-    public EarBuds(int id, String name, String brand, int price, int quantity, Category category, String connectType, boolean isWaterResistance) {
-        super(id, name, brand, price, quantity, category);
+    public EarBuds(String name, String brand, int price, int quantity, Category category, String connectType, boolean isWaterResistance) {
+        super(name, brand, price, quantity, category);
         this.connectType = connectType;
         this.waterResistance = isWaterResistance;
     }
@@ -32,8 +32,8 @@ public class EarBuds extends Product implements Serializable {
 
     @Override
     public String getDescription() {
-        return getCategory().getName() + ", connect type: " +
-               connectType + ", water resistance: " + waterResistance;
+        String content = (waterResistance) ? "yes" : "no";
+        return "connect type: " + connectType + ", water resistance: " + content;
     }
 
     @Override

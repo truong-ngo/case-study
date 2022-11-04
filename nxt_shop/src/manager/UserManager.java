@@ -1,16 +1,14 @@
 package manager;
 
 import io_file.IOFile;
-import user.User;
-
-import java.io.Serializable;
+import shop_item.User;
 import java.util.List;
 
 public class UserManager implements ManagerList<User> {
     private final List<User> users;
     private final User ADMIN = new User("admin","123456");
     private final String path = "src/file/users";
-    private IOFile<User> ioFile;
+    private final IOFile<User> ioFile;
 
     public UserManager() {
         ioFile = new IOFile<>();
@@ -23,14 +21,6 @@ public class UserManager implements ManagerList<User> {
 
     public List<User> getUsers() {
         return users;
-    }
-
-    public IOFile<User> getIoFile() {
-        return ioFile;
-    }
-
-    public String getPath() {
-        return path;
     }
 
     public User getUserByName(String name) {

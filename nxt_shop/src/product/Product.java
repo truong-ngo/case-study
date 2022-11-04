@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public abstract class Product implements Serializable,Comparable<Product> {
     private static final long serialVersionUID = 42L;
+    private static Integer ID_COUNT = 0;
     private Integer id;
     private String name;
     private String brand;
@@ -11,8 +12,8 @@ public abstract class Product implements Serializable,Comparable<Product> {
     private int quantity;
     private Category category;
 
-    public Product(int id, String name, String brand, int price, int quantity, Category category) {
-        this.id = id;
+    public Product(String name, String brand, int price, int quantity, Category category) {
+        id = ++ID_COUNT;
         this.name = name;
         this.brand = brand;
         this.price = price;
@@ -20,12 +21,12 @@ public abstract class Product implements Serializable,Comparable<Product> {
         this.category = category;
     }
 
-    public int getId() {
-        return id;
+    public void setIdCount(int newCount) {
+        Product.ID_COUNT = newCount;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getId() {
+        return id;
     }
 
     public String getName() {

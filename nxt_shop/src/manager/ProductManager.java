@@ -1,5 +1,6 @@
 package manager;
 
+import io_file.IOFile;
 import menu.Resource;
 import product.*;
 
@@ -9,25 +10,38 @@ import java.util.Collections;
 import java.util.List;
 
 public class ProductManager implements ManagerList<Product> {
-    private List<Product> products;
+    private final List<Product> products;
+    private final IOFile<Product> ioFile;
+    private final String path = "src/file/products";
 
     public ProductManager() {
-        products = new ArrayList<>();
-        Product mobile = new Mobile(1,"Pixel 7","Google", 18000000, 10, new Category("Mobile", "Electric Device"), "5g", "90Hz");
-        Product laptop = new Laptop(2,"Surface 5","Microsoft", 27000000, 10, new Category("Laptop", "Electric Device"), "14 inch", "compact");
-        Product earBud = new EarBuds(3,"LG FN4","LG", 1000000, 10, new Category("Ear Buds", "Accessories"), "bluetooth", true);
-        products.add(mobile);
-        products.add(laptop);
-        products.add(earBud);
+        ioFile = new IOFile<>();
+        products = ioFile.readFile(path);
+        if (!products.isEmpty()) {
+            int id = getLast().getId();
+            getLast().setIdCount(id);
+        }
+//        Product mobile = new Mobile("Pixel 7","Google", 18000000, 10, new Category("Mobile"), "5g", "90Hz");
+//        Product laptop = new Laptop("Surface 5","Microsoft", 27000000, 10, new Category("Laptop"), "14 inch", "compact");
+//        Product earBud = new EarBuds("LG FN4","LG", 1000000, 10, new Category("Ear Buds"), "bluetooth", true);
+//        products.add(mobile);
+//        products.add(laptop);
+//        products.add(earBud);
     }
 
     public List<Product> getProducts() {
         return products;
     }
 
+    public Product getLast() {
+        int index = products.size() - 1;
+        return products.get(index);
+    }
+
     @Override
     public void add(Product item) {
         products.add(item);
+        ioFile.writeToFile(products, path);
     }
 
     @Override
@@ -40,39 +54,39 @@ public class ProductManager implements ManagerList<Product> {
 
     }
 
+    public void saveProductList() {
+        ioFile.writeToFile(products, path);
+    }
+
     public void displayAll(Resource resource) {
-        List<Product> list = products;
-        resource.printer.productManagerPrinter.printProduct(list);
+        resource.printer.productManagerPrinter.printProduct(products);
     }
 
     public void displayByPrice(Resource resource) {
-        List<Product> list = products;
-        List<Product> sortedList = new ArrayList<>(list);
+        List<Product> sortedList = new ArrayList<>(products);
         Collections.sort(sortedList);
         resource.printer.productManagerPrinter.printProduct(sortedList);
     }
 
     public boolean searchByName(String name, Resource resource) {
-        List<Product> lists = products;
-        List<Product> searchLists = resource.input.productInput.checkName(name, lists);
+        List<Product> searchLists = resource.input.productInput.checkName(name, products);
         if (searchLists.isEmpty()) {
-            System.out.println("⛔ No match product");
+            resource.printer.productManagerPrinter.noMatchProduct();
             return false;
         } else {
-            System.out.println("☑ Search result: ");
+            resource.printer.productManagerPrinter.searchResult();
             resource.printer.productManagerPrinter.printProduct(searchLists);
             return true;
         }
     }
 
     public boolean searchByBrand(String name, Resource resource) {
-        List<Product> lists = products;
-        List<Product> searchLists = resource.input.productInput.checkBrand(name, lists);
+        List<Product> searchLists = resource.input.productInput.checkBrand(name, products);
         if (searchLists.isEmpty()) {
-            System.out.println("⛔ No match product");
+            resource.printer.productManagerPrinter.noMatchProduct();
             return false;
         } else {
-            System.out.println("☑ Search result: ");
+            resource.printer.productManagerPrinter.searchResult();
             resource.printer.productManagerPrinter.printProduct(searchLists);
             return true;
         }

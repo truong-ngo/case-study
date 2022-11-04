@@ -3,7 +3,6 @@ package menu;
 import java.util.Scanner;
 
 public class GuestMenu {
-
     private final UserMenu submenu;
 
     public GuestMenu() {
@@ -15,7 +14,7 @@ public class GuestMenu {
         while (check) {
             String str;
             int choice = -1;
-            resource.printer.menuPrinter.printGuestPage();
+            resource.printer.mainMenuPrinter.printGuestPage();
             str = scanner.nextLine();
             if (resource.input.validate.validateGuestPageChoice(str)) {
                 choice = Integer.parseInt(str);

@@ -1,4 +1,4 @@
-package user;
+package shop_item;
 
 import java.io.Serializable;
 

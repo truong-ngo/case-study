@@ -12,8 +12,8 @@ public class ProductManagerPrinter {
         System.out.printf(header, "ID", "Name", "Brand", "Category", "Quantity", "Price", "Description");
         for (Product product : lists) {
             System.out.println("├────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤");
-            System.out.printf(content, product.getId(), product.getName(), product.getBrand(),
-                              product.getCategory().getType(), product.getQuantity(), product.getPrice(), product.getDescription());
+            System.out.printf(content, product.getId(), product.getName(), product.getBrand(), product.getCategory().getName(),
+                              product.getQuantity(), product.getPrice(), product.getDescription());
         }
         System.out.println("└────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘");
     }
@@ -27,5 +27,21 @@ public class ProductManagerPrinter {
 
     public void invalidBrand() {
         System.out.println("⛔ Invalid brand");
+    }
+
+    public void noMatchProduct() {
+        System.out.println("⛔ No match product");
+    }
+
+    public void searchResult() {
+        System.out.println("☑ Search result: ");
+    }
+
+    public void invalidData() {
+        System.out.println("⛔ Invalid data");
+    }
+
+    public void addSuccessfully() {
+        System.out.println("✅ Add successfully");
     }
 }

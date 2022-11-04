@@ -1,14 +1,12 @@
-package user;
+package shop_item;
 
 import product.Product;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 
 public class Cart implements Serializable {
     private static final long serialVersionUID = 42L;

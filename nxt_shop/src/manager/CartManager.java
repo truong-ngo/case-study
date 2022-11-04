@@ -1,10 +1,9 @@
 package manager;
 
 import io_file.IOFile;
-import user.Cart;
-import user.User;
+import shop_item.Cart;
+import shop_item.User;
 
-import java.io.Serializable;
 import java.util.List;
 
 public class CartManager implements ManagerList<Cart> {

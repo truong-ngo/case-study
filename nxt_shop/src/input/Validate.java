@@ -29,15 +29,11 @@ public class Validate extends Input {
     }
 
     public boolean validateIdInput(String choice) {
-        return validate(choice, Regex.ID_INPUT);
+        return validate(choice, Regex.INPUT_NUMBER_DATA);
     }
 
-    public boolean validateQuantityInput(String choice) {
-        return validate(choice, Regex.QUANTITY_INPUT);
-    }
-
-    public boolean validateCartManagerChoice(String choice) {
-        return validate(choice, Regex.CART_MANAGER_CHOICE);
+    public boolean validateInputNumberData(String choice) {
+        return validate(choice, Regex.INPUT_NUMBER_DATA);
     }
 
     public boolean validateAccountManagerChoice(String choice) {
@@ -54,5 +50,9 @@ public class Validate extends Input {
 
     public boolean validatePhoneNumber(String phoneNumber) {
         return validate(phoneNumber, Regex.PHONE_REGEX);
+    }
+
+    public boolean validateAdminMenuChoice(String choice) {
+        return validate(choice, Regex.ADMIN_MENU_CHOICE);
     }
 }

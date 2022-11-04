@@ -1,16 +1,18 @@
 package menu;
 
-import user.Cart;
-import user.User;
+import shop_item.Cart;
+import shop_item.User;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class LoginMenu {
     private final UserMenu userMenu;
+    private final AdminMenu adminMenu;
 
     public LoginMenu() {
         userMenu = new UserMenu();
+        adminMenu = new AdminMenu();
     }
     public void displayLoginMenu(Scanner scanner, Resource resource) {
         String string;
@@ -35,7 +37,7 @@ public class LoginMenu {
                         userMenu.runUserMenu(scanner, resource, user);
                     } else if (resource.input.loginAndUserInput.validateAdmin(data, users)) {
                         resource.printer.loginMenuPrinter.logInSuccessful();
-                        // Run admin menu
+                        adminMenu.runAdminMenu(scanner, resource);
                     } else {
                         resource.printer.loginMenuPrinter.logInFail();
                     }

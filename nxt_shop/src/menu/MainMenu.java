@@ -13,7 +13,7 @@ public class MainMenu {
         String str;
         int choice = -1;
         while (true) {
-            resource.printer.menuPrinter.printHomePage();
+            resource.printer.mainMenuPrinter.printHomePage();
             str = scanner.nextLine();
             if (resource.input.validate.validateHomePageChoice(str)) {
                 choice = Integer.parseInt(str);

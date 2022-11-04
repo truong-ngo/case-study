@@ -1,19 +1,22 @@
 package printer;
 
 public class GeneralPrinter {
-    public final MainMenuPrinter menuPrinter;
+    public final MainMenuPrinter mainMenuPrinter;
     public final LoginMenuPrinter loginMenuPrinter;
+    public final AdminMenuPrinter adminMenuPrinter;
+    public final UserMenuPrinter userMenuPrinter;
     public final ProductManagerPrinter productManagerPrinter;
     public final UserManagerPrinter userManagerPrinter;
-    public final UserMenuPrinter userMenuPrinter;
     public final CartManagerPrinter cartManagerPrinter;
 
+
     public GeneralPrinter() {
-        menuPrinter = new MainMenuPrinter();
+        mainMenuPrinter = new MainMenuPrinter();
         loginMenuPrinter = new LoginMenuPrinter();
+        adminMenuPrinter = new AdminMenuPrinter();
+        userMenuPrinter = new UserMenuPrinter();
         productManagerPrinter = new ProductManagerPrinter();
         userManagerPrinter = new UserManagerPrinter();
-        userMenuPrinter = new UserMenuPrinter();
         cartManagerPrinter = new CartManagerPrinter();
     }
 

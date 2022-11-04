@@ -7,8 +7,8 @@ public class Mobile extends Product implements Serializable {
     private String networkType;
     private String refreshRate;
 
-    public Mobile(int id, String name, String brand, int price, int quantity, Category category, String networkType, String refreshRate) {
-        super(id, name, brand, price, quantity, category);
+    public Mobile(String name, String brand, int price, int quantity, Category category, String networkType, String refreshRate) {
+        super(name, brand, price, quantity, category);
         this.networkType = networkType;
         this.refreshRate = refreshRate;
     }
@@ -31,8 +31,7 @@ public class Mobile extends Product implements Serializable {
 
     @Override
     public String getDescription() {
-        return getCategory().getName() + ", network type: " + networkType +
-               ", refresh rate: " + refreshRate;
+        return "network type: " + networkType + ", refresh rate: " + refreshRate;
     }
 
     @Override

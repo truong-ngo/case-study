@@ -1,7 +1,7 @@
 package input;
 
 import menu.Resource;
-import user.User;
+import shop_item.User;
 
 import java.util.List;
 import java.util.Scanner;

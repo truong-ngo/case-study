@@ -1,9 +1,10 @@
 package printer;
 
 import product.Product;
-import user.User;
+import shop_item.User;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 
@@ -15,7 +16,7 @@ public class CartManagerPrinter {
         String content = "│ %-2d │ %-15s │ %10d │ %10d │ %10d │\n";
         String footer = "│ %-46s │ %10d │\n";
         System.out.println("\uD83D\uDED2 " + user.getUserName() + " " + type);
-        sum = printCartTable(header, content, footer, cart, sum, products);
+        printCartTable(header, content, footer, cart, sum, products);
     }
 
     public void printBill(Map<Map<Product, Integer>, LocalDateTime> billItem, User user, String type) {
@@ -41,7 +42,7 @@ public class CartManagerPrinter {
         for (Product product : products) {
             System.out.println("├─────────────────────────────────────────────────────────────┤");
             System.out.printf(content, product.getId(), product.getName(), bill.get(product),
-                    product.getPrice(), product.getPrice() * bill.get(product));
+                              product.getPrice(), product.getPrice() * bill.get(product));
             sum += product.getPrice() * bill.get(product);
         }
         System.out.println("├─────────────────────────────────────────────────────────────┤");
@@ -59,6 +60,6 @@ public class CartManagerPrinter {
     }
 
     public void cartIsEmpty() {
-        System.out.println("✅ Cart is Empty");
+        System.out.println("⏰ Cart is Empty");
     }
 }

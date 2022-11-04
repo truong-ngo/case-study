@@ -1,6 +1,6 @@
 package printer;
 
-import user.User;
+import shop_item.User;
 
 public class LoginMenuPrinter {
     public void printSignInMenu() {
