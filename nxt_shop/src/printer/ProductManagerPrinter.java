@@ -17,4 +17,15 @@ public class ProductManagerPrinter {
         }
         System.out.println("└────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘");
     }
+    public void productListTitle() {
+        System.out.println("⌚ Product list: ");
+    }
+
+    public void invalidName() {
+        System.out.println("⛔ Invalid name");
+    }
+
+    public void invalidBrand() {
+        System.out.println("⛔ Invalid brand");
+    }
 }

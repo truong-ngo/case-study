@@ -7,7 +7,7 @@ import user.User;
 import java.io.Serializable;
 import java.util.List;
 
-public class CartManager implements ManagerList<Cart>, Serializable {
+public class CartManager implements ManagerList<Cart> {
     private final List<Cart> carts;
     private final IOFile<Cart> ioFile;
     private final String path = "src/file/carts";
@@ -19,14 +19,6 @@ public class CartManager implements ManagerList<Cart>, Serializable {
 
     public List<Cart> getCarts() {
         return carts;
-    }
-
-    public IOFile<Cart> getIoFile() {
-        return ioFile;
-    }
-
-    public String getPath() {
-        return path;
     }
 
     public Cart getCartByUser(User user) {

@@ -1,12 +1,15 @@
 package input;
 
-public class ValidateMenuChoice extends Input {
+public class Validate extends Input {
     public boolean validateHomePageChoice(String choice) {
         return validate(choice, Regex.HOME_PAGE_CHOICE);
     }
 
+    public boolean validateSignupChoice(String choice) {
+        return validate(choice, Regex.SIGNUP_CHOICE);
+    }
     public boolean validateLoginChoice(String choice) {
-        return validate(choice, Regex.LOGIN_SIGNUP_CHOICE);
+        return validate(choice, Regex.LOGIN_CHOICE);
     }
 
     public boolean validateGuestPageChoice(String choice) {
@@ -39,5 +42,17 @@ public class ValidateMenuChoice extends Input {
 
     public boolean validateAccountManagerChoice(String choice) {
         return validate(choice, Regex.ACCOUNT_MANAGER_CHOICE);
+    }
+
+    public boolean validateAccountUpdateChoice(String choice) {
+        return validate(choice, Regex.ACCOUNT_UPDATE_CHOICE);
+    }
+
+    public boolean validateEmail(String email) {
+        return validate(email, Regex.EMAIL_REGEX);
+    }
+
+    public boolean validatePhoneNumber(String phoneNumber) {
+        return validate(phoneNumber, Regex.PHONE_REGEX);
     }
 }

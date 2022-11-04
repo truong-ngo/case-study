@@ -1,13 +1,15 @@
 package printer;
 
+import user.User;
+
 public class LoginMenuPrinter {
     public void printSignInMenu() {
         String format = "│ %-45s │\n";
         System.out.println("┌───────────────────────────────────────────────┐");
         System.out.printf(format, "SIGN IN");
         System.out.println("├───────────────────────────────────────────────┤");
-        System.out.printf(format, "▶[1]. Log in as user.");
-        System.out.printf(format, "▶[2]. Log in as admin.");
+        System.out.printf(format, "▶[1]. Log in.");
+        System.out.printf(format, "▶[2]. Forgot password?.");
         System.out.printf(format, "▶[0]. Return to Home Page.");
         System.out.println("└───────────────────────────────────────────────┘");
         System.out.println("☞ Enter your choice:");
@@ -46,5 +48,23 @@ public class LoginMenuPrinter {
 
     public void passWordNotChanged() {
         System.out.println("⛔ Password not change");
+    }
+
+    public void emailNotFound() {
+        System.out.println("⛔ Email not found");
+    }
+
+    public void sendEmailContainPassWord(User user) {
+        System.out.println("✉ Mail to user: " + user.getUserName());
+        System.out.println("Your password is: " + user.getPassword());
+        System.out.println("Please change password to ensure your privacy");
+    }
+
+    public void duplicateEmail() {
+        System.out.println("⛔ Duplicate email");
+    }
+
+    public void duplicatePhoneNumber() {
+        System.out.println("⛔ Duplicate phone number");
     }
 }

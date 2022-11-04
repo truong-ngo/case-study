@@ -8,12 +8,12 @@ import java.util.Scanner;
 
 public class ProductInput {
     public String inputName(Scanner scanner) {
-        System.out.println("Enter name: ");
+        System.out.println("⌨ Enter name: ");
         return scanner.nextLine();
     }
 
     public String inputBrand(Scanner scanner) {
-        System.out.println("Enter brand: ");
+        System.out.println("⌨ Enter brand: ");
         return scanner.nextLine();
     }
 

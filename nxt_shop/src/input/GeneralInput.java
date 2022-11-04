@@ -1,14 +1,14 @@
 package input;
 
 public class GeneralInput {
-    public ValidateMenuChoice validateMenuChoice;
-    public LoginInput loginInput;
+    public Validate validate;
+    public LoginAndUserInput loginAndUserInput;
     public ProductInput productInput;
     public CartInput cartInput;
 
     public GeneralInput() {
-        validateMenuChoice = new ValidateMenuChoice();
-        loginInput = new LoginInput();
+        validate = new Validate();
+        loginAndUserInput = new LoginAndUserInput();
         productInput = new ProductInput();
         cartInput = new CartInput();
     }

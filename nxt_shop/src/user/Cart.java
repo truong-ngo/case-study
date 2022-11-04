@@ -3,19 +3,23 @@ package user;
 import product.Product;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
 public class Cart implements Serializable {
-    private User cartId;
+    private static final long serialVersionUID = 42L;
+    private final User cartId;
     private Map<Product, Integer> cart;
-    private Map<Product, Integer> bill;
+    private Map<Map<Product, Integer>, LocalDateTime> bill;
 
     public Cart(User user) {
         cartId = user;
-        cart = new TreeMap<>();
-        bill = new TreeMap<>();
+        cart = new HashMap<>();
+        bill = new HashMap<>();
     }
 
     public Map<Product, Integer> getCart() {
@@ -30,11 +34,11 @@ public class Cart implements Serializable {
         this.cart = cart;
     }
 
-    public Map<Product, Integer> getBill() {
+    public Map<Map<Product, Integer>, LocalDateTime> getBill() {
         return bill;
     }
 
-    public void setBill(Map<Product, Integer> bill) {
+    public void setBill(Map<Map<Product, Integer>, LocalDateTime> bill) {
         this.bill = bill;
     }
 

@@ -6,7 +6,7 @@ import user.User;
 import java.io.Serializable;
 import java.util.List;
 
-public class UserManager implements ManagerList<User>, Serializable {
+public class UserManager implements ManagerList<User> {
     private final List<User> users;
     private final User ADMIN = new User("admin","123456");
     private final String path = "src/file/users";
@@ -15,11 +15,22 @@ public class UserManager implements ManagerList<User>, Serializable {
     public UserManager() {
         ioFile = new IOFile<>();
         users = ioFile.readFile(path);
-        ADMIN.setRole("ADMIN");
+        if (users.isEmpty()) {
+            ADMIN.setRole("ADMIN");
+            users.add(ADMIN);
+        }
     }
 
     public List<User> getUsers() {
         return users;
+    }
+
+    public IOFile<User> getIoFile() {
+        return ioFile;
+    }
+
+    public String getPath() {
+        return path;
     }
 
     public User getUserByName(String name) {
@@ -34,6 +45,10 @@ public class UserManager implements ManagerList<User>, Serializable {
 
     public User getADMIN() {
         return ADMIN;
+    }
+
+    public void saveUserList() {
+        ioFile.writeToFile(users, path);
     }
 
     @Override

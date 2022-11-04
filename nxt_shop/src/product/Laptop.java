@@ -3,6 +3,7 @@ package product;
 import java.io.Serializable;
 
 public class Laptop extends Product implements Serializable {
+    private static final long serialVersionUID = 42L;
     private String screenSize;
     private String keyBoardType;
 

@@ -4,6 +4,7 @@ import java.awt.*;
 import java.io.Serializable;
 
 public class EarBuds extends Product implements Serializable {
+    private static final long serialVersionUID = 42L;
     private String connectType;
     boolean waterResistance;
 

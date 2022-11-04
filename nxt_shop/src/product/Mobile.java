@@ -3,6 +3,7 @@ package product;
 import java.io.Serializable;
 
 public class Mobile extends Product implements Serializable {
+    private static final long serialVersionUID = 42L;
     private String networkType;
     private String refreshRate;
 

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ProductManager implements ManagerList<Product>, Serializable {
+public class ProductManager implements ManagerList<Product> {
     private List<Product> products;
 
     public ProductManager() {

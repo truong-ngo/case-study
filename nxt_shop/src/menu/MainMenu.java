@@ -15,7 +15,7 @@ public class MainMenu {
         while (true) {
             resource.printer.menuPrinter.printHomePage();
             str = scanner.nextLine();
-            if (resource.input.validateMenuChoice.validateHomePageChoice(str)) {
+            if (resource.input.validate.validateHomePageChoice(str)) {
                 choice = Integer.parseInt(str);
             } else {
                 resource.printer.reChoice();

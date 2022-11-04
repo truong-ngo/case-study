@@ -3,6 +3,7 @@ package product;
 import java.io.Serializable;
 
 public abstract class Product implements Serializable,Comparable<Product> {
+    private static final long serialVersionUID = 42L;
     private Integer id;
     private String name;
     private String brand;
