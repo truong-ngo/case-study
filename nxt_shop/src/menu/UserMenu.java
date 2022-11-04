@@ -21,7 +21,7 @@ public class UserMenu {
             }
             switch (choice) {
                 case 1:
-                    String name = resource.input.productInput.inputStringData(resource, scanner, "name");
+                    String name = resource.input.productInput.inputStringData(scanner, "name");
                     if (!name.equals("")) {
                         resource.manager.getProductManager().searchByName(name, resource);
                     } else {
@@ -29,7 +29,7 @@ public class UserMenu {
                     }
                     break;
                 case 2:
-                    String brand = resource.input.productInput.inputStringData(resource, scanner, "brand");
+                    String brand = resource.input.productInput.inputStringData(scanner, "brand");
                     if (!brand.equals("")) {
                         resource.manager.getProductManager().searchByBrand(brand, resource);
                     } else {
@@ -72,13 +72,13 @@ public class UserMenu {
                         }
                         switch (searchChoice) {
                             case 1:
-                                String name = resource.input.productInput.inputStringData(resource, scanner, "name");
+                                String name = resource.input.productInput.inputStringData(scanner, "name");
                                 if (resource.manager.getProductManager().searchByName(name, resource)) {
                                     runAddToCartMenu(scanner, resource, user, cart);
                                 }
                                 break;
                             case 2:
-                                String brand = resource.input.productInput.inputStringData(resource, scanner, "brand");
+                                String brand = resource.input.productInput.inputStringData(scanner, "brand");
                                 if (resource.manager.getProductManager().searchByBrand(brand, resource)) {
                                     runAddToCartMenu(scanner, resource, user, cart);
                                 }

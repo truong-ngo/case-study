@@ -21,6 +21,10 @@ public class ProductManagerPrinter {
         System.out.println("⌚ Product list: ");
     }
 
+    public void idDoesntExist() {
+        System.out.println("⛔ Id doesnt exist");
+    }
+
     public void invalidName() {
         System.out.println("⛔ Invalid name");
     }
@@ -40,6 +44,10 @@ public class ProductManagerPrinter {
     public void invalidData() {
         System.out.println("⛔ Invalid data");
     }
+    public void invalidId() {
+        System.out.println("⛔ Invalid id");
+    }
+
 
     public void addSuccessfully() {
         System.out.println("✅ Add successfully");

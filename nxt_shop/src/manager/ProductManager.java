@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 
 public class ProductManager implements ManagerList<Product> {
     private final List<Product> products;
@@ -21,12 +22,6 @@ public class ProductManager implements ManagerList<Product> {
             int id = getLast().getId();
             getLast().setIdCount(id);
         }
-//        Product mobile = new Mobile("Pixel 7","Google", 18000000, 10, new Category("Mobile"), "5g", "90Hz");
-//        Product laptop = new Laptop("Surface 5","Microsoft", 27000000, 10, new Category("Laptop"), "14 inch", "compact");
-//        Product earBud = new EarBuds("LG FN4","LG", 1000000, 10, new Category("Ear Buds"), "bluetooth", true);
-//        products.add(mobile);
-//        products.add(laptop);
-//        products.add(earBud);
     }
 
     public List<Product> getProducts() {
@@ -49,9 +44,22 @@ public class ProductManager implements ManagerList<Product> {
 
     }
 
+    public int getIndexById(int id) {
+        int index = -1;
+        for (int i = 0; i < products.size(); i++) {
+            if (products.get(i).getId() == id) {
+                index = i;
+            }
+        }
+        return index;
+    }
+
     @Override
     public void delete(int id) {
-
+        if (checkId(id)) {
+            products.remove(getProductById(id));
+        }
+        ioFile.writeToFile(products, path);
     }
 
     public void saveProductList() {
