@@ -31,7 +31,7 @@ public class UserBills implements Serializable {
         bills.add(bill);
     }
 
-    public int getTotalSpent() {
+    public int getUserTotalSpent() {
         int totalSpent = 0;
         for (Bill bill : bills) {
             totalSpent += bill.getBillAmount();

@@ -15,6 +15,11 @@ public class LoginAndUserInput {
         return new String[]{userName, password};
     }
 
+    public String inputUsername(Scanner scanner) {
+        System.out.println("⌨ Username:");
+        return scanner.nextLine();
+    }
+
     public boolean validateUser(String[] data, List<User> users) {
         for (User user : users) {
             if (data[0].equals(user.getUserName()) && data[1].equals(user.getPassword())
@@ -26,7 +31,7 @@ public class LoginAndUserInput {
     }
 
     public boolean checkExistUserName(String name, Resource resource) {
-        List<User> users = resource.manager.getUserManager().getUsers();
+        List<User> users = resource.manager.getUser().getUsers();
         for (User user : users) {
             if (user.getUserName().equals(name)) {
                 return true;

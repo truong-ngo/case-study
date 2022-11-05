@@ -1,31 +1,31 @@
 package manager;
 
 public class GeneralManager {
-    private final ProductManager productManager;
-    private final UserManager userManager;
-    private final CartManager cartManager;
-    private final BillManager billManager;
+    public final ProductManager product;
+    public final UserManager user;
+    public final CartManager cart;
+    public final BillManager bill;
 
     public GeneralManager() {
-        productManager = new ProductManager();
-        userManager = new UserManager();
-        cartManager = new CartManager();
-        billManager = new BillManager();
+        product = new ProductManager();
+        user = new UserManager();
+        cart = new CartManager();
+        bill = new BillManager();
     }
 
-    public ProductManager getProductManager() {
-        return productManager;
+    public ProductManager getProduct() {
+        return product;
     }
 
-    public UserManager getUserManager() {
-        return userManager;
+    public UserManager getUser() {
+        return user;
     }
 
-    public CartManager getCartManager() {
-        return cartManager;
+    public CartManager getCart() {
+        return cart;
     }
 
-    public BillManager getBillManager() {
-        return billManager;
+    public BillManager getBill() {
+        return bill;
     }
 }

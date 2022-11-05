@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class ProductInput {
     public String inputStringData(Scanner scanner, String type) {
-        System.out.println("⌨ Enter " + type + " : ");
+        System.out.println("⌨ Enter " + type + ": ");
         return scanner.nextLine();
     }
 
@@ -22,7 +22,7 @@ public class ProductInput {
                 return string;
             }
             if (count >= 0) {
-                resource.printer.productManagerPrinter.invalidData();
+                resource.printer.error.invalidData();
             }
             count++;
         }
@@ -32,12 +32,12 @@ public class ProductInput {
         String string = null;
         boolean check = true;
         while (check) {
-            System.out.println("⌨ " + type + " : ");
+            System.out.println("⌨ " + type + ": ");
             string = scanner.nextLine();
             if (string.equals("yes") || string.equals("no") || string.equals("")) {
                 check = false;
             } else {
-                resource.printer.productManagerPrinter.invalidData();
+                resource.printer.error.invalidData();
             }
         }
         return string;
@@ -52,7 +52,7 @@ public class ProductInput {
                 return string.equals("yes");
             }
             if (count >= 0) {
-                resource.printer.productManagerPrinter.invalidData();
+                resource.printer.error.invalidData();
             }
             count++;
         }
@@ -62,12 +62,12 @@ public class ProductInput {
         String string = null;
         boolean check = true;
         while (check) {
-            System.out.println("⌨ Enter " + type + " : ");
+            System.out.println("⌨ Enter " + type + ": ");
             string = scanner.nextLine();
             if (resource.input.validate.validateInputNumberData(string) || string.equals("")) {
                 check = false;
             } else {
-                resource.printer.productManagerPrinter.invalidData();
+                resource.printer.error.invalidData();
             }
         }
         return string;
@@ -82,7 +82,7 @@ public class ProductInput {
                 return Integer.parseInt(string);
             }
             if (count >= 0) {
-                resource.printer.productManagerPrinter.invalidData();
+                resource.printer.error.invalidData();
             }
             count++;
         }
@@ -93,21 +93,21 @@ public class ProductInput {
         String string = scanner.nextLine();
         if (resource.input.validate.validateInputNumberData(string)) {
             int id = Integer.parseInt(string);
-            if (resource.manager.getProductManager().checkId(id)) {
+            if (resource.manager.getProduct().checkId(id)) {
                 return id;
             } else {
-                resource.printer.productManagerPrinter.idDoesntExist();
+                resource.printer.error.idDoesntExist();
                 return -1;
             }
         } else {
-            resource.printer.productManagerPrinter.invalidId();
+            resource.printer.error.invalidId();
             return -1;
         }
     }
 
     public Product inputAddProduct(Resource resource, Scanner scanner, int choice) {
         Product product = null;
-        List<Product> list = resource.manager.getProductManager().getProducts();
+        List<Product> list = resource.manager.getProduct().getProducts();
         String name;
         do {
             name = getStringData(resource, scanner, "name");
@@ -140,8 +140,8 @@ public class ProductInput {
     }
 
     public Product updateProduct(int id, Resource resource, Scanner scanner) {
-        Product product = resource.manager.getProductManager().getProductById(id);
-        List<Product> list = resource.manager.getProductManager().getProducts();
+        Product product = resource.manager.getProduct().getProductById(id);
+        List<Product> list = resource.manager.getProduct().getProducts();
         String name;
         int price, quantity;
         do {

@@ -76,23 +76,23 @@ public class ProductManager implements ManagerList<Product> {
     }
 
     public void displayAll(Resource resource) {
-        resource.printer.productManagerPrinter.printProduct(products);
+        resource.printer.table.printProduct(products);
     }
 
     public void displayByPrice(Resource resource) {
         List<Product> sortedList = new ArrayList<>(products);
         Collections.sort(sortedList);
-        resource.printer.productManagerPrinter.printProduct(sortedList);
+        resource.printer.table.printProduct(sortedList);
     }
 
     public boolean searchByName(String name, Resource resource) {
         List<Product> searchLists = resource.input.productInput.checkName(name, products);
         if (searchLists.isEmpty()) {
-            resource.printer.productManagerPrinter.noMatchProduct();
+            resource.printer.error.noMatchProduct();
             return false;
         } else {
-            resource.printer.productManagerPrinter.searchResult();
-            resource.printer.productManagerPrinter.printProduct(searchLists);
+            resource.printer.notification.searchResult();
+            resource.printer.table.printProduct(searchLists);
             return true;
         }
     }
@@ -100,11 +100,11 @@ public class ProductManager implements ManagerList<Product> {
     public boolean searchByBrand(String name, Resource resource) {
         List<Product> searchLists = resource.input.productInput.checkBrand(name, products);
         if (searchLists.isEmpty()) {
-            resource.printer.productManagerPrinter.noMatchProduct();
+            resource.printer.error.noMatchProduct();
             return false;
         } else {
-            resource.printer.productManagerPrinter.searchResult();
-            resource.printer.productManagerPrinter.printProduct(searchLists);
+            resource.printer.notification.searchResult();
+            resource.printer.table.printProduct(searchLists);
             return true;
         }
     }

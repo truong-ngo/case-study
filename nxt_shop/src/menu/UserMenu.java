@@ -9,89 +9,28 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class UserMenu {
-    public void runSearchMenu(Scanner scanner, Resource resource) {
-        boolean check = true;
-        while (check) {
-            int choice = -1;
-            resource.printer.userMenuPrinter.searchPrinter();
-            String string = scanner.nextLine();
-            if (resource.input.validate.validateSearchChoice(string)) {
-                choice = Integer.parseInt(string);
-            } else {
-                resource.printer.reChoice();
-            }
-            switch (choice) {
-                case 1:
-                    String name = resource.input.productInput.inputStringData(scanner, "name");
-                    if (!name.equals("")) {
-                        resource.manager.getProductManager().searchByName(name, resource);
-                    } else {
-                        resource.printer.productManagerPrinter.invalidName();
-                    }
-                    break;
-                case 2:
-                    String brand = resource.input.productInput.inputStringData(scanner, "brand");
-                    if (!brand.equals("")) {
-                        resource.manager.getProductManager().searchByBrand(brand, resource);
-                    } else {
-                        resource.printer.productManagerPrinter.invalidBrand();
-                    }
-                    break;
-                case 0:
-                    check = false;
-            }
-        }
-    }
-
     public void runUserMenu(Scanner scanner, Resource resource, User user) {
-        UserCart userCart = resource.manager.getCartManager().getCartByUser(user);
-        UserBills userBills = resource.manager.getBillManager().getBillsByUser(user);
+        UserCart userCart = resource.manager.cart.getCartByUser(user);
         boolean check = true;
         while (check) {
             int choice = -1;
-            resource.printer.mainMenuPrinter.printUserPage(user);
+            resource.printer.menu.printUserPageMenu(user);
             String string = scanner.nextLine();
             if (resource.input.validate.validateCartChoice(string)) {
                 choice = Integer.parseInt(string);
             } else {
-                resource.printer.reChoice();
+                resource.printer.error.reChoice();
             }
             switch (choice) {
                 case 1:
-                    resource.manager.getProductManager().displayAll(resource);
+                    resource.manager.product.displayAll(resource);
                     runAddToCartMenu(scanner, resource, user, userCart);
                     break;
                 case 2:
-                    boolean searchCheck = true;
-                    while (searchCheck) {
-                        int searchChoice = -1;
-                        resource.printer.userMenuPrinter.searchPrinter();
-                        String str = scanner.nextLine();
-                        if (resource.input.validate.validateSearchChoice(str)) {
-                            searchChoice = Integer.parseInt(str);
-                        } else {
-                            resource.printer.reChoice();
-                        }
-                        switch (searchChoice) {
-                            case 1:
-                                String name = resource.input.productInput.inputStringData(scanner, "name");
-                                if (resource.manager.getProductManager().searchByName(name, resource)) {
-                                    runAddToCartMenu(scanner, resource, user, userCart);
-                                }
-                                break;
-                            case 2:
-                                String brand = resource.input.productInput.inputStringData(scanner, "brand");
-                                if (resource.manager.getProductManager().searchByBrand(brand, resource)) {
-                                    runAddToCartMenu(scanner, resource, user, userCart);
-                                }
-                                break;
-                            case 0:
-                                searchCheck = false;
-                        }
-                    }
+                    runUserSearchMenu(scanner, resource, user, userCart);
                     break;
                 case 3:
-                    resource.manager.getProductManager().displayByPrice(resource);
+                    resource.manager.getProduct().displayByPrice(resource);
                     runAddToCartMenu(scanner, resource, user, userCart);
                     break;
                 case 4:
@@ -106,17 +45,47 @@ public class UserMenu {
         }
     }
 
+    private void runUserSearchMenu(Scanner scanner, Resource resource, User user, UserCart userCart) {
+        boolean check = true;
+        while (check) {
+            int choice = -1;
+            resource.printer.menu.printSearchMenu();
+            String string = scanner.nextLine();
+            if (resource.input.validate.validateSearchChoice(string)) {
+                choice = Integer.parseInt(string);
+            } else {
+                resource.printer.error.reChoice();
+            }
+            switch (choice) {
+                case 1:
+                    String name = resource.input.productInput.inputStringData(scanner, "name");
+                    if (resource.manager.product.searchByName(name, resource)) {
+                        runAddToCartMenu(scanner, resource, user, userCart);
+                    }
+                    break;
+                case 2:
+                    String brand = resource.input.productInput.inputStringData(scanner, "brand");
+                    if (resource.manager.product.searchByBrand(brand, resource)) {
+                        runAddToCartMenu(scanner, resource, user, userCart);
+                    }
+                    break;
+                case 0:
+                    check = false;
+            }
+        }
+    }
+
     public void runAddToCartMenu(Scanner scanner, Resource resource, User user,
                                  UserCart cart) {
         boolean check = true;
         while (check) {
-            resource.printer.userMenuPrinter.printViewProductMenu(user);
+            resource.printer.menu.printViewProductMenu(user);
             String string = scanner.nextLine();
             int choice = -1;
             if (resource.input.validate.validateAddToCartChoice(string)) {
                 choice = Integer.parseInt(string);
             } else {
-                resource.printer.reChoice();
+                resource.printer.error.reChoice();
             }
             switch (choice) {
                 case 1:
@@ -124,18 +93,18 @@ public class UserMenu {
                     if (resource.input.validate.validateIdInput(strings[0]) &&
                         resource.input.validate.validateInputNumberData(strings[1])) {
                         int id = Integer.parseInt(strings[0]);
-                        Product product = resource.manager.getProductManager().getProductById(id);
+                        Product product = resource.manager.product.getProductById(id);
                         int quantity = Integer.parseInt(strings[1]);
-                        if (resource.manager.getProductManager().checkId(id)
+                        if (resource.manager.product.checkId(id)
                             && quantity <= product.getQuantity()) {
                             cart.addToCart(product, quantity);
-                            resource.manager.getCartManager().saveUserCartList();
-                            System.out.println("✅ Add to cart successfully");
+                            resource.manager.cart.saveUserCartList();
+                            resource.printer.success.addToCartSuccessfully();
                         } else {
-                            System.out.println("⛔ Id doesnt exist or quantity exceed");
+                            resource.printer.error.addToCartFail();
                         }
                     } else {
-                        resource.printer.reChoice();
+                        resource.printer.error.reChoice();
                     }
                     break;
                 case 0:
@@ -147,32 +116,32 @@ public class UserMenu {
     public void runCartManager(Scanner scanner, Resource resource, User user, UserCart cart) {
         boolean check = true;
         Map<Product, Integer> cartItem = cart.getCart();
-        UserBills userBills = resource.manager.getBillManager().getBillsByUser(user);
+        UserBills userBills = resource.manager.bill.getUserBillsByUser(user);
         int choice = -1;
         while (check) {
-            resource.printer.userMenuPrinter.printCartManager(user);
+            resource.printer.menu.printCartManager(user);
             String string = scanner.nextLine();
             if (resource.input.validate.validateCartManagerChoice(string)) {
                 choice = Integer.parseInt(string);
             } else {
-                resource.printer.reChoice();
+                resource.printer.error.reChoice();
             }
             switch (choice) {
                 case 1:
-                    resource.printer.cartManagerPrinter.printCart(cartItem, user, "cart");
+                    resource.printer.table.printCart(cartItem, user, "cart");
                     break;
                 case 2:
                     if (cartItem.isEmpty()) {
-                        resource.printer.cartManagerPrinter.cartIsEmpty();
+                        resource.printer.notification.cartIsEmpty();
                     } else {
                         cartItem.clear();
-                        resource.manager.getCartManager().saveUserCartList();
-                        resource.printer.cartManagerPrinter.cartClearSuccessfully();
+                        resource.manager.cart.saveUserCartList();
+                        resource.printer.success.cartClearSuccessfully();
                     }
                     break;
                 case 3:
                     if (cartItem.isEmpty()) {
-                        resource.printer.cartManagerPrinter.cartIsEmpty();
+                        resource.printer.notification.cartIsEmpty();
                     } else {
                         LocalDateTime time = LocalDateTime.now();
                         Map<Product, Integer> billItem = new TreeMap<>(cartItem);
@@ -185,14 +154,14 @@ public class UserMenu {
                             product.setQuantity(quantity);
                         }
                         cartItem.clear();
-                        resource.manager.getProductManager().saveProductList();
-                        resource.manager.getCartManager().saveUserCartList();
-                        resource.manager.getBillManager().saveUserBillsList();
-                        resource.printer.cartManagerPrinter.paymentSuccessfully();
+                        resource.manager.product.saveProductList();
+                        resource.manager.cart.saveUserCartList();
+                        resource.manager.bill.saveUserBillsList();
+                        resource.printer.success.paymentSuccessfully();
                     }
                     break;
                 case 4:
-                    resource.printer.cartManagerPrinter.printBill(userBills, user, "bill");
+                    resource.printer.table.printBill(userBills, user, "bill");
                     break;
                 case 0:
                     check = false;
@@ -204,29 +173,29 @@ public class UserMenu {
         boolean check = true;
         int choice = -1;
         while (check) {
-            resource.printer.userMenuPrinter.printAccountManager(user);
+            resource.printer.menu.printAccountManagerMenu(user);
             String string = scanner.nextLine();
             if (resource.input.validate.validateAccountManagerChoice(string)) {
                 choice = Integer.parseInt(string);
             } else {
-                resource.printer.reChoice();
+                resource.printer.error.reChoice();
             }
             switch (choice) {
                 case 1:
                     String newPassword = resource.input.loginAndUserInput.changePassword(scanner);
                     if (user.getPassword().equals(newPassword) || newPassword.equals("")) {
-                        resource.printer.loginMenuPrinter.passWordNotChanged();
+                        resource.printer.notification.passWordNotChanged();
                     } else {
                         user.setPassword(newPassword);
-                        resource.manager.getUserManager().saveUserList();
-                        resource.printer.loginMenuPrinter.passWordChanged();
+                        resource.manager.user.saveUserList();
+                        resource.printer.success.passWordChanged();
                     }
                     break;
                 case 2:
                     runAccountUpdateMenu(resource, scanner, user);
                     break;
                 case 3:
-                    resource.printer.userMenuPrinter.printUserInformation(user);
+                    resource.printer.table.printUserInformation(user);
                     break;
                 case 0:
                     check = false;
@@ -237,42 +206,50 @@ public class UserMenu {
     public void runAccountUpdateMenu(Resource resource, Scanner scanner, User user) {
         boolean check = true;
         int choice = -1;
-        List<User> users = resource.manager.getUserManager().getUsers();
+        List<User> users = resource.manager.user.getUsers();
         while (check) {
-            resource.printer.userMenuPrinter.printAccountUpdate(user);
+            resource.printer.menu.printAccountUpdateMenu(user);
             String string = scanner.nextLine();
             if (resource.input.validate.validateAccountUpdateChoice(string)) {
                 choice = Integer.parseInt(string);
             } else {
-                resource.printer.reChoice();
+                resource.printer.error.reChoice();
             }
             switch (choice) {
                 case 1:
                     String newEmail = resource.input.loginAndUserInput.updateEmail(scanner);
-                    if (resource.input.validate.validateEmail(newEmail)) {
-                        if (!resource.input.loginAndUserInput.checkDuplicateEmail(newEmail, users)) {
-                            user.setEmail(newEmail);
-                            resource.manager.getUserManager().saveUserList();
-                            resource.printer.userMenuPrinter.updateSuccessfully();
-                        } else {
-                            resource.printer.loginMenuPrinter.duplicateEmail();
-                        }
+                    if (newEmail.equals("")) {
+                        resource.printer.notification.pleaseFillEmail();
                     } else {
-                        resource.printer.userMenuPrinter.updateFail();
+                        if (resource.input.validate.validateEmail(newEmail)) {
+                            if (!resource.input.loginAndUserInput.checkDuplicateEmail(newEmail, users)) {
+                                user.setEmail(newEmail);
+                                resource.manager.user.saveUserList();
+                                resource.printer.success.updateSuccessfully();
+                            } else {
+                                resource.printer.error.duplicateEmail();
+                            }
+                        } else {
+                            resource.printer.error.updateEmailFail();
+                        }
                     }
                     break;
                 case 2:
                     String newPhoneNumber = resource.input.loginAndUserInput.updatePhoneNumber(scanner);
-                    if (resource.input.validate.validatePhoneNumber(newPhoneNumber)) {
-                        if (!resource.input.loginAndUserInput.checkDuplicatePhoneNumber(newPhoneNumber, users)) {
-                            user.setPhoneNumber(newPhoneNumber);
-                            resource.manager.getUserManager().saveUserList();
-                            resource.printer.userMenuPrinter.updateSuccessfully();
-                        } else {
-                            resource.printer.loginMenuPrinter.duplicatePhoneNumber();
-                        }
+                    if (newPhoneNumber.equals("")) {
+                        resource.printer.notification.pleaseFillPhoneNumber();
                     } else {
-                        resource.printer.userMenuPrinter.updateFail();
+                        if (resource.input.validate.validatePhoneNumber(newPhoneNumber)) {
+                            if (!resource.input.loginAndUserInput.checkDuplicatePhoneNumber(newPhoneNumber, users)) {
+                                user.setPhoneNumber(newPhoneNumber);
+                                resource.manager.user.saveUserList();
+                                resource.printer.success.updateSuccessfully();
+                            } else {
+                                resource.printer.error.duplicatePhoneNumber();
+                            }
+                        } else {
+                            resource.printer.error.updatePhoneNumberFail();
+                        }
                     }
                     break;
                 case 0:

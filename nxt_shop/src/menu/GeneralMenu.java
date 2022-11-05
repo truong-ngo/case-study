@@ -12,6 +12,6 @@ public class GeneralMenu {
     }
 
     public void display(Scanner scanner) {
-        mainMenu.displayMainMenu(scanner, resource);
+        mainMenu.runMainMenu(scanner, resource);
     }
 }

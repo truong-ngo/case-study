@@ -16,13 +16,21 @@ public class BillManager implements ManagerList<UserBills> {
         userBillsList = ioFile.readFile(path);
     }
 
-    public UserBills getBillsByUser(User user) {
+    public UserBills getUserBillsByUser(User user) {
         for (UserBills bills : userBillsList) {
             if (bills.getBillsId().getUserName().equals(user.getUserName())) {
                 return bills;
             }
         }
         return null;
+    }
+
+    public int getTotalIncome() {
+        int totalIncome = 0;
+        for (UserBills bills : userBillsList) {
+            totalIncome += bills.getUserTotalSpent();
+        }
+        return totalIncome;
     }
 
     public void saveUserBillsList() {
