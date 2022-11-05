@@ -1,6 +1,7 @@
 package menu;
 
-import shop_item.Cart;
+import shop_item.UserBills;
+import shop_item.UserCart;
 import shop_item.User;
 
 import java.util.List;
@@ -30,7 +31,6 @@ public class LoginMenu {
             switch (choice) {
                 case 1:
                     String[] data = resource.input.loginAndUserInput.logInInput(scanner);
-                    User admin = resource.manager.getUserManager().getADMIN();
                     if (resource.input.loginAndUserInput.validateUser(data, users)) {
                         resource.printer.loginMenuPrinter.logInSuccessful();
                         User user = resource.manager.getUserManager().getUserByName(data[0]);
@@ -44,7 +44,7 @@ public class LoginMenu {
                     break;
                 case 2:
                     String email = resource.input.loginAndUserInput.forgotPassword(scanner);
-                    User user = null;
+                    User user = new User();
                     if (resource.input.loginAndUserInput.checkDuplicateEmail(email, users)) {
                         for (User u : users) {
                             if (u.getEmail() == null) {
@@ -86,9 +86,11 @@ public class LoginMenu {
                         resource.printer.loginMenuPrinter.userNameExist();
                     } else {
                         User newUser = new User(data[0], data[1]);
-                        Cart newCart = new Cart(newUser);
+                        UserCart userCart = new UserCart(newUser);
+                        UserBills userBills = new UserBills(newUser);
                         resource.manager.getUserManager().add(newUser);
-                        resource.manager.getCartManager().add(newCart);
+                        resource.manager.getCartManager().add(userCart);
+                        resource.manager.getBillManager().add(userBills);
                         resource.printer.loginMenuPrinter.signUpSuccessful();
                     }
                     break;

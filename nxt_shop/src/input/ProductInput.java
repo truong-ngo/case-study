@@ -1,10 +1,7 @@
 package input;
 
 import menu.Resource;
-import product.Category;
-import product.EarBuds;
-import product.Mobile;
-import product.Product;
+import product.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,8 +58,6 @@ public class ProductInput {
         }
     }
 
-
-
     public String inputNumberData(Resource resource, Scanner scanner, String type) {
         String string = null;
         boolean check = true;
@@ -97,15 +92,26 @@ public class ProductInput {
         System.out.println("⌨ Enter id: ");
         String string = scanner.nextLine();
         if (resource.input.validate.validateInputNumberData(string)) {
-            return Integer.parseInt(string);
+            int id = Integer.parseInt(string);
+            if (resource.manager.getProductManager().checkId(id)) {
+                return id;
+            } else {
+                resource.printer.productManagerPrinter.idDoesntExist();
+                return -1;
+            }
         } else {
+            resource.printer.productManagerPrinter.invalidId();
             return -1;
         }
     }
 
-    public Product inputProduct(Resource resource, Scanner scanner, int choice) {
+    public Product inputAddProduct(Resource resource, Scanner scanner, int choice) {
         Product product = null;
-        String name = getStringData(resource, scanner, "name");
+        List<Product> list = resource.manager.getProductManager().getProducts();
+        String name;
+        do {
+            name = getStringData(resource, scanner, "name");
+        } while (checkDuplicateName(list, name));
         String brand = getStringData(resource, scanner, "brand");
         int price = getNumberData(resource, scanner, "price");
         int quantity = getNumberData(resource, scanner, "quantity");
@@ -116,24 +122,101 @@ public class ProductInput {
                 String refreshRate = getStringData(resource, scanner, "refresh rate");
                 category = new Category("Mobile");
                 product = new Mobile(name, brand, price, quantity, category, networkType, refreshRate);
-                resource.printer.productManagerPrinter.addSuccessfully();
                 break;
             case 2:
                 String screenSize = getStringData(resource, scanner, "screen size");
                 String keyboardType = getStringData(resource, scanner, "keyboard type");
                 category = new Category("Laptop");
-                product = new Mobile(name, brand, price, quantity, category, screenSize, keyboardType);
-                resource.printer.productManagerPrinter.addSuccessfully();
+                product = new Laptop(name, brand, price, quantity, category, screenSize, keyboardType);
                 break;
             case 3:
                 String connectType = getStringData(resource, scanner, "connect type");
                 boolean waterResistance = getBooleanData(resource, scanner, "is water resistance");
                 category = new Category("Earbuds");
                 product = new EarBuds(name, brand, price, quantity, category, connectType, waterResistance);
-                resource.printer.productManagerPrinter.addSuccessfully();
                 break;
         }
         return product;
+    }
+
+    public Product updateProduct(int id, Resource resource, Scanner scanner) {
+        Product product = resource.manager.getProductManager().getProductById(id);
+        List<Product> list = resource.manager.getProductManager().getProducts();
+        String name;
+        int price, quantity;
+        do {
+            name = inputStringData(scanner, "name");
+        } while (checkDuplicateName(list, name));
+        if (name.equals("")) {
+            name = product.getName();
+        }
+        String brand = inputStringData(scanner, "brand");
+        if (brand.equals("")) {
+            brand = product.getBrand();
+        }
+        String priceStr = inputNumberData(resource, scanner, "price");
+        if (priceStr.equals("")) {
+            price = product.getPrice();
+        } else {
+            price = Integer.parseInt(priceStr);
+        }
+        String quantityStr = inputNumberData(resource, scanner, "quantity");
+        if (quantityStr.equals("")) {
+            quantity = product.getQuantity();
+        } else {
+            quantity = Integer.parseInt(quantityStr);
+        }
+        Category category;
+        if (product instanceof Mobile) {
+            String networkType = inputStringData(scanner, "network type");
+            if (networkType.equals("")) {
+                networkType = ((Mobile) product).getNetworkType();
+            }
+            String refreshRate = inputStringData(scanner, "refresh rate");
+            if (refreshRate.equals("")) {
+                refreshRate = ((Mobile) product).getRefreshRate();
+            }
+            category = new Category("Mobile");
+            product = new Mobile(name, brand, price, quantity, category, networkType, refreshRate);
+        }
+        if (product instanceof Laptop) {
+            String screenSize = getStringData(resource, scanner, "screen size");
+            if (screenSize.equals("")) {
+                screenSize = ((Laptop) product).getScreenSize();
+            }
+            String keyboardType = getStringData(resource, scanner, "keyboard type");
+            if (keyboardType.equals("")) {
+                keyboardType = ((Laptop) product).getKeyBoardType();
+            }
+            category = new Category("Laptop");
+            product = new Mobile(name, brand, price, quantity, category, screenSize, keyboardType);
+        }
+        if (product instanceof EarBuds) {
+            String connectType = inputStringData(scanner, "connect type");
+            if (connectType.equals("")) {
+                connectType = ((EarBuds) product).getConnectType();
+            }
+            String waterResistanceStr = inputBooleanData(resource, scanner, "is water resistance");
+            boolean waterResistance;
+            if (waterResistanceStr.equals("")) {
+                waterResistance = ((EarBuds) product).isWaterResistance();
+            } else {
+                waterResistance = waterResistanceStr.equals("yes");
+            }
+            category = new Category("Earbuds");
+            product = new EarBuds(name, brand, price, quantity, category, connectType, waterResistance);
+        }
+        product.setId(id);
+        return product;
+    }
+
+    public boolean checkDuplicateName(List<Product> list, String name) {
+        for (Product product : list) {
+            if (product.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public List<Product> checkName(String name, List<Product> products) {

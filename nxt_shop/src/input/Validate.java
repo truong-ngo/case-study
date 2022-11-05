@@ -32,6 +32,10 @@ public class Validate extends Input {
         return validate(choice, Regex.INPUT_NUMBER_DATA);
     }
 
+    public boolean validateCartManagerChoice(String choice) {
+        return validate(choice, Regex.CART_MANAGER_CHOICE);
+    }
+
     public boolean validateInputNumberData(String choice) {
         return validate(choice, Regex.INPUT_NUMBER_DATA);
     }
@@ -54,5 +58,9 @@ public class Validate extends Input {
 
     public boolean validateAdminMenuChoice(String choice) {
         return validate(choice, Regex.ADMIN_MENU_CHOICE);
+    }
+
+    public boolean validateUserManagerChoice(String choice) {
+        return validate(choice, Regex.USER_MANAGER_CHOICE);
     }
 }

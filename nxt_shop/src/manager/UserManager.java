@@ -48,7 +48,7 @@ public class UserManager implements ManagerList<User> {
     }
 
     @Override
-    public void update(int id) {
+    public void update(int id, User user) {
 
     }
 

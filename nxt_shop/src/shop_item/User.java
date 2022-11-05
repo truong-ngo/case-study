@@ -6,6 +6,7 @@ public class User implements Serializable {
     private static final long serialVersionUID = 42L;
     private String userName;
     private String password;
+    private int balance;
     private String email;
     private String phoneNumber;
     private String role;
@@ -17,7 +18,16 @@ public class User implements Serializable {
     public User(String userName, String password) {
         this.userName = userName;
         this.password = password;
+        balance = 0;
         role = "USER";
+    }
+
+    public int getBalance() {
+        return balance;
+    }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
     }
 
     public String getUserName() {

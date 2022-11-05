@@ -15,4 +15,5 @@ public class Regex {
     public static final String PHONE_REGEX = "0[35789]\\d{8}";
     public static final String ADMIN_MENU_CHOICE = "[0-6]";
     public static final String INPUT_NUMBER_DATA = "\\d+";
+    public static final String USER_MANAGER_CHOICE = "[0-3]";
 }

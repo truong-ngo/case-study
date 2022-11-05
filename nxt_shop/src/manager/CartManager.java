@@ -1,27 +1,23 @@
 package manager;
 
 import io_file.IOFile;
-import shop_item.Cart;
+import shop_item.UserCart;
 import shop_item.User;
 
 import java.util.List;
 
-public class CartManager implements ManagerList<Cart> {
-    private final List<Cart> carts;
-    private final IOFile<Cart> ioFile;
+public class CartManager implements ManagerList<UserCart> {
+    private final List<UserCart> userCartList;
+    private final IOFile<UserCart> ioFile;
     private final String path = "src/file/carts";
 
     public CartManager() {
         ioFile = new IOFile<>();
-        carts = ioFile.readFile(path);
+        userCartList = ioFile.readFile(path);
     }
 
-    public List<Cart> getCarts() {
-        return carts;
-    }
-
-    public Cart getCartByUser(User user) {
-        for (Cart cart : carts) {
+    public UserCart getCartByUser(User user) {
+        for (UserCart cart : userCartList) {
             if (cart.getCartId().getUserName().equals(user.getUserName())) {
                 return cart;
             }
@@ -29,18 +25,18 @@ public class CartManager implements ManagerList<Cart> {
         return null;
     }
 
-    public void saveCartList() {
-        ioFile.writeToFile(carts,path);
+    public void saveUserCartList() {
+        ioFile.writeToFile(userCartList,path);
     }
 
     @Override
-    public void add(Cart item) {
-        carts.add(item);
-        ioFile.writeToFile(carts, path);
+    public void add(UserCart item) {
+        userCartList.add(item);
+        ioFile.writeToFile(userCartList, path);
     }
 
     @Override
-    public void update(int id) {
+    public void update(int id, UserCart cart) {
 
     }
 

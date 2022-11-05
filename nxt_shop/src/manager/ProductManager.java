@@ -24,6 +24,13 @@ public class ProductManager implements ManagerList<Product> {
         }
     }
 
+    public void setStaticNumber() {
+        if (!products.isEmpty()) {
+            int id = getLast().getId();
+            getLast().setIdCount(id);
+        }
+    }
+
     public List<Product> getProducts() {
         return products;
     }
@@ -40,8 +47,10 @@ public class ProductManager implements ManagerList<Product> {
     }
 
     @Override
-    public void update(int id) {
-
+    public void update(int id, Product updateProduct) {
+        int index = getIndexById(id);
+        products.set(index, updateProduct);
+        ioFile.writeToFile(products, path);
     }
 
     public int getIndexById(int id) {

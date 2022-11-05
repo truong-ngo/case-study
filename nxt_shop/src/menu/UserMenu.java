@@ -1,7 +1,8 @@
 package menu;
 
 import product.Product;
-import shop_item.Cart;
+import shop_item.UserBills;
+import shop_item.UserCart;
 import shop_item.User;
 
 import java.time.LocalDateTime;
@@ -43,7 +44,8 @@ public class UserMenu {
     }
 
     public void runUserMenu(Scanner scanner, Resource resource, User user) {
-        Cart cart = resource.manager.getCartManager().getCartByUser(user);
+        UserCart userCart = resource.manager.getCartManager().getCartByUser(user);
+        UserBills userBills = resource.manager.getBillManager().getBillsByUser(user);
         boolean check = true;
         while (check) {
             int choice = -1;
@@ -57,7 +59,7 @@ public class UserMenu {
             switch (choice) {
                 case 1:
                     resource.manager.getProductManager().displayAll(resource);
-                    runAddToCartMenu(scanner, resource, user, cart);
+                    runAddToCartMenu(scanner, resource, user, userCart);
                     break;
                 case 2:
                     boolean searchCheck = true;
@@ -74,13 +76,13 @@ public class UserMenu {
                             case 1:
                                 String name = resource.input.productInput.inputStringData(scanner, "name");
                                 if (resource.manager.getProductManager().searchByName(name, resource)) {
-                                    runAddToCartMenu(scanner, resource, user, cart);
+                                    runAddToCartMenu(scanner, resource, user, userCart);
                                 }
                                 break;
                             case 2:
                                 String brand = resource.input.productInput.inputStringData(scanner, "brand");
                                 if (resource.manager.getProductManager().searchByBrand(brand, resource)) {
-                                    runAddToCartMenu(scanner, resource, user, cart);
+                                    runAddToCartMenu(scanner, resource, user, userCart);
                                 }
                                 break;
                             case 0:
@@ -90,10 +92,10 @@ public class UserMenu {
                     break;
                 case 3:
                     resource.manager.getProductManager().displayByPrice(resource);
-                    runAddToCartMenu(scanner, resource, user, cart);
+                    runAddToCartMenu(scanner, resource, user, userCart);
                     break;
                 case 4:
-                    runCartManager(scanner, resource, user);
+                    runCartManager(scanner, resource, user, userCart);
                     break;
                 case 5:
                     runAccountManager(resource, scanner, user);
@@ -105,7 +107,7 @@ public class UserMenu {
     }
 
     public void runAddToCartMenu(Scanner scanner, Resource resource, User user,
-                                 Cart cart) {
+                                 UserCart cart) {
         boolean check = true;
         while (check) {
             resource.printer.userMenuPrinter.printViewProductMenu(user);
@@ -127,7 +129,7 @@ public class UserMenu {
                         if (resource.manager.getProductManager().checkId(id)
                             && quantity <= product.getQuantity()) {
                             cart.addToCart(product, quantity);
-                            resource.manager.getCartManager().saveCartList();
+                            resource.manager.getCartManager().saveUserCartList();
                             System.out.println("✅ Add to cart successfully");
                         } else {
                             System.out.println("⛔ Id doesnt exist or quantity exceed");
@@ -142,16 +144,15 @@ public class UserMenu {
         }
     }
 
-    public void runCartManager(Scanner scanner, Resource resource, User user) {
+    public void runCartManager(Scanner scanner, Resource resource, User user, UserCart cart) {
         boolean check = true;
-        Cart cart = resource.manager.getCartManager().getCartByUser(user);
         Map<Product, Integer> cartItem = cart.getCart();
-        Map<Map<Product, Integer>, LocalDateTime> billItem = cart.getBill();
+        UserBills userBills = resource.manager.getBillManager().getBillsByUser(user);
         int choice = -1;
         while (check) {
             resource.printer.userMenuPrinter.printCartManager(user);
             String string = scanner.nextLine();
-            if (resource.input.validate.validateInputNumberData(string)) {
+            if (resource.input.validate.validateCartManagerChoice(string)) {
                 choice = Integer.parseInt(string);
             } else {
                 resource.printer.reChoice();
@@ -165,7 +166,7 @@ public class UserMenu {
                         resource.printer.cartManagerPrinter.cartIsEmpty();
                     } else {
                         cartItem.clear();
-                        resource.manager.getCartManager().saveCartList();
+                        resource.manager.getCartManager().saveUserCartList();
                         resource.printer.cartManagerPrinter.cartClearSuccessfully();
                     }
                     break;
@@ -174,21 +175,24 @@ public class UserMenu {
                         resource.printer.cartManagerPrinter.cartIsEmpty();
                     } else {
                         LocalDateTime time = LocalDateTime.now();
-                        Map<Product, Integer> bill = new HashMap<>(cartItem);
-                        billItem.put(bill, time);
+                        Map<Product, Integer> billItem = new TreeMap<>(cartItem);
+                        UserBills.Bill bill = userBills.new Bill();
+                        bill.add(billItem, time);
+                        userBills.addBill(bill);
                         Set<Product> products = cartItem.keySet();
                         for (Product product : products) {
                             int quantity = product.getQuantity() - cartItem.get(product);
                             product.setQuantity(quantity);
                         }
                         cartItem.clear();
-                        resource.manager.getCartManager().saveCartList();
                         resource.manager.getProductManager().saveProductList();
+                        resource.manager.getCartManager().saveUserCartList();
+                        resource.manager.getBillManager().saveUserBillsList();
                         resource.printer.cartManagerPrinter.paymentSuccessfully();
                     }
                     break;
                 case 4:
-                    resource.printer.cartManagerPrinter.printBill(billItem, user, "bill");
+                    resource.printer.cartManagerPrinter.printBill(userBills, user, "bill");
                     break;
                 case 0:
                     check = false;
