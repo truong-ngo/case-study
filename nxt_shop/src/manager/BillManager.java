@@ -6,7 +6,7 @@ import shop_item.UserBills;
 
 import java.util.List;
 
-public class BillManager implements ManagerList<UserBills> {
+public class BillManager {
     private final List<UserBills> userBillsList;
     private final IOFile<UserBills> ioFile;
     private final String path = "src/file/user-bills-list";
@@ -37,19 +37,8 @@ public class BillManager implements ManagerList<UserBills> {
         ioFile.writeToFile(userBillsList,path);
     }
 
-    @Override
     public void add(UserBills item) {
         userBillsList.add(item);
-        ioFile.writeToFile(userBillsList, path);
-    }
-
-    @Override
-    public void update(int id, UserBills obj) {
-
-    }
-
-    @Override
-    public void delete(int id) {
-
+        saveUserBillsList();
     }
 }

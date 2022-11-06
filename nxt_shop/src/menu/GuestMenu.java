@@ -5,7 +5,7 @@ import manager.GeneralManager;
 import java.util.Scanner;
 
 public class GuestMenu extends AbstractMenu {
-    public void run(Scanner scanner, Resource resource, GeneralManager manager) {
+    public void run(Scanner scanner, GeneralManager manager) {
         boolean check = true;
         while (check) {
             String string;
@@ -15,7 +15,7 @@ public class GuestMenu extends AbstractMenu {
             if (input.validate.validateChoice(string, 0, 3)) {
                 choice = Integer.parseInt(string);
             } else {
-                resource.printer.error.reChoice();
+                printer.error.reChoice();
             }
             switch (choice) {
                 case 1:
@@ -27,7 +27,7 @@ public class GuestMenu extends AbstractMenu {
                     break;
                 case 3:
                     printer.notification.productListTitle();
-                    manager.product.displayByPrice(resource);
+                    manager.product.displayByPrice(printer);
                     break;
                 case 0:
                     check = false;
@@ -48,17 +48,17 @@ public class GuestMenu extends AbstractMenu {
             }
             switch (choice) {
                 case 1:
-                    String name = input.productInput.inputStringData(scanner, "name");
+                    String name = input.product.inputStringData(scanner, printer, "name");
                     if (!name.equals("")) {
-                        manager.product.searchByName(name, printer, input);
+                        manager.product.searchByName(name, printer);
                     } else {
                         printer.notification.pleaseFillName();
                     }
                     break;
                 case 2:
-                    String brand = input.productInput.inputStringData(scanner, "brand");
+                    String brand = input.product.inputStringData(scanner, printer, "brand");
                     if (!brand.equals("")) {
-                        manager.product.searchByBrand(brand, printer, input);
+                        manager.product.searchByBrand(brand, printer);
                     } else {
                         printer.notification.pleaseFillBrand();
                     }

@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class UserMenu extends AbstractMenu {
-    public void run(Scanner scanner, Resource resource, GeneralManager manager, User user) {
+    public void run(Scanner scanner, GeneralManager manager, User user) {
         UserCart userCart = manager.cart.getCartByUser(user);
         boolean check = true;
         while (check) {
@@ -31,14 +31,14 @@ public class UserMenu extends AbstractMenu {
                     runSearch(scanner, manager, user);
                     break;
                 case 3:
-                    manager.getProduct().displayByPrice(resource);
+                    manager.getProduct().displayByPrice(printer);
                     runAddToCart(scanner, manager, user);
                     break;
                 case 4:
                     runCartManager(scanner, manager, user);
                     break;
                 case 5:
-                    runAccountManager(resource, manager, scanner, user);
+                    runAccountManager(manager, scanner, user);
                     break;
                 case 0:
                     check = false;
@@ -59,14 +59,14 @@ public class UserMenu extends AbstractMenu {
             }
             switch (choice) {
                 case 1:
-                    String name = input.productInput.inputStringData(scanner, "name");
-                    if (manager.product.searchByName(name, printer, input)) {
+                    String name = input.product.inputStringData(scanner, printer, "name");
+                    if (manager.product.searchByName(name, printer)) {
                         runAddToCart(scanner, manager, user);
                     }
                     break;
                 case 2:
-                    String brand = input.productInput.inputStringData(scanner, "brand");
-                    if (manager.product.searchByBrand(brand, printer, input)) {
+                    String brand = input.product.inputStringData(scanner, printer, "brand");
+                    if (manager.product.searchByBrand(brand, printer)) {
                         runAddToCart(scanner, manager, user);
                     }
                     break;
@@ -90,7 +90,7 @@ public class UserMenu extends AbstractMenu {
             }
             switch (choice) {
                 case 1:
-                    String[] strings = input.cartInput.addToCartInput(scanner);
+                    String[] strings = input.cart.addToCartInput(scanner);
                     if (input.validate.validateNumber(strings[0]) &&
                         input.validate.validateNumber(strings[1])) {
                         int id = Integer.parseInt(strings[0]);
@@ -177,7 +177,7 @@ public class UserMenu extends AbstractMenu {
         }
     }
 
-    public void runAccountManager(Resource resource, GeneralManager manager, Scanner scanner, User user) {
+    public void runAccountManager(GeneralManager manager, Scanner scanner, User user) {
         boolean check = true;
         int choice = -1;
         while (check) {
@@ -200,10 +200,18 @@ public class UserMenu extends AbstractMenu {
                     }
                     break;
                 case 2:
-                    runAccountUpdateMenu(manager, scanner, user);
+                    String[] newInformation = input.user.userInformationInput(scanner, printer, input);
+                    if (newInformation == null) {
+                        printer.notification.itemHasNotBeenUpdated("User information");
+                    } else if (newInformation.length == 0) {
+                        printer.error.invalidData("information");
+                    } else if (newInformation.length == 2) {
+                        manager.user.update(newInformation, user);
+                        printer.success.actionSuccessfully("User information update");
+                    }
                     break;
                 case 3:
-                    int amount = input.productInput.getNumberData(resource, scanner, "amount of money");
+                    int amount = input.product.getNumberData(scanner, printer, input, "amount of money");
                     int balance = user.getBalance();
                     user.setBalance(balance + amount);
                     manager.user.saveUserList();
@@ -211,61 +219,6 @@ public class UserMenu extends AbstractMenu {
                     break;
                 case 4:
                     printer.table.printUserInformation(user);
-                    break;
-                case 0:
-                    check = false;
-            }
-        }
-    }
-
-    public void runAccountUpdateMenu(GeneralManager manager, Scanner scanner, User user) {
-        boolean check = true;
-        int choice = -1;
-        List<User> users = manager.user.getUsers();
-        while (check) {
-            printer.menu.printAccountUpdateMenu(user);
-            String string = scanner.nextLine();
-            if (input.validate.validateChoice(string, 0, 2)) {
-                choice = Integer.parseInt(string);
-            } else {
-                printer.error.reChoice();
-            }
-            switch (choice) {
-                case 1:
-                    String newEmail = input.user.updateEmail(scanner);
-                    if (newEmail.equals("")) {
-                        printer.notification.pleaseFillEmail();
-                    } else {
-                        if (input.validate.validateEmail(newEmail)) {
-                            if (!input.user.checkDuplicateEmail(newEmail, users)) {
-                                user.setEmail(newEmail);
-                                manager.user.saveUserList();
-                                printer.success.updateSuccessfully();
-                            } else {
-                                printer.error.duplicateEmail();
-                            }
-                        } else {
-                            printer.error.updateEmailFail();
-                        }
-                    }
-                    break;
-                case 2:
-                    String newPhoneNumber = input.user.updatePhoneNumber(scanner);
-                    if (newPhoneNumber.equals("")) {
-                        printer.notification.pleaseFillPhoneNumber();
-                    } else {
-                        if (input.validate.validatePhoneNumber(newPhoneNumber)) {
-                            if (!input.user.checkDuplicatePhoneNumber(newPhoneNumber, users)) {
-                                user.setPhoneNumber(newPhoneNumber);
-                                manager.user.saveUserList();
-                                printer.success.updateSuccessfully();
-                            } else {
-                                printer.error.duplicatePhoneNumber();
-                            }
-                        } else {
-                            printer.error.updatePhoneNumberFail();
-                        }
-                    }
                     break;
                 case 0:
                     check = false;

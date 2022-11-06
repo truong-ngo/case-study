@@ -4,7 +4,7 @@ import io_file.IOFile;
 import shop_item.User;
 import java.util.List;
 
-public class UserManager implements ManagerList<User> {
+public class UserManager {
     private final List<User> users;
     private final String path = "src/file/users";
     private final IOFile<User> ioFile;
@@ -37,7 +37,6 @@ public class UserManager implements ManagerList<User> {
         ioFile.writeToFile(users, path);
     }
 
-    @Override
     public void add(User user) {
         users.add(user);
         ioFile.writeToFile(users, path);
@@ -72,13 +71,30 @@ public class UserManager implements ManagerList<User> {
         return false;
     }
 
-    @Override
-    public void update(int id, User user) {
-
+    public void update(String[] newInformation, User user) {
+        for (User u : users) {
+            if (u.equals(user)) {
+                u.setEmail(newInformation[0]);
+                u.setPhoneNumber(newInformation[1]);
+            }
+        }
+        saveUserList();
     }
 
-    @Override
-    public void delete(int id) {
+    public boolean checkInputInformation(String[] newInformation, User user) {
+        return user.getEmail().equals(newInformation[0]) &&
+               user.getPhoneNumber().equals(newInformation[1]);
+    }
 
+    public boolean checkDuplicateEmail(String email) {
+        for (User user : users) {
+            if (user.getEmail() == null) {
+                continue;
+            }
+            if (user.getEmail().equals(email)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

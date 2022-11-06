@@ -1,9 +1,6 @@
 package input;
 
 import printer.GeneralPrinter;
-import shop_item.User;
-
-import java.util.List;
 import java.util.Scanner;
 
 public class UserInput {
@@ -18,52 +15,25 @@ public class UserInput {
         return new String[]{userName, password};
     }
 
+    public String[] userInformationInput(Scanner scanner, GeneralPrinter printer, GeneralInput input) {
+        printer.inputBox.printInputBox("new email");
+        String email = scanner.nextLine();
+        printer.inputBox.printInputBox("new phone number");
+        String phoneNumber = scanner.nextLine();
+        if ((input.validate.validatePhoneNumber(phoneNumber) || phoneNumber.equals("")) &&
+            (input.validate.validateEmail(email) || email.equals(""))) {
+            if (email.equals("") && phoneNumber.equals("")) {
+                return null;
+            } else {
+                return new String[]{email, phoneNumber};
+            }
+        } else {
+            return new String[0];
+        }
+    }
+
     public String inputItem(Scanner scanner, GeneralPrinter printer, String item) {
         printer.inputBox.printInputBox(item);
         return scanner.nextLine();
-    }
-
-    public String updatePassword(Scanner scanner, GeneralPrinter printer) {
-        printer.inputBox.printInputBox("new password");
-        return scanner.nextLine();
-    }
-
-    public String updateEmail(Scanner scanner) {
-        System.out.println("⌨ Update email:");
-        return scanner.nextLine();
-    }
-
-    public String updatePhoneNumber(Scanner scanner) {
-        System.out.println("⌨ Update phone number:");
-        return scanner.nextLine();
-    }
-
-    public String forgotPassword(Scanner scanner) {
-        System.out.println("⌨ Enter email:");
-        return scanner.nextLine();
-    }
-
-    public boolean checkDuplicateEmail(String email, List<User> users) {
-        for (User user : users) {
-            if (user.getEmail() == null) {
-                continue;
-            }
-            if (user.getEmail().equals(email)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean checkDuplicatePhoneNumber(String phoneNumber, List<User> users) {
-        for (User user : users) {
-            if (user.getPhoneNumber() == null) {
-                continue;
-            }
-            if (user.getPhoneNumber().equals(phoneNumber)) {
-                return true;
-            }
-        }
-        return false;
     }
 }

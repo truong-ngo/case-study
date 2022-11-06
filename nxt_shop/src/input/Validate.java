@@ -39,14 +39,4 @@ public class Validate {
     public boolean validateStringWithoutNull(String string) {
         return !string.equals("");
     }
-
-    public boolean validateUser(String[] data, List<User> users) {
-        for (User user : users) {
-            if (data[0].equals(user.getUserName()) && data[1].equals(user.getPassword())
-                    && user.getRole().equals("USER")) {
-                return true;
-            }
-        }
-        return false;
-    }
 }

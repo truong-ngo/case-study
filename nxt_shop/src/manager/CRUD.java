@@ -1,8 +1,6 @@
 package manager;
 
-import java.util.List;
-
-public interface ManagerList<E> {
+public interface CRUD<E> {
     void add(E item);
     void update(int id, E obj);
     void delete(int id);

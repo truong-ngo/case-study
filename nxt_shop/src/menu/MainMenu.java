@@ -16,7 +16,7 @@ public class MainMenu extends AbstractMenu {
         userMenu = new UserMenu();
         adminMenu = new AdminMenu();
     }
-    public void run(Scanner scanner, Resource resource, GeneralManager manager) {
+    public void run(Scanner scanner, GeneralManager manager) {
         String string;
         int choice = -1;
         while (true) {
@@ -29,10 +29,10 @@ public class MainMenu extends AbstractMenu {
             }
             switch (choice) {
                 case 1:
-                    guestMenu.run(scanner, resource, manager);
+                    guestMenu.run(scanner, manager);
                     break;
                 case 2:
-                    runLoginMenu(scanner, resource, manager);
+                    runLoginMenu(scanner, manager);
                     break;
                 case 3:
                     runSignupMenu(scanner, manager);
@@ -43,7 +43,7 @@ public class MainMenu extends AbstractMenu {
         }
     }
 
-    public void runLoginMenu(Scanner scanner, Resource resource, GeneralManager manager) {
+    public void runLoginMenu(Scanner scanner, GeneralManager manager) {
         String string;
         int choice = -1;
         boolean check = true;
@@ -63,10 +63,10 @@ public class MainMenu extends AbstractMenu {
                         if (manager.user.checkUser(data)) {
                             printer.success.loginSuccessfully();
                             User user = manager.user.getUserByName(data[0]);
-                            userMenu.run(scanner, resource, manager, user);
+                            userMenu.run(scanner, manager, user);
                         } else if (manager.user.checkAdmin(data)) {
                             printer.success.loginSuccessfully();
-                            adminMenu.runAdminMenu(scanner, manager, resource);
+                            adminMenu.runAdminMenu(scanner, manager);
                         } else {
                             printer.error.loginFail();
                         }
@@ -75,10 +75,10 @@ public class MainMenu extends AbstractMenu {
                     }
                     break;
                 case 2:
-                    String email = input.user.forgotPassword(scanner);
+                    String email = input.user.inputItem(scanner, printer, "email");
                     if (input.validate.validateEmail(email)) {
                         User user = new User();
-                        if (input.user.checkDuplicateEmail(email, users)) {
+                        if (manager.user.checkDuplicateEmail(email)) {
                             for (User u : users) {
                                 if (u.getEmail() == null) {
                                     continue;
@@ -88,13 +88,13 @@ public class MainMenu extends AbstractMenu {
                                     break;
                                 }
                             }
-                            printer.notification.sendEmailContainPassWord(user);
+                            printer.notification.sendEmailContainPassword(user);
                             break;
                         } else {
-                            printer.error.emailNotFound();
+                            printer.error.itemNotFound("email");
                         }
                     } else {
-                        printer.notification.pleaseFillEmail();
+                        printer.error.pleaseEnterAllData();
                     }
                     break;
                 case 0:

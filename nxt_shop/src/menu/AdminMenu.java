@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class AdminMenu extends AbstractMenu {
-    public void runAdminMenu(Scanner scanner, GeneralManager manager, Resource resource) {
+    public void runAdminMenu(Scanner scanner, GeneralManager manager) {
         boolean check = true;
         int id = -1;
         while (check) {
@@ -23,30 +23,30 @@ public class AdminMenu extends AbstractMenu {
             }
             switch (choice) {
                 case 1:
-                    runAddProductMenu(scanner, manager, resource);
+                    runAddProductMenu(scanner, manager);
                     break;
                 case 2:
-                    id = input.productInput.inputId(resource, scanner);
+                    id = input.product.inputId(scanner, printer, input, manager);
                     if (id != -1) {
-                        Product product = input.productInput.updateProduct(id, resource, scanner);
+                        Product product = input.product.inputUpdateProduct(id, scanner, printer, input, manager);
                         manager.product.update(id, product);
                         manager.product.setStaticNumber();
-                        printer.success.productUpdateSuccessfully();
+                        printer.success.actionSuccessfully("Update");
                     }
                     break;
                 case 3:
-                    id = input.productInput.inputId(resource, scanner);
+                    id = input.product.inputId(scanner, printer, input, manager);
                     if (id != -1) {
                         manager.product.delete(id);
                         manager.product.setStaticNumber();
-                        printer.success.productDeleteSuccessfully();
+                        printer.success.actionSuccessfully("Delete");
                     }
                     break;
                 case 4:
                     manager.product.displayAll(printer);
                     break;
                 case 5:
-                    manager.product.displayByPrice(resource);
+                    manager.product.displayByPrice(printer);
                     break;
                 case 6:
                     runUserManagerMenu(scanner, manager);
@@ -57,7 +57,7 @@ public class AdminMenu extends AbstractMenu {
         }
     }
 
-    public void runAddProductMenu(Scanner scanner, GeneralManager manager, Resource resource) {
+    public void runAddProductMenu(Scanner scanner, GeneralManager manager) {
         boolean check = true;
         while (check) {
             int choice = -1;
@@ -72,7 +72,7 @@ public class AdminMenu extends AbstractMenu {
                 case 1:
                 case 2:
                 case 3:
-                    Product product = input.productInput.inputAddProduct(resource, scanner, choice);
+                    Product product = input.product.inputAddProduct(scanner, printer, input, manager, choice);
                     manager.product.add(product);
                     printer.success.addSuccessfully();
                     break;

@@ -7,11 +7,11 @@ public class NotificationPrinter {
     public void itemNotChanged(String item) {
         System.out.println("⏰ " + item + " not change");
     }
-    public void productHasNotBeenUpdated(String property) {
-        System.out.println("⏰ Product's " + property + " has not been updated");
+    public void itemHasNotBeenUpdated(String item) {
+        System.out.println("⏰ " + item + " has not been updated");
     }
 
-    public void sendEmailContainPassWord(User user) {
+    public void sendEmailContainPassword(User user) {
         System.out.println("✉ Mail to user: " + user.getUserName());
         System.out.println("Your password is: " + user.getPassword());
         System.out.println("Please change password to ensure your privacy");

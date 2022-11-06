@@ -1,18 +1,14 @@
 package manager;
 
-import input.GeneralInput;
 import io_file.IOFile;
-import menu.Resource;
 import printer.GeneralPrinter;
 import product.*;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Scanner;
 
-public class ProductManager implements ManagerList<Product> {
+public class ProductManager implements CRUD<Product> {
     private final List<Product> products;
     private final IOFile<Product> ioFile;
     private final String path = "src/file/products";
@@ -81,16 +77,16 @@ public class ProductManager implements ManagerList<Product> {
         printer.table.printProduct(products);
     }
 
-    public void displayByPrice(Resource resource) {
+    public void displayByPrice(GeneralPrinter printer) {
         List<Product> sortedList = new ArrayList<>(products);
         Collections.sort(sortedList);
-        resource.printer.table.printProduct(sortedList);
+        printer.table.printProduct(sortedList);
     }
 
-    public boolean searchByName(String name, GeneralPrinter printer, GeneralInput input) {
-        List<Product> searchLists = input.productInput.checkName(name, products);
+    public boolean searchByName(String name, GeneralPrinter printer) {
+        List<Product> searchLists = checkName(name);
         if (searchLists.isEmpty()) {
-            printer.error.noMatchProduct();
+            printer.error.noMatchFound();
             return false;
         } else {
             printer.notification.searchResult();
@@ -99,10 +95,10 @@ public class ProductManager implements ManagerList<Product> {
         }
     }
 
-    public boolean searchByBrand(String name, GeneralPrinter printer, GeneralInput input) {
-        List<Product> searchLists = input.productInput.checkBrand(name, products);
+    public boolean searchByBrand(String name, GeneralPrinter printer) {
+        List<Product> searchLists = checkBrand(name);
         if (searchLists.isEmpty()) {
-            printer.error.noMatchProduct();
+            printer.error.noMatchFound();
             return false;
         } else {
             printer.notification.searchResult();
@@ -127,5 +123,38 @@ public class ProductManager implements ManagerList<Product> {
             }
         }
         return null;
+    }
+
+    public boolean checkDuplicateName(String name) {
+        for (Product product : products) {
+            if (product.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public List<Product> checkName(String name) {
+        List<Product> searchLists = new ArrayList<>();
+        for (Product product : products) {
+            String value = name.toLowerCase();
+            String productName = product.getName().toLowerCase();
+            if (productName.contains(value)) {
+                searchLists.add(product);
+            }
+        }
+        return searchLists;
+    }
+
+    public List<Product> checkBrand(String name) {
+        List<Product> searchLists = new ArrayList<>();
+        for (Product product : products) {
+            String value = name.toLowerCase();
+            String brand = product.getBrand().toLowerCase();
+            if (brand.contains(value)) {
+                searchLists.add(product);
+            }
+        }
+        return searchLists;
     }
 }
