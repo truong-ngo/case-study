@@ -16,7 +16,7 @@ public class Input {
         while (check) {
             System.out.println("⌨ Enter " + type + ": ");
             string = scanner.nextLine();
-            if (resource.input.validate.validateInputNumberData(string) || string.equals("")) {
+            if (resource.input.validate.validateNumber(string) || string.equals("")) {
                 check = false;
             } else {
                 resource.printer.error.invalidData();

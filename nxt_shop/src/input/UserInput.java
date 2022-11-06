@@ -1,57 +1,30 @@
 package input;
 
-import menu.Resource;
+import printer.GeneralPrinter;
 import shop_item.User;
 
 import java.util.List;
 import java.util.Scanner;
 
-public class LoginAndUserInput {
-    public String[] logInInput(Scanner scanner) {
-        System.out.println("⌨ Username:");
+public class UserInput {
+    public String[] userInput(Scanner scanner, GeneralPrinter printer) {
+        printer.inputBox.printInputBox("username");
         String userName = scanner.nextLine();
-        System.out.println("⌨ Password:");
+        printer.inputBox.printInputBox("password");
         String password = scanner.nextLine();
+        if (userName.equals("") || password.equals("")) {
+            return null;
+        }
         return new String[]{userName, password};
     }
 
-    public String inputUsername(Scanner scanner) {
-        System.out.println("⌨ Username:");
+    public String inputItem(Scanner scanner, GeneralPrinter printer, String item) {
+        printer.inputBox.printInputBox(item);
         return scanner.nextLine();
     }
 
-    public boolean validateUser(String[] data, List<User> users) {
-        for (User user : users) {
-            if (data[0].equals(user.getUserName()) && data[1].equals(user.getPassword())
-                && user.getRole().equals("USER")) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean checkExistUserName(String name, Resource resource) {
-        List<User> users = resource.manager.getUser().getUsers();
-        for (User user : users) {
-            if (user.getUserName().equals(name)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean validateAdmin(String[] data, List<User> users) {
-        for (User user : users) {
-            if (data[0].equals(user.getUserName()) && data[1].equals(user.getPassword())
-                    && user.getRole().equals("ADMIN")) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public String changePassword(Scanner scanner) {
-        System.out.println("⌨ Enter password:");
+    public String updatePassword(Scanner scanner, GeneralPrinter printer) {
+        printer.inputBox.printInputBox("new password");
         return scanner.nextLine();
     }
 

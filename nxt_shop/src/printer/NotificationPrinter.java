@@ -3,6 +3,10 @@ package printer;
 import shop_item.User;
 
 public class NotificationPrinter {
+
+    public void itemNotChanged(String item) {
+        System.out.println("⏰ " + item + " not change");
+    }
     public void productHasNotBeenUpdated(String property) {
         System.out.println("⏰ Product's " + property + " has not been updated");
     }

@@ -1,7 +1,9 @@
 package manager;
 
+import input.GeneralInput;
 import io_file.IOFile;
 import menu.Resource;
+import printer.GeneralPrinter;
 import product.*;
 
 import java.io.Serializable;
@@ -75,8 +77,8 @@ public class ProductManager implements ManagerList<Product> {
         ioFile.writeToFile(products, path);
     }
 
-    public void displayAll(Resource resource) {
-        resource.printer.table.printProduct(products);
+    public void displayAll(GeneralPrinter printer) {
+        printer.table.printProduct(products);
     }
 
     public void displayByPrice(Resource resource) {
@@ -85,26 +87,26 @@ public class ProductManager implements ManagerList<Product> {
         resource.printer.table.printProduct(sortedList);
     }
 
-    public boolean searchByName(String name, Resource resource) {
-        List<Product> searchLists = resource.input.productInput.checkName(name, products);
+    public boolean searchByName(String name, GeneralPrinter printer, GeneralInput input) {
+        List<Product> searchLists = input.productInput.checkName(name, products);
         if (searchLists.isEmpty()) {
-            resource.printer.error.noMatchProduct();
+            printer.error.noMatchProduct();
             return false;
         } else {
-            resource.printer.notification.searchResult();
-            resource.printer.table.printProduct(searchLists);
+            printer.notification.searchResult();
+            printer.table.printProduct(searchLists);
             return true;
         }
     }
 
-    public boolean searchByBrand(String name, Resource resource) {
-        List<Product> searchLists = resource.input.productInput.checkBrand(name, products);
+    public boolean searchByBrand(String name, GeneralPrinter printer, GeneralInput input) {
+        List<Product> searchLists = input.productInput.checkBrand(name, products);
         if (searchLists.isEmpty()) {
-            resource.printer.error.noMatchProduct();
+            printer.error.noMatchProduct();
             return false;
         } else {
-            resource.printer.notification.searchResult();
-            resource.printer.table.printProduct(searchLists);
+            printer.notification.searchResult();
+            printer.table.printProduct(searchLists);
             return true;
         }
     }

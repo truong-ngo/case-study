@@ -1,12 +1,12 @@
 package printer;
 
 public class GeneralPrinter {
-
     public final MenuPrinter menu;
     public final TablePrinter table;
     public final ErrorPrinter error;
     public final SuccessPrinter success;
     public final NotificationPrinter notification;
+    public final InputBoxPrinter inputBox;
 
     public GeneralPrinter() {
         menu = new MenuPrinter();
@@ -14,5 +14,6 @@ public class GeneralPrinter {
         error = new ErrorPrinter();
         success = new SuccessPrinter();
         notification = new NotificationPrinter();
+        inputBox = new InputBoxPrinter();
     }
 }

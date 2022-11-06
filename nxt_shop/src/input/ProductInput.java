@@ -64,7 +64,7 @@ public class ProductInput {
         while (check) {
             System.out.println("⌨ Enter " + type + ": ");
             string = scanner.nextLine();
-            if (resource.input.validate.validateInputNumberData(string) || string.equals("")) {
+            if (resource.input.validate.validateNumber(string) || string.equals("")) {
                 check = false;
             } else {
                 resource.printer.error.invalidData();
@@ -91,7 +91,7 @@ public class ProductInput {
     public int inputId(Resource resource, Scanner scanner) {
         System.out.println("⌨ Enter id: ");
         String string = scanner.nextLine();
-        if (resource.input.validate.validateInputNumberData(string)) {
+        if (resource.input.validate.validateNumber(string)) {
             int id = Integer.parseInt(string);
             if (resource.manager.getProduct().checkId(id)) {
                 return id;

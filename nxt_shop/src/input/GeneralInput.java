@@ -2,13 +2,13 @@ package input;
 
 public class GeneralInput {
     public Validate validate;
-    public LoginAndUserInput loginAndUserInput;
+    public UserInput user;
     public ProductInput productInput;
     public CartInput cartInput;
 
     public GeneralInput() {
         validate = new Validate();
-        loginAndUserInput = new LoginAndUserInput();
+        user = new UserInput();
         productInput = new ProductInput();
         cartInput = new CartInput();
     }

@@ -1,31 +1,33 @@
 package menu;
 
+import manager.GeneralManager;
+
 import java.util.Scanner;
 
-public class GuestMenu {
-    public void runGuestMenu(Scanner scanner, Resource resource) {
+public class GuestMenu extends AbstractMenu {
+    public void run(Scanner scanner, Resource resource, GeneralManager manager) {
         boolean check = true;
         while (check) {
             String string;
             int choice = -1;
-            resource.printer.menu.printGuestPageMenu();
+            printer.menu.printGuestPageMenu();
             string = scanner.nextLine();
-            if (resource.input.validate.validateGuestPageChoice(string)) {
+            if (input.validate.validateChoice(string, 0, 3)) {
                 choice = Integer.parseInt(string);
             } else {
                 resource.printer.error.reChoice();
             }
             switch (choice) {
                 case 1:
-                    resource.printer.notification.productListTitle();
-                    resource.manager.product.displayAll(resource);
+                    printer.notification.productListTitle();
+                    manager.product.displayAll(printer);
                     break;
                 case 2:
-                    runGuestSearchMenu(scanner, resource);
+                    runSearch(scanner, manager);
                     break;
                 case 3:
-                    resource.printer.notification.productListTitle();
-                    resource.manager.product.displayByPrice(resource);
+                    printer.notification.productListTitle();
+                    manager.product.displayByPrice(resource);
                     break;
                 case 0:
                     check = false;
@@ -33,32 +35,32 @@ public class GuestMenu {
         }
     }
 
-    public void runGuestSearchMenu(Scanner scanner, Resource resource) {
+    public void runSearch(Scanner scanner, GeneralManager manager) {
         boolean check = true;
         while (check) {
             int choice = -1;
-            resource.printer.menu.printSearchMenu();
+            printer.menu.printSearchMenu();
             String string = scanner.nextLine();
-            if (resource.input.validate.validateSearchChoice(string)) {
+            if (input.validate.validateChoice(string, 0, 2)) {
                 choice = Integer.parseInt(string);
             } else {
-                resource.printer.error.reChoice();
+                printer.error.reChoice();
             }
             switch (choice) {
                 case 1:
-                    String name = resource.input.productInput.inputStringData(scanner, "name");
+                    String name = input.productInput.inputStringData(scanner, "name");
                     if (!name.equals("")) {
-                        resource.manager.product.searchByName(name, resource);
+                        manager.product.searchByName(name, printer, input);
                     } else {
-                        resource.printer.notification.pleaseFillName();
+                        printer.notification.pleaseFillName();
                     }
                     break;
                 case 2:
-                    String brand = resource.input.productInput.inputStringData(scanner, "brand");
+                    String brand = input.productInput.inputStringData(scanner, "brand");
                     if (!brand.equals("")) {
-                        resource.manager.product.searchByBrand(brand, resource);
+                        manager.product.searchByBrand(brand, printer, input);
                     } else {
-                        resource.printer.notification.pleaseFillBrand();
+                        printer.notification.pleaseFillBrand();
                     }
                     break;
                 case 0:

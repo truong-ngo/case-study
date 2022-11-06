@@ -18,7 +18,7 @@ public class MenuPrinter {
 
     public void printGuestPageMenu() {
         String format = "│ %-45s │\n";
-        System.out.println("┌─────────────────[Guest Page]──────────────────┐");
+        System.out.println("┌───────────────────────────────────────────────┐");
         System.out.printf(format, "GUEST");
         System.out.println("├───────────────────────────────────────────────┤");
         System.out.printf(format, "▶[1]. View all product.");
@@ -31,7 +31,7 @@ public class MenuPrinter {
 
     public void printUserPageMenu(User user) {
         String format = "│ %-45s │\n";
-        System.out.println("┌─────────────────[User Page]───────────────────┐");
+        System.out.println("┌───────────────────────────────────────────────┐");
         System.out.printf(format, "USER: " + user.getUserName());
         System.out.println("├───────────────────────────────────────────────┤");
         System.out.printf(format, "▶[1]. View all product.");
@@ -44,25 +44,9 @@ public class MenuPrinter {
         System.out.println("☞ Enter your choice:");
     }
 
-    public void printAdminPageMenu() {
-        String format = "│ %-45s │\n";
-        System.out.println("┌─────────────────[Admin Page]──────────────────┐");
-        System.out.printf(format, "ADMIN");
-        System.out.println("├───────────────────────────────────────────────┤");
-        System.out.printf(format, "▶[1]. Add product.");
-        System.out.printf(format, "▶[2]. Update product.");
-        System.out.printf(format, "▶[3]. Delete product.");
-        System.out.printf(format, "▶[4]. View all product.");
-        System.out.printf(format, "▶[5]. Sort product by price.");
-        System.out.printf(format, "▶[6]. User manager.");
-        System.out.printf(format, "▶[0]. Sign out.");
-        System.out.println("└───────────────────────────────────────────────┘");
-        System.out.println("☞ Enter your choice:");
-    }
-
     public void printUserManagerMenu() {
         String format = "│ %-45s │\n";
-        System.out.println("┌─────────────────[Admin Page]──────────────────┐");
+        System.out.println("┌───────────────────────────────────────────────┐");
         System.out.printf(format, "ADMIN");
         System.out.println("├───────────────────────────────────────────────┤");
         System.out.printf(format, "▶[1]. Display user list.");
@@ -159,9 +143,9 @@ public class MenuPrinter {
         System.out.println("☞ Enter your choice:");
     }
 
-    public void printAdminPage() {
+    public void printAdminPageMenu() {
         String format = "│ %-45s │\n";
-        System.out.println("┌─────────────────[Admin Page]──────────────────┐");
+        System.out.println("┌───────────────────────────────────────────────┐");
         System.out.printf(format, "ADMIN");
         System.out.println("├───────────────────────────────────────────────┤");
         System.out.printf(format, "▶[1]. Add product.");
@@ -177,7 +161,7 @@ public class MenuPrinter {
 
     public void printAddProductMenu() {
         String format = "│ %-45s │\n";
-        System.out.println("┌─────────────────[Admin Page]──────────────────┐");
+        System.out.println("┌───────────────────────────────────────────────┐");
         System.out.printf(format, "ADMIN");
         System.out.println("├───────────────────────────────────────────────┤");
         System.out.printf(format, "▶[1]. Add mobile.");

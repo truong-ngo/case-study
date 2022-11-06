@@ -5,13 +5,13 @@ import menu.GeneralMenu;
 import java.util.Scanner;
 
 public class ShopSystem {
-    public GeneralMenu generalMenu;
+    public GeneralMenu menu;
 
     public ShopSystem() {
-        generalMenu = new GeneralMenu();
+        menu = new GeneralMenu();
     }
 
     public void run(Scanner scanner) {
-        generalMenu.display(scanner);
+        menu.run(scanner);
     }
 }

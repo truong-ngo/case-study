@@ -1,6 +1,21 @@
 package printer;
 
 public class ErrorPrinter {
+    public void itemNotFound(String item) {
+        System.out.println("⛔ " + item + " not found");
+    }
+
+    public void itemAlreadyExist(String item) {
+        System.out.println("⛔ " + item + " already exist");
+    }
+
+    public void itemDoesntExist(String item) {
+        System.out.println("⛔ " + item + " doesn't exist");
+    }
+
+    public void pleaseEnterAllData() {
+        System.out.println("⛔ Please enter all data");
+    }
     public void reChoice() {
         System.out.println("⛔ Invalid choice, please re-select.");
     }
