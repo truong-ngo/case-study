@@ -39,4 +39,13 @@ public class UserCart implements Serializable {
             cart.put(product, Math.min(value + quantity, product.getQuantity()));
         }
     }
+
+    public int getCartAmount() {
+        int amount = 0;
+        Set<Product> keys = cart.keySet();
+        for (Product key : keys) {
+            amount += key.getPrice() * cart.get(key);
+        }
+        return amount;
+    }
 }

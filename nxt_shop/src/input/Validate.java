@@ -1,6 +1,6 @@
 package input;
 
-public class Validate extends Input {
+public class Validate extends InputValidate {
     public boolean validateHomePageChoice(String choice) {
         return validate(choice, Regex.HOME_PAGE_CHOICE);
     }

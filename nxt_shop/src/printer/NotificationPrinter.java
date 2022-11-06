@@ -50,4 +50,7 @@ public class NotificationPrinter {
         System.out.println("Total income of shop is: " + totalIncome + " VND");
     }
 
+    public void notEnoughBalance() {
+        System.out.println("⏰ Your account doesn't have enough balance");
+    }
 }

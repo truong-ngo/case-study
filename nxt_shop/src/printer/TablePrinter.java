@@ -84,9 +84,11 @@ public class TablePrinter {
 
     public void printUserInformation(User user) {
         String format = "│ %-12s │ %-30s │\n";
-        System.out.println("User Info:");
+        System.out.println("\uD83D\uDC64 User information:");
         System.out.println("┌───────────────────────────────────────────────┐");
         System.out.printf(format, "User name", user.getUserName());
+        System.out.println("├───────────────────────────────────────────────┤");
+        System.out.printf(format, "Balance", user.getBalance() + " VND");
         System.out.println("├───────────────────────────────────────────────┤");
         System.out.printf(format, "Email", user.getEmail());
         System.out.println("├───────────────────────────────────────────────┤");

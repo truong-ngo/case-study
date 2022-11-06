@@ -6,7 +6,7 @@ public class ErrorPrinter {
     }
 
     public void idDoesntExist() {
-        System.out.println("⛔ Id doesnt exist");
+        System.out.println("⛔ Id doesn't exist");
     }
 
     public void noMatchProduct() {

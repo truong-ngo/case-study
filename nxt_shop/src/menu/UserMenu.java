@@ -1,5 +1,8 @@
 package menu;
 
+import input.Input;
+import input.InputValidate;
+import input.Regex;
 import product.Product;
 import shop_item.UserBills;
 import shop_item.UserCart;
@@ -48,7 +51,7 @@ public class UserMenu {
     private void runUserSearchMenu(Scanner scanner, Resource resource, User user, UserCart userCart) {
         boolean check = true;
         while (check) {
-            int choice = -1;
+            int choice = -2;
             resource.printer.menu.printSearchMenu();
             String string = scanner.nextLine();
             if (resource.input.validate.validateSearchChoice(string)) {
@@ -143,21 +146,28 @@ public class UserMenu {
                     if (cartItem.isEmpty()) {
                         resource.printer.notification.cartIsEmpty();
                     } else {
-                        LocalDateTime time = LocalDateTime.now();
-                        Map<Product, Integer> billItem = new TreeMap<>(cartItem);
-                        UserBills.Bill bill = userBills.new Bill();
-                        bill.add(billItem, time);
-                        userBills.addBill(bill);
-                        Set<Product> products = cartItem.keySet();
-                        for (Product product : products) {
-                            int quantity = product.getQuantity() - cartItem.get(product);
-                            product.setQuantity(quantity);
+                        if (cart.getCartAmount() > user.getBalance()) {
+                            resource.printer.notification.notEnoughBalance();
+                        } else {
+                            int newBalance = user.getBalance() - cart.getCartAmount();
+                            user.setBalance(newBalance);
+                            LocalDateTime time = LocalDateTime.now();
+                            Map<Product, Integer> billItem = new TreeMap<>(cartItem);
+                            UserBills.Bill bill = userBills.new Bill();
+                            bill.add(billItem, time);
+                            userBills.addBill(bill);
+                            Set<Product> products = cartItem.keySet();
+                            for (Product product : products) {
+                                int quantity = product.getQuantity() - cartItem.get(product);
+                                product.setQuantity(quantity);
+                            }
+                            cartItem.clear();
+                            resource.manager.user.saveUserList();
+                            resource.manager.product.saveProductList();
+                            resource.manager.cart.saveUserCartList();
+                            resource.manager.bill.saveUserBillsList();
+                            resource.printer.success.paymentSuccessfully();
                         }
-                        cartItem.clear();
-                        resource.manager.product.saveProductList();
-                        resource.manager.cart.saveUserCartList();
-                        resource.manager.bill.saveUserBillsList();
-                        resource.printer.success.paymentSuccessfully();
                     }
                     break;
                 case 4:
@@ -175,7 +185,7 @@ public class UserMenu {
         while (check) {
             resource.printer.menu.printAccountManagerMenu(user);
             String string = scanner.nextLine();
-            if (resource.input.validate.validateAccountManagerChoice(string)) {
+            if (InputValidate.validateMenuChoice(string, Regex.INPUT_NUMBER_DATA, 0, 4)) {
                 choice = Integer.parseInt(string);
             } else {
                 resource.printer.error.reChoice();
@@ -195,6 +205,13 @@ public class UserMenu {
                     runAccountUpdateMenu(resource, scanner, user);
                     break;
                 case 3:
+                    int amount = Input.getNumberData(resource, scanner, "amount of money");
+                    int balance = user.getBalance();
+                    user.setBalance(balance + amount);
+                    resource.manager.user.saveUserList();
+                    resource.printer.success.addSuccessfully();
+                    break;
+                case 4:
                     resource.printer.table.printUserInformation(user);
                     break;
                 case 0:

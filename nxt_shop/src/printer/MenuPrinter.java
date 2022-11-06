@@ -115,7 +115,7 @@ public class MenuPrinter {
         System.out.println("├───────────────────────────────────────────────┤");
         System.out.printf(format, "▶[1]. Display cart.");
         System.out.printf(format, "▶[2]. Clear cart.");
-        System.out.printf(format, "▶[3]. Payment.");
+        System.out.printf(format, "▶[3]. Checkout your cart.");
         System.out.printf(format, "▶[4]. Display bill.");
         System.out.printf(format, "▶[0]. Return.");
         System.out.println("└───────────────────────────────────────────────┘");
@@ -140,7 +140,8 @@ public class MenuPrinter {
         System.out.println("├───────────────────────────────────────────────┤");
         System.out.printf(format, "▶[1]. Change password.");
         System.out.printf(format, "▶[2]. Update information.");
-        System.out.printf(format, "▶[3]. User information.");
+        System.out.printf(format, "▶[3]. Add money to your account.");
+        System.out.printf(format, "▶[4]. User information.");
         System.out.printf(format, "▶[0]. Return.");
         System.out.println("└───────────────────────────────────────────────┘");
         System.out.println("☞ Enter your choice:");
