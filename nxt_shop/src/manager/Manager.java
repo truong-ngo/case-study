@@ -5,27 +5,13 @@ public class Manager {
     public final UserManager user;
     public final CartManager cart;
     public final BillManager bill;
+    public final ChatManager chat;
 
     public Manager() {
         product = new ProductManager();
         user = new UserManager();
         cart = new CartManager();
         bill = new BillManager();
-    }
-
-    public ProductManager getProduct() {
-        return product;
-    }
-
-    public UserManager getUser() {
-        return user;
-    }
-
-    public CartManager getCart() {
-        return cart;
-    }
-
-    public BillManager getBill() {
-        return bill;
+        chat = ChatManager.getInstance();
     }
 }

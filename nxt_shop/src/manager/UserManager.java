@@ -5,7 +5,7 @@ import shop_item.User;
 import java.util.List;
 
 public class UserManager {
-    private final List<User> users;
+    private List<User> users;
     private final String path = "src/file/users";
     private final IOFile<User> ioFile;
 
@@ -31,6 +31,15 @@ public class UserManager {
             }
         }
         return user;
+    }
+
+    public User getAdmin() {
+        for (User user : users) {
+            if (user.getRole().equals("ADMIN")) {
+                return user;
+            }
+        }
+        return null;
     }
 
     public void saveUserList() {

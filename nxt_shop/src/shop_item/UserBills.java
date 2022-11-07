@@ -13,10 +13,12 @@ public class UserBills implements Serializable {
     private static final long serialVersionUID = 42L;
     private final User billsID;
     private final List<Bill> bills;
+    private final List<Messenger> notification;
 
     public UserBills(User user) {
         billsID = user;
         bills = new ArrayList<>();
+        notification = new ArrayList<>();
     }
 
     public User getBillsID() {
@@ -29,6 +31,18 @@ public class UserBills implements Serializable {
 
     public void addBill(UserBills.Bill bill) {
         bills.add(bill);
+    }
+
+    public List<Messenger> getNotification() {
+        return notification;
+    }
+
+    public void addNotification(Messenger messenger) {
+        notification.add(messenger);
+    }
+
+    public void clearNotification() {
+        notification.clear();
     }
 
     public int getUserTotalSpent() {

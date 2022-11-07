@@ -1,6 +1,8 @@
 package printer;
 
 import product.Product;
+import shop_item.ChatSession;
+import shop_item.Messenger;
 import shop_item.User;
 import shop_item.UserBills;
 import java.time.LocalDateTime;
@@ -104,5 +106,27 @@ public class TablePrinter {
         System.out.println("├───────────────────────────────────────────────┤");
         System.out.printf(format, "Phone number", user.getPhoneNumber());
         System.out.println("└───────────────────────────────────────────────┘");
+    }
+
+    public void printChatBox(User userOne, User userTwo, ChatSession chatSession) {
+        String userOneName = userOne.getUserName();
+        String userTwoName = userTwo.getUserName();
+        List<Messenger> messengerList = chatSession.getMessengerList();
+        String userOneFormat = "│ %-70s │\n";
+        String userTwoFormat = "│ %70s │\n";
+        System.out.println("┌────────────────────────────────────────────────────────────────────────┐");
+        System.out.printf(userOneFormat, userOneName + " & " + userTwoName + " chat box");
+        System.out.println("├────────────────────────────────────────────────────────────────────────┤");
+        for (Messenger messenger : messengerList) {
+            if (messenger.getMessage().contains(userOneName)) {
+                System.out.printf(userOneFormat, messenger.getMessage());
+                System.out.printf(userOneFormat, messenger.getTime().toString());
+            }
+            if (messenger.getMessage().contains(userTwoName)) {
+                System.out.printf(userOneFormat, messenger.getMessage());
+                System.out.printf(userOneFormat, messenger.getTime().toString());
+            }
+        }
+        System.out.println("└────────────────────────────────────────────────────────────────────────┘");
     }
 }

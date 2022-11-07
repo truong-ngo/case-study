@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class ProductManager implements CRUD<Product> {
-    private final List<Product> products;
+    private List<Product> products;
     private final IOFile<Product> ioFile;
     private final String path = "src/file/products";
 

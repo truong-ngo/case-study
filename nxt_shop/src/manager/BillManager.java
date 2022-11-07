@@ -9,7 +9,7 @@ import java.util.List;
 public class BillManager {
     private final List<UserBills> userBillsList;
     private final IOFile<UserBills> ioFile;
-    private final String path = "src/file/user-bills-list";
+    private final String path = "src/file/bills";
 
     public BillManager() {
         ioFile = new IOFile<>();

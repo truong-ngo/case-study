@@ -39,6 +39,7 @@ public class MenuPrinter {
         System.out.printf(format, "▶[3]. Sort by price.");
         System.out.printf(format, "▶[4]. Cart manager.");
         System.out.printf(format, "▶[5]. Account manager.");
+        System.out.printf(format, "▶[6]. Chat with admin.");
         System.out.printf(format, "▶[0]. Sign out.");
         System.out.println("└───────────────────────────────────────────────┘");
         System.out.println("☞ Enter your choice:");
@@ -155,6 +156,18 @@ public class MenuPrinter {
         System.out.printf(format, "▶[1]. Add mobile.");
         System.out.printf(format, "▶[2]. Add laptop.");
         System.out.printf(format, "▶[3]. Add earbuds.");
+        System.out.printf(format, "▶[0]. Return.");
+        System.out.println("└───────────────────────────────────────────────┘");
+        System.out.println("☞ Enter your choice:");
+    }
+
+    public void printUserChat(User user) {
+        String format = "│ %-45s │\n";
+        System.out.println("┌───────────────────────────────────────────────┐");
+        System.out.printf(format, "\uD83D\uDC64 USER: " + user.getUserName());
+        System.out.println("├───────────────────────────────────────────────┤");
+        System.out.printf(format, "▶[1]. Enter message.");
+        System.out.printf(format, "▶[2]. Refresh.");
         System.out.printf(format, "▶[0]. Return.");
         System.out.println("└───────────────────────────────────────────────┘");
         System.out.println("☞ Enter your choice:");

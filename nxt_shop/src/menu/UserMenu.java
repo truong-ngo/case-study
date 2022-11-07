@@ -2,9 +2,7 @@ package menu;
 
 import manager.Manager;
 import product.Product;
-import shop_item.UserBills;
-import shop_item.UserCart;
-import shop_item.User;
+import shop_item.*;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -16,7 +14,7 @@ public class UserMenu extends AbstractMenu {
             int choice = -1;
             printer.menu.printUserPage(user);
             String string = scanner.nextLine();
-            if (input.validate.validateChoice(string, 0, 5)) {
+            if (input.validate.validateChoice(string, 0, 6)) {
                 choice = Integer.parseInt(string);
             } else {
                 printer.error.invalidData("choice");
@@ -30,7 +28,7 @@ public class UserMenu extends AbstractMenu {
                     runSearch(scanner, manager, user);
                     break;
                 case 3:
-                    manager.getProduct().displayByPrice(printer);
+                    manager.product.displayByPrice(printer);
                     runAddToCart(scanner, manager, user);
                     break;
                 case 4:
@@ -38,6 +36,9 @@ public class UserMenu extends AbstractMenu {
                     break;
                 case 5:
                     runAccountManager(manager, scanner, user);
+                    break;
+                case 6:
+                    runChatSession(scanner, manager, user);
                     break;
                 case 0:
                     check = false;
@@ -243,6 +244,45 @@ public class UserMenu extends AbstractMenu {
                     break;
                 case 4:
                     printer.table.printUserInformation(user);
+                    break;
+                case 0:
+                    check = false;
+            }
+        }
+    }
+
+    public void runChatSession(Scanner scanner, Manager manager, User user) {
+        boolean check = true;
+        while (check) {
+            manager.chat.readSessionList();
+            User admin = manager.user.getAdmin();
+            ChatSession chatSession = manager.chat.getSessionByUsers(user, admin);
+            printer.table.printChatBox(user, admin, chatSession);
+            int choice = -1;
+            printer.menu.printUserChat(user);
+            String string = scanner.nextLine();
+            if (input.validate.validateChoice(string, 0, 2)) {
+                choice = Integer.parseInt(string);
+            } else {
+                printer.error.invalidData("choice");
+            }
+            switch (choice) {
+                case 1:
+                    printer.chat.enterMessage();
+                    String message = scanner.nextLine();
+                    if (!message.equals("")) {
+                        LocalDateTime time = LocalDateTime.now();
+                        message = user.getUserName() + ": " + message;
+                        Messenger messenger = new Messenger(message, time);
+                        chatSession.addMessenger(messenger);
+                        printer.success.actionSuccessfully("Sent message");
+                    } else {
+                        printer.error.actionFailed("Sent message");
+                    }
+                    manager.chat.saveSessionList();
+                    break;
+                case 2:
+                    manager.chat.readSessionList();
                     break;
                 case 0:
                     check = false;

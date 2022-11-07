@@ -7,6 +7,7 @@ public class Printer {
     public final SuccessPrinter success;
     public final NotificationPrinter notification;
     public final InputBoxPrinter inputBox;
+    public final ChatPrinter chat;
 
     public Printer() {
         menu = new MenuPrinter();
@@ -15,5 +16,6 @@ public class Printer {
         success = new SuccessPrinter();
         notification = new NotificationPrinter();
         inputBox = new InputBoxPrinter();
+        chat = new ChatPrinter();
     }
 }

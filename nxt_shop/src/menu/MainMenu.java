@@ -1,6 +1,7 @@
 package menu;
 
 import manager.Manager;
+import shop_item.ChatSession;
 import shop_item.User;
 import shop_item.UserBills;
 import shop_item.UserCart;
@@ -100,7 +101,6 @@ public class MainMenu extends AbstractMenu {
                             printer.error.invalidData("email");
                         }
                     }
-
                     break;
                 case 0:
                     check = false;
@@ -129,12 +129,15 @@ public class MainMenu extends AbstractMenu {
                         if (manager.user.checkExistUsername(userInput[0])) {
                             printer.error.itemAlreadyExist("Username");
                         } else {
+                            User admin = manager.user.getAdmin();
                             User newUser = new User(userInput[0], userInput[1]);
                             UserCart userCart = new UserCart(newUser);
                             UserBills userBills = new UserBills(newUser);
+                            ChatSession chatSession = new ChatSession(newUser, admin);
                             manager.user.add(newUser);
                             manager.cart.add(userCart);
                             manager.bill.add(userBills);
+                            manager.chat.add(chatSession);
                             printer.success.actionSuccessfully("Signup");
                         }
                     }

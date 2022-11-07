@@ -7,7 +7,7 @@ import shop_item.User;
 import java.util.List;
 
 public class CartManager implements CRUD<UserCart> {
-    private final List<UserCart> userCartList;
+    private List<UserCart> userCartList;
     private final IOFile<UserCart> ioFile;
     private final String path = "src/file/carts";
 

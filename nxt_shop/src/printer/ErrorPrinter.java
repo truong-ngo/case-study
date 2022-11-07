@@ -9,6 +9,10 @@ public class ErrorPrinter {
         System.out.println("⛔ " + item + " already exist");
     }
 
+    public void actionFailed(String action) {
+        System.out.println("⛔ " + action + " failed");
+    }
+
     public void pleaseEnterData(String data) {
         System.out.println("⛔ Please enter " + data);
     }
