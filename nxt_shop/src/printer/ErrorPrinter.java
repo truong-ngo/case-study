@@ -13,8 +13,8 @@ public class ErrorPrinter {
         System.out.println("⛔ " + item + " doesn't exist");
     }
 
-    public void pleaseEnterAllData() {
-        System.out.println("⛔ Please enter all data");
+    public void pleaseEnterData(String data) {
+        System.out.println("⛔ Please enter " + data);
     }
     public void reChoice() {
         System.out.println("⛔ Invalid choice, please re-select.");

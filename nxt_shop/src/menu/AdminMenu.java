@@ -1,6 +1,6 @@
 package menu;
 
-import manager.GeneralManager;
+import manager.Manager;
 import product.Product;
 import shop_item.User;
 import shop_item.UserBills;
@@ -9,12 +9,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class AdminMenu extends AbstractMenu {
-    public void runAdminMenu(Scanner scanner, GeneralManager manager) {
+    public void runAdminMenu(Scanner scanner, Manager manager) {
         boolean check = true;
-        int id = -1;
+        int id;
         while (check) {
             int choice = -1;
-            printer.menu.printAdminPageMenu();
+            printer.menu.printAdminPage();
             String string = scanner.nextLine();
             if (input.validate.validateChoice(string, 0, 6)) {
                 choice = Integer.parseInt(string);
@@ -57,11 +57,11 @@ public class AdminMenu extends AbstractMenu {
         }
     }
 
-    public void runAddProductMenu(Scanner scanner, GeneralManager manager) {
+    public void runAddProductMenu(Scanner scanner, Manager manager) {
         boolean check = true;
         while (check) {
             int choice = -1;
-            printer.menu.printAddProductMenu();
+            printer.menu.printAddProduct();
             String string = scanner.nextLine();
             if (input.validate.validateChoice(string, 0, 3)) {
                 choice = Integer.parseInt(string);
@@ -82,13 +82,12 @@ public class AdminMenu extends AbstractMenu {
         }
     }
 
-    public void runUserManagerMenu(Scanner scanner, GeneralManager manager) {
+    public void runUserManagerMenu(Scanner scanner, Manager manager) {
         boolean check = true;
-        int choice = -1;
-        String string;
         while (check) {
-            printer.menu.printUserManagerMenu();
-            string = scanner.nextLine();
+            int choice = -1;
+            printer.menu.printUserManager();
+            String string = scanner.nextLine();
             if (input.validate.validateChoice(string, 0, 3)) {
                 choice = Integer.parseInt(string);
             } else {
@@ -101,12 +100,16 @@ public class AdminMenu extends AbstractMenu {
                     break;
                 case 2:
                     String username = input.user.inputItem(scanner, printer, "username");
-                    if (manager.user.checkExistUsername(username)) {
-                        User user = manager.user.getUserByName(username);
-                        UserBills userBills = manager.bill.getUserBillsByUser(user);
-                        printer.table.printBill(userBills, user, "bill");
+                    if (username == null) {
+                        printer.error.pleaseEnterData("username");
                     } else {
-                        printer.error.itemNotFound("User");
+                        if (manager.user.checkExistUsername(username)) {
+                            User user = manager.user.getUserByName(username);
+                            UserBills userBills = manager.bill.getUserBillsByUser(user);
+                            printer.table.printBill(userBills, user, "bill");
+                        } else {
+                            printer.error.itemNotFound("Username");
+                        }
                     }
                     break;
                 case 3:

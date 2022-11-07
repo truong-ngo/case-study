@@ -1,10 +1,10 @@
 package input;
 
-import printer.GeneralPrinter;
+import printer.Printer;
 import java.util.Scanner;
 
 public class UserInput {
-    public String[] userInput(Scanner scanner, GeneralPrinter printer) {
+    public String[] userInput(Scanner scanner, Printer printer) {
         printer.inputBox.printInputBox("username");
         String userName = scanner.nextLine();
         printer.inputBox.printInputBox("password");
@@ -15,7 +15,7 @@ public class UserInput {
         return new String[]{userName, password};
     }
 
-    public String[] userInformationInput(Scanner scanner, GeneralPrinter printer, Input input) {
+    public String[] userInformationInput(Scanner scanner, Printer printer, Input input) {
         printer.inputBox.printInputBox("new email");
         String email = scanner.nextLine();
         printer.inputBox.printInputBox("new phone number");
@@ -32,8 +32,12 @@ public class UserInput {
         }
     }
 
-    public String inputItem(Scanner scanner, GeneralPrinter printer, String item) {
+    public String inputItem(Scanner scanner, Printer printer, String item) {
         printer.inputBox.printInputBox(item);
-        return scanner.nextLine();
+        String data = scanner.nextLine();
+        if (data.equals("")) {
+            return null;
+        }
+        return data;
     }
 }

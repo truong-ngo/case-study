@@ -3,7 +3,7 @@ package printer;
 import shop_item.User;
 
 public class MenuPrinter {
-    public void printHomePageMenu() {
+    public void printHomePage() {
         String format = "│ %-45s │\n";
         System.out.println("┌───────────────────────────────────────────────┐");
         System.out.println("│      --o0o-- WELCOME TO NXT SHOP --o0o--      │");
@@ -16,7 +16,7 @@ public class MenuPrinter {
         System.out.println("▶ Enter your choice:");
     }
 
-    public void printGuestPageMenu() {
+    public void printGuestPage() {
         String format = "│ %-45s │\n";
         System.out.println("┌───────────────────────────────────────────────┐");
         System.out.printf(format, "GUEST");
@@ -29,7 +29,7 @@ public class MenuPrinter {
         System.out.println("☞ Enter your choice:");
     }
 
-    public void printUserPageMenu(User user) {
+    public void printUserPage(User user) {
         String format = "│ %-45s │\n";
         System.out.println("┌───────────────────────────────────────────────┐");
         System.out.printf(format, "USER: " + user.getUserName());
@@ -44,7 +44,7 @@ public class MenuPrinter {
         System.out.println("☞ Enter your choice:");
     }
 
-    public void printUserManagerMenu() {
+    public void printUserManager() {
         String format = "│ %-45s │\n";
         System.out.println("┌───────────────────────────────────────────────┐");
         System.out.printf(format, "ADMIN");
@@ -57,10 +57,10 @@ public class MenuPrinter {
         System.out.println("☞ Enter your choice:");
     }
 
-    public void printLoginMenu() {
+    public void printLogin() {
         String format = "│ %-45s │\n";
         System.out.println("┌───────────────────────────────────────────────┐");
-        System.out.printf(format, "SIGN IN");
+        System.out.printf(format, "LOGIN");
         System.out.println("├───────────────────────────────────────────────┤");
         System.out.printf(format, "▶[1]. Login.");
         System.out.printf(format, "▶[2]. Forgot password?.");
@@ -69,10 +69,10 @@ public class MenuPrinter {
         System.out.println("☞ Enter your choice:");
     }
 
-    public void printSignupMenu() {
+    public void printSignup() {
         String format = "│ %-45s │\n";
         System.out.println("┌───────────────────────────────────────────────┐");
-        System.out.printf(format, "SIGN UP");
+        System.out.printf(format, "SIGNUP");
         System.out.println("├───────────────────────────────────────────────┤");
         System.out.printf(format, "▶[1]. Signup.");
         System.out.printf(format, "▶[0]. Return to Home Page.");
@@ -80,7 +80,7 @@ public class MenuPrinter {
         System.out.println("☞ Enter your choice:");
     }
 
-    public void printSearchMenu() {
+    public void printSearch() {
         String format = "│ %-45s │\n";
         System.out.println("┌───────────────────────────────────────────────┐");
         System.out.printf(format, "GUEST");
@@ -106,7 +106,7 @@ public class MenuPrinter {
         System.out.println("☞ Enter your choice:");
     }
 
-    public void printViewProductMenu(User user) {
+    public void printViewProduct(User user) {
         String format = "│ %-45s │\n";
         System.out.println("┌───────────────────────────────────────────────┐");
         System.out.printf(format, "USER: " + user.getUserName());
@@ -117,7 +117,7 @@ public class MenuPrinter {
         System.out.println("☞ Enter your choice:");
     }
 
-    public void printAccountManagerMenu(User user) {
+    public void printAccountManager(User user) {
         String format = "│ %-45s │\n";
         System.out.println("┌───────────────────────────────────────────────┐");
         System.out.printf(format, "USER: " + user.getUserName());
@@ -131,19 +131,7 @@ public class MenuPrinter {
         System.out.println("☞ Enter your choice:");
     }
 
-    public void printAccountUpdateMenu(User user) {
-        String format = "│ %-45s │\n";
-        System.out.println("┌───────────────────────────────────────────────┐");
-        System.out.printf(format, "USER: " + user.getUserName());
-        System.out.println("├───────────────────────────────────────────────┤");
-        System.out.printf(format, "▶[1]. Update email.");
-        System.out.printf(format, "▶[2]. Update phone number.");
-        System.out.printf(format, "▶[0]. Return.");
-        System.out.println("└───────────────────────────────────────────────┘");
-        System.out.println("☞ Enter your choice:");
-    }
-
-    public void printAdminPageMenu() {
+    public void printAdminPage() {
         String format = "│ %-45s │\n";
         System.out.println("┌───────────────────────────────────────────────┐");
         System.out.printf(format, "ADMIN");
@@ -159,7 +147,7 @@ public class MenuPrinter {
         System.out.println("☞ Enter your choice:");
     }
 
-    public void printAddProductMenu() {
+    public void printAddProduct() {
         String format = "│ %-45s │\n";
         System.out.println("┌───────────────────────────────────────────────┐");
         System.out.printf(format, "ADMIN");

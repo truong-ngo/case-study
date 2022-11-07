@@ -1,6 +1,6 @@
 package menu;
 
-import manager.GeneralManager;
+import manager.Manager;
 import shop_item.User;
 import shop_item.UserBills;
 import shop_item.UserCart;
@@ -16,11 +16,11 @@ public class MainMenu extends AbstractMenu {
         userMenu = new UserMenu();
         adminMenu = new AdminMenu();
     }
-    public void run(Scanner scanner, GeneralManager manager) {
+    public void run(Scanner scanner, Manager manager) {
         String string;
-        int choice = -1;
         while (true) {
-            printer.menu.printHomePageMenu();
+            int choice = -1;
+            printer.menu.printHomePage();
             string = scanner.nextLine();
             if (input.validate.validateChoice(string, 0, 3)) {
                 choice = Integer.parseInt(string);
@@ -43,13 +43,13 @@ public class MainMenu extends AbstractMenu {
         }
     }
 
-    public void runLoginMenu(Scanner scanner, GeneralManager manager) {
+    public void runLoginMenu(Scanner scanner, Manager manager) {
         String string;
-        int choice = -1;
         boolean check = true;
         List<User> users = manager.user.getUsers();
         while (check) {
-            printer.menu.printLoginMenu();
+            int choice = -1;
+            printer.menu.printLogin();
             string = scanner.nextLine();
             if (input.validate.validateChoice(string, 0, 2)) {
                 choice = Integer.parseInt(string);
@@ -68,34 +68,39 @@ public class MainMenu extends AbstractMenu {
                             printer.success.loginSuccessfully();
                             adminMenu.runAdminMenu(scanner, manager);
                         } else {
-                            printer.error.incorrectData("username and password");
+                            printer.error.incorrectData("username or password");
                         }
                     } else {
-                        printer.error.pleaseEnterAllData();
+                        printer.error.pleaseEnterData("username and password");
                     }
                     break;
                 case 2:
                     String email = input.user.inputItem(scanner, printer, "email");
-                    if (input.validate.validateEmail(email)) {
-                        User user = new User();
-                        if (manager.user.checkDuplicateEmail(email)) {
-                            for (User u : users) {
-                                if (u.getEmail() == null) {
-                                    continue;
-                                }
-                                if (u.getEmail().equals(email)) {
-                                    user = u;
-                                    break;
-                                }
-                            }
-                            printer.notification.sendEmailContainPassword(user);
-                            break;
-                        } else {
-                            printer.error.itemNotFound("email");
-                        }
+                    if (email == null) {
+                        printer.error.pleaseEnterData("email");
                     } else {
-                        printer.error.pleaseEnterAllData();
+                        if (input.validate.validateEmail(email)) {
+                            User user = new User();
+                            if (manager.user.checkDuplicateEmail(email)) {
+                                for (User u : users) {
+                                    if (u.getEmail() == null) {
+                                        continue;
+                                    }
+                                    if (u.getEmail().equals(email)) {
+                                        user = u;
+                                        break;
+                                    }
+                                }
+                                printer.notification.sendEmailContainPassword(user);
+                                break;
+                            } else {
+                                printer.error.itemNotFound("email");
+                            }
+                        } else {
+                            printer.error.invalidData("email");
+                        }
                     }
+
                     break;
                 case 0:
                     check = false;
@@ -103,12 +108,12 @@ public class MainMenu extends AbstractMenu {
         }
     }
 
-    public void runSignupMenu(Scanner scanner, GeneralManager manager) {
+    public void runSignupMenu(Scanner scanner, Manager manager) {
         String string;
-        int choice = -1;
         boolean check = true;
         while (check) {
-            printer.menu.printSignupMenu();
+            int choice = -1;
+            printer.menu.printSignup();
             string = scanner.nextLine();
             if (input.validate.validateChoice(string, 0, 1)) {
                 choice = Integer.parseInt(string);
@@ -119,7 +124,7 @@ public class MainMenu extends AbstractMenu {
                 case 1:
                     String[] userInput = input.user.userInput(scanner, printer);
                     if (userInput == null) {
-                        printer.error.pleaseEnterAllData();
+                        printer.error.pleaseEnterData("username and input");
                     } else {
                         if (manager.user.checkExistUsername(userInput[0])) {
                             printer.error.itemAlreadyExist("Username");

@@ -1,6 +1,6 @@
 package printer;
 
-public class GeneralPrinter {
+public class Printer {
     public final MenuPrinter menu;
     public final TablePrinter table;
     public final ErrorPrinter error;
@@ -8,7 +8,7 @@ public class GeneralPrinter {
     public final NotificationPrinter notification;
     public final InputBoxPrinter inputBox;
 
-    public GeneralPrinter() {
+    public Printer() {
         menu = new MenuPrinter();
         table = new TablePrinter();
         error = new ErrorPrinter();

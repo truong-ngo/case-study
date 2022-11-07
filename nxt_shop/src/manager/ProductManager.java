@@ -1,7 +1,7 @@
 package manager;
 
 import io_file.IOFile;
-import printer.GeneralPrinter;
+import printer.Printer;
 import product.*;
 
 import java.util.ArrayList;
@@ -73,17 +73,17 @@ public class ProductManager implements CRUD<Product> {
         ioFile.writeToFile(products, path);
     }
 
-    public void displayAll(GeneralPrinter printer) {
+    public void displayAll(Printer printer) {
         printer.table.printProduct(products);
     }
 
-    public void displayByPrice(GeneralPrinter printer) {
+    public void displayByPrice(Printer printer) {
         List<Product> sortedList = new ArrayList<>(products);
         Collections.sort(sortedList);
         printer.table.printProduct(sortedList);
     }
 
-    public boolean searchByName(String name, GeneralPrinter printer) {
+    public boolean searchByName(String name, Printer printer) {
         List<Product> searchLists = checkName(name);
         if (searchLists.isEmpty()) {
             printer.error.noMatchFound();
@@ -95,7 +95,7 @@ public class ProductManager implements CRUD<Product> {
         }
     }
 
-    public boolean searchByBrand(String name, GeneralPrinter printer) {
+    public boolean searchByBrand(String name, Printer printer) {
         List<Product> searchLists = checkBrand(name);
         if (searchLists.isEmpty()) {
             printer.error.noMatchFound();

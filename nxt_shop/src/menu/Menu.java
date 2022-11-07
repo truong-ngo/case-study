@@ -1,16 +1,16 @@
 package menu;
 
-import manager.GeneralManager;
+import manager.Manager;
 
 import java.util.Scanner;
 
-public class GeneralMenu {
+public class Menu {
     public MainMenu mainMenu;
-    public GeneralManager manager;
+    public Manager manager;
 
-    public GeneralMenu() {
+    public Menu() {
         mainMenu = new MainMenu();
-        manager = new GeneralManager();
+        manager = new Manager();
     }
 
     public void run(Scanner scanner) {

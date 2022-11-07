@@ -1,14 +1,14 @@
 package system;
 
-import menu.GeneralMenu;
+import menu.Menu;
 
 import java.util.Scanner;
 
 public class ShopSystem {
-    public GeneralMenu menu;
+    public Menu menu;
 
     public ShopSystem() {
-        menu = new GeneralMenu();
+        menu = new Menu();
     }
 
     public void run(Scanner scanner) {

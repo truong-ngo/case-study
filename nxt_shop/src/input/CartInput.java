@@ -1,11 +1,11 @@
 package input;
 
-import printer.GeneralPrinter;
+import printer.Printer;
 
 import java.util.Scanner;
 
 public class CartInput {
-    public int[] addToCartInput(Scanner scanner, GeneralPrinter printer, Input input) {
+    public int[] addToCartInput(Scanner scanner, Printer printer, Input input) {
         printer.inputBox.printInputBox("ID of product");
         String id = scanner.nextLine();
         printer.inputBox.printInputBox("quantity to add");
@@ -16,6 +16,5 @@ public class CartInput {
             printer.error.invalidData("ID or quantity");
             return null;
         }
-
     }
 }

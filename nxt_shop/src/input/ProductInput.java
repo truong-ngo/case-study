@@ -1,17 +1,17 @@
 package input;
 
-import manager.GeneralManager;
-import printer.GeneralPrinter;
+import manager.Manager;
+import printer.Printer;
 import product.*;
 import java.util.Scanner;
 
 public class ProductInput {
-    public String inputStringData(Scanner scanner, GeneralPrinter printer, String data) {
+    public String inputStringData(Scanner scanner, Printer printer, String data) {
         printer.inputBox.printInputBox(data);
         return scanner.nextLine();
     }
 
-    public String inputNumberData(Scanner scanner, GeneralPrinter printer, Input input, String data) {
+    public String inputNumberData(Scanner scanner, Printer printer, Input input, String data) {
         String string = null;
         boolean check = true;
         while (check) {
@@ -26,7 +26,7 @@ public class ProductInput {
         return string;
     }
 
-    public String inputBooleanData(Scanner scanner, GeneralPrinter printer, String data) {
+    public String inputBooleanData(Scanner scanner, Printer printer, String data) {
         String string = null;
         boolean check = true;
         while (check) {
@@ -41,7 +41,7 @@ public class ProductInput {
         return string;
     }
 
-    public String getStringData(Scanner scanner, GeneralPrinter printer, String data) {
+    public String getStringData(Scanner scanner, Printer printer, String data) {
         String string;
         int count = 0;
         while (true) {
@@ -56,7 +56,7 @@ public class ProductInput {
         }
     }
 
-    public int getNumberData(Scanner scanner, GeneralPrinter printer, Input input, String data) {
+    public int getNumberData(Scanner scanner, Printer printer, Input input, String data) {
         String string;
         int count = 0;
         while (true) {
@@ -71,7 +71,7 @@ public class ProductInput {
         }
     }
 
-    public boolean getBooleanData(Scanner scanner, GeneralPrinter printer, String data) {
+    public boolean getBooleanData(Scanner scanner, Printer printer, String data) {
         String string;
         int count = 0;
         while (true) {
@@ -86,7 +86,7 @@ public class ProductInput {
         }
     }
 
-    public int inputId(Scanner scanner, GeneralPrinter printer, Input input, GeneralManager manager) {
+    public int inputId(Scanner scanner, Printer printer, Input input, Manager manager) {
         printer.inputBox.printInputBox("ID");
         String string = scanner.nextLine();
         if (input.validate.validateNumber(string)) {
@@ -103,8 +103,8 @@ public class ProductInput {
         }
     }
 
-    public Product inputAddProduct(Scanner scanner, GeneralPrinter printer, Input input,
-                                   GeneralManager manager, int choice) {
+    public Product inputAddProduct(Scanner scanner, Printer printer, Input input,
+                                   Manager manager, int choice) {
         Product product = null;
         String name;
         do {
@@ -137,8 +137,8 @@ public class ProductInput {
         return product;
     }
 
-    public Product inputUpdateProduct(int id, Scanner scanner, GeneralPrinter printer,
-                                      Input input, GeneralManager manager) {
+    public Product inputUpdateProduct(int id, Scanner scanner, Printer printer,
+                                      Input input, Manager manager) {
         Product product = manager.product.getProductById(id);
         String name;
         int price, quantity;

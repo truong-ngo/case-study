@@ -1,12 +1,12 @@
 package manager;
 
-public class GeneralManager {
+public class Manager {
     public final ProductManager product;
     public final UserManager user;
     public final CartManager cart;
     public final BillManager bill;
 
-    public GeneralManager() {
+    public Manager() {
         product = new ProductManager();
         user = new UserManager();
         cart = new CartManager();

@@ -1,17 +1,15 @@
 package menu;
 
-import manager.GeneralManager;
-
+import manager.Manager;
 import java.util.Scanner;
 
 public class GuestMenu extends AbstractMenu {
-    public void run(Scanner scanner, GeneralManager manager) {
+    public void run(Scanner scanner, Manager manager) {
         boolean check = true;
         while (check) {
-            String string;
             int choice = -1;
-            printer.menu.printGuestPageMenu();
-            string = scanner.nextLine();
+            printer.menu.printGuestPage();
+            String string = scanner.nextLine();
             if (input.validate.validateChoice(string, 0, 3)) {
                 choice = Integer.parseInt(string);
             } else {
@@ -35,11 +33,11 @@ public class GuestMenu extends AbstractMenu {
         }
     }
 
-    public void runSearch(Scanner scanner, GeneralManager manager) {
+    public void runSearch(Scanner scanner, Manager manager) {
         boolean check = true;
         while (check) {
             int choice = -1;
-            printer.menu.printSearchMenu();
+            printer.menu.printSearch();
             String string = scanner.nextLine();
             if (input.validate.validateChoice(string, 0, 2)) {
                 choice = Integer.parseInt(string);

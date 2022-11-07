@@ -1,6 +1,6 @@
 package menu;
 
-import manager.GeneralManager;
+import manager.Manager;
 import product.Product;
 import shop_item.UserBills;
 import shop_item.UserCart;
@@ -10,12 +10,11 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class UserMenu extends AbstractMenu {
-    public void run(Scanner scanner, GeneralManager manager, User user) {
-        UserCart userCart = manager.cart.getCartByUser(user);
+    public void run(Scanner scanner, Manager manager, User user) {
         boolean check = true;
         while (check) {
             int choice = -1;
-            printer.menu.printUserPageMenu(user);
+            printer.menu.printUserPage(user);
             String string = scanner.nextLine();
             if (input.validate.validateChoice(string, 0, 5)) {
                 choice = Integer.parseInt(string);
@@ -46,11 +45,11 @@ public class UserMenu extends AbstractMenu {
         }
     }
 
-    private void runSearch(Scanner scanner, GeneralManager manager, User user) {
+    private void runSearch(Scanner scanner, Manager manager, User user) {
         boolean check = true;
         while (check) {
-            int choice = -2;
-            printer.menu.printSearchMenu();
+            int choice = -1;
+            printer.menu.printSearch();
             String string = scanner.nextLine();
             if (input.validate.validateChoice(string, 0, 2)) {
                 choice = Integer.parseInt(string);
@@ -76,11 +75,11 @@ public class UserMenu extends AbstractMenu {
         }
     }
 
-    public void runAddToCart(Scanner scanner, GeneralManager manager, User user) {
+    public void runAddToCart(Scanner scanner, Manager manager, User user) {
         boolean check = true;
         while (check) {
             UserCart userCart = manager.cart.getCartByUser(user);
-            printer.menu.printViewProductMenu(user);
+            printer.menu.printViewProduct(user);
             String string = scanner.nextLine();
             int choice = -1;
             if (input.validate.validateChoice(string, 0, 1)) {
@@ -98,7 +97,7 @@ public class UserMenu extends AbstractMenu {
         }
     }
 
-    public void addToCartChoice(Scanner scanner, GeneralManager manager, UserCart userCart) {
+    public void addToCartChoice(Scanner scanner, Manager manager, UserCart userCart) {
         int[] addInput = input.cart.addToCartInput(scanner, printer, input);
         if (addInput != null) {
             int id = addInput[0], quantity = addInput[1];
@@ -119,13 +118,13 @@ public class UserMenu extends AbstractMenu {
         }
     }
 
-    public void runCartManager(Scanner scanner, GeneralManager manager, User user) {
+    public void runCartManager(Scanner scanner, Manager manager, User user) {
         boolean check = true;
         UserCart userCart = manager.cart.getCartByUser(user);
         Map<Product, Integer> cartItem = userCart.getCart();
         UserBills userBills = manager.bill.getUserBillsByUser(user);
-        int choice = -1;
         while (check) {
+            int choice = -1;
             printer.menu.printCartManager(user);
             String string = scanner.nextLine();
             if (input.validate.validateChoice(string, 0, 4)) {
@@ -183,11 +182,11 @@ public class UserMenu extends AbstractMenu {
         }
     }
 
-    public void runAccountManager(GeneralManager manager, Scanner scanner, User user) {
+    public void runAccountManager(Manager manager, Scanner scanner, User user) {
         boolean check = true;
-        int choice = -1;
         while (check) {
-            printer.menu.printAccountManagerMenu(user);
+            int choice = -1;
+            printer.menu.printAccountManager(user);
             String string = scanner.nextLine();
             if (input.validate.validateChoice(string, 0, 4)) {
                 choice = Integer.parseInt(string);
