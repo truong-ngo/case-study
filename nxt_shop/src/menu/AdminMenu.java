@@ -28,10 +28,15 @@ public class AdminMenu extends AbstractMenu {
                 case 2:
                     id = input.product.inputId(scanner, printer, input, manager);
                     if (id != -1) {
-                        Product product = input.product.inputUpdateProduct(id, scanner, printer, input, manager);
-                        manager.product.update(id, product);
-                        manager.product.setStaticNumber();
-                        printer.success.actionSuccessfully("Update");
+                        if (manager.product.getProducts().isEmpty()) {
+                            printer.notification.listIsEmpty("Product list");
+                            // check empty list
+                        } else {
+                            Product product = input.product.inputUpdateProduct(id, scanner, printer, input, manager);
+                            manager.product.update(id, product);
+                            manager.product.setStaticNumber();
+                            printer.success.actionSuccessfully("Update");
+                        }
                     }
                     break;
                 case 3:

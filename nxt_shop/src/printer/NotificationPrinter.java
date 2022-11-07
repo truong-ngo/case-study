@@ -33,8 +33,8 @@ public class NotificationPrinter {
         System.out.println("☑ Search result: ");
     }
 
-    public void cartIsEmpty() {
-        System.out.println("⏰ Cart is empty");
+    public void listIsEmpty(String list) {
+        System.out.println("⏰ " + list + " is empty");
     }
 
     public void totalIncomeDisplay(int totalIncome) {

@@ -99,12 +99,16 @@ public class UserMenu extends AbstractMenu {
 
     public void addToCartChoice(Scanner scanner, Manager manager, UserCart userCart) {
         int[] addInput = input.cart.addToCartInput(scanner, printer, input);
-        if (addInput != null) {
+        if (addInput == null) {
+            printer.error.pleaseEnterData("ID or quantity");
+        } else if (addInput.length == 0) {
+            printer.error.pleaseEnterData("ID and quantity");
+        } else if (addInput.length == 2) {
             int id = addInput[0], quantity = addInput[1];
             if (manager.product.checkId(id)) {
                 Product product = manager.product.getProductById(id);
-                if (quantity <= product.getQuantity()) {
-                    printer.error.exceedAmount("quantity");
+                if (quantity > product.getQuantity()) {
+                    printer.error.exceedAmount("Quantity");
                 } else {
                     userCart.addToCart(product, addInput[1]);
                     manager.cart.saveUserCartList();
@@ -113,8 +117,6 @@ public class UserMenu extends AbstractMenu {
             } else if (!manager.product.checkId(id)) {
                 printer.error.itemDoesntExist("ID");
             }
-        } else {
-            printer.error.reChoice();
         }
     }
 
@@ -138,7 +140,7 @@ public class UserMenu extends AbstractMenu {
                     break;
                 case 2:
                     if (cartItem.isEmpty()) {
-                        printer.notification.cartIsEmpty();
+                        printer.notification.listIsEmpty("Cart");
                     } else {
                         cartItem.clear();
                         manager.cart.saveUserCartList();
@@ -147,7 +149,7 @@ public class UserMenu extends AbstractMenu {
                     break;
                 case 3:
                     if (cartItem.isEmpty()) {
-                        printer.notification.cartIsEmpty();
+                        printer.notification.listIsEmpty("Cart");
                     } else {
                         if (userCart.getCartAmount() > user.getBalance()) {
                             printer.notification.notEnoughBalance();
@@ -196,12 +198,16 @@ public class UserMenu extends AbstractMenu {
             switch (choice) {
                 case 1:
                     String newPassword = input.user.inputItem(scanner, printer, "new password");
-                    if (user.getPassword().equals(newPassword) || newPassword.equals("")) {
-                        printer.notification.itemNotChanged("Password");
+                    if (newPassword != null) {
+                        if (user.getPassword().equals(newPassword) || newPassword.equals("")) {
+                            printer.notification.itemNotChanged("Password");
+                        } else {
+                            user.setPassword(newPassword);
+                            manager.user.saveUserList();
+                            printer.success.actionSuccessfully("Change password");
+                        }
                     } else {
-                        user.setPassword(newPassword);
-                        manager.user.saveUserList();
-                        printer.success.actionSuccessfully("Change password");
+                        printer.error.pleaseEnterData("new password");
                     }
                     break;
                 case 2:
