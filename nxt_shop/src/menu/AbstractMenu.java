@@ -1,14 +1,14 @@
 package menu;
 
-import input.GeneralInput;
+import input.Input;
 import printer.GeneralPrinter;
 
 public abstract class AbstractMenu {
     public GeneralPrinter printer;
-    public GeneralInput input;
+    public Input input;
 
     public AbstractMenu() {
         printer = new GeneralPrinter();
-        input = new GeneralInput();
+        input = new Input();
     }
 }

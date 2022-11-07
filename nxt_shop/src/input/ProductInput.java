@@ -3,8 +3,6 @@ package input;
 import manager.GeneralManager;
 import printer.GeneralPrinter;
 import product.*;
-
-import java.util.List;
 import java.util.Scanner;
 
 public class ProductInput {
@@ -13,7 +11,7 @@ public class ProductInput {
         return scanner.nextLine();
     }
 
-    public String inputNumberData(Scanner scanner, GeneralPrinter printer, GeneralInput input, String data) {
+    public String inputNumberData(Scanner scanner, GeneralPrinter printer, Input input, String data) {
         String string = null;
         boolean check = true;
         while (check) {
@@ -58,7 +56,7 @@ public class ProductInput {
         }
     }
 
-    public int getNumberData(Scanner scanner, GeneralPrinter printer, GeneralInput input, String data) {
+    public int getNumberData(Scanner scanner, GeneralPrinter printer, Input input, String data) {
         String string;
         int count = 0;
         while (true) {
@@ -88,7 +86,7 @@ public class ProductInput {
         }
     }
 
-    public int inputId(Scanner scanner, GeneralPrinter printer, GeneralInput input, GeneralManager manager) {
+    public int inputId(Scanner scanner, GeneralPrinter printer, Input input, GeneralManager manager) {
         printer.inputBox.printInputBox("ID");
         String string = scanner.nextLine();
         if (input.validate.validateNumber(string)) {
@@ -105,7 +103,7 @@ public class ProductInput {
         }
     }
 
-    public Product inputAddProduct(Scanner scanner, GeneralPrinter printer, GeneralInput input,
+    public Product inputAddProduct(Scanner scanner, GeneralPrinter printer, Input input,
                                    GeneralManager manager, int choice) {
         Product product = null;
         String name;
@@ -140,9 +138,8 @@ public class ProductInput {
     }
 
     public Product inputUpdateProduct(int id, Scanner scanner, GeneralPrinter printer,
-                                      GeneralInput input, GeneralManager manager) {
+                                      Input input, GeneralManager manager) {
         Product product = manager.product.getProductById(id);
-        List<Product> list = manager.product.getProducts();
         String name;
         int price, quantity;
         do {

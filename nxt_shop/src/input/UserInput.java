@@ -15,7 +15,7 @@ public class UserInput {
         return new String[]{userName, password};
     }
 
-    public String[] userInformationInput(Scanner scanner, GeneralPrinter printer, GeneralInput input) {
+    public String[] userInformationInput(Scanner scanner, GeneralPrinter printer, Input input) {
         printer.inputBox.printInputBox("new email");
         String email = scanner.nextLine();
         printer.inputBox.printInputBox("new phone number");

@@ -68,7 +68,7 @@ public class MainMenu extends AbstractMenu {
                             printer.success.loginSuccessfully();
                             adminMenu.runAdminMenu(scanner, manager);
                         } else {
-                            printer.error.loginFail();
+                            printer.error.incorrectData("username and password");
                         }
                     } else {
                         printer.error.pleaseEnterAllData();

@@ -90,26 +90,32 @@ public class UserMenu extends AbstractMenu {
             }
             switch (choice) {
                 case 1:
-                    String[] strings = input.cart.addToCartInput(scanner);
-                    if (input.validate.validateNumber(strings[0]) &&
-                        input.validate.validateNumber(strings[1])) {
-                        int id = Integer.parseInt(strings[0]);
-                        Product product = manager.product.getProductById(id);
-                        int quantity = Integer.parseInt(strings[1]);
-                        if (manager.product.checkId(id) && quantity <= product.getQuantity()) {
-                            userCart.addToCart(product, quantity);
-                            manager.cart.saveUserCartList();
-                            printer.success.addToCartSuccessfully();
-                        } else {
-                            printer.error.addToCartFail();
-                        }
-                    } else {
-                        printer.error.reChoice();
-                    }
+                    addToCartChoice(scanner, manager, userCart);
                     break;
                 case 0:
                     check = false;
             }
+        }
+    }
+
+    public void addToCartChoice(Scanner scanner, GeneralManager manager, UserCart userCart) {
+        int[] addInput = input.cart.addToCartInput(scanner, printer, input);
+        if (addInput != null) {
+            int id = addInput[0], quantity = addInput[1];
+            if (manager.product.checkId(id)) {
+                Product product = manager.product.getProductById(id);
+                if (quantity <= product.getQuantity()) {
+                    printer.error.exceedAmount("quantity");
+                } else {
+                    userCart.addToCart(product, addInput[1]);
+                    manager.cart.saveUserCartList();
+                    printer.success.addToCartSuccessfully();
+                }
+            } else if (!manager.product.checkId(id)) {
+                printer.error.itemDoesntExist("ID");
+            }
+        } else {
+            printer.error.reChoice();
         }
     }
 

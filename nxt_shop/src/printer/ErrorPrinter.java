@@ -20,10 +20,6 @@ public class ErrorPrinter {
         System.out.println("⛔ Invalid choice, please re-select.");
     }
 
-    public void idDoesntExist() {
-        System.out.println("⛔ Id doesn't exist");
-    }
-
     public void noMatchFound() {
         System.out.println("⛔ No match found");
     }
@@ -32,12 +28,12 @@ public class ErrorPrinter {
         System.out.println("⛔ Invalid " + data);
     }
 
-    public void invalidId() {
-        System.out.println("⛔ Invalid id");
+    public void incorrectData(String data) {
+        System.out.println("⛔ Incorrect " + data);
     }
 
-    public void loginFail() {
-        System.out.println("⛔ Wrong username or password.");
+    public void exceedAmount(String data) {
+        System.out.println("⛔ " + data + " exceed");
     }
 
     public void addToCartFail() {

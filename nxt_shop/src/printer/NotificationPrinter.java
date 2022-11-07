@@ -16,26 +16,13 @@ public class NotificationPrinter {
         System.out.println("Your password is: " + user.getPassword());
         System.out.println("Please change password to ensure your privacy");
     }
-    public void passWordNotChanged() {
-        System.out.println("⏰ Password not change");
-    }
-    public void pleaseFillUsernameAndPassword() {
-        System.out.println("⏰ Please fill username and password field.");
-    }
+
     public void pleaseFillName() {
         System.out.println("⏰ Please fill name field");
     }
 
     public void pleaseFillBrand() {
         System.out.println("⏰ Please fill brand field");
-    }
-
-    public void pleaseFillEmail() {
-        System.out.println("⏰ Please fill email field");
-    }
-
-    public void pleaseFillPhoneNumber() {
-        System.out.println("⏰ Please fill phone number field");
     }
 
     public void productListTitle() {
@@ -47,7 +34,7 @@ public class NotificationPrinter {
     }
 
     public void cartIsEmpty() {
-        System.out.println("⏰ Cart is Empty");
+        System.out.println("⏰ Cart is empty");
     }
 
     public void totalIncomeDisplay(int totalIncome) {

@@ -81,11 +81,6 @@ public class UserManager {
         saveUserList();
     }
 
-    public boolean checkInputInformation(String[] newInformation, User user) {
-        return user.getEmail().equals(newInformation[0]) &&
-               user.getPhoneNumber().equals(newInformation[1]);
-    }
-
     public boolean checkDuplicateEmail(String email) {
         for (User user : users) {
             if (user.getEmail() == null) {
