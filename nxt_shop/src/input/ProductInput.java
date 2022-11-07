@@ -94,7 +94,7 @@ public class ProductInput {
             if (manager.product.checkId(id)) {
                 return id;
             } else {
-                printer.error.itemDoesntExist("ID");
+                printer.error.itemNotFound("ID");
                 return -1;
             }
         } else {

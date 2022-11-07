@@ -19,7 +19,7 @@ public class UserMenu extends AbstractMenu {
             if (input.validate.validateChoice(string, 0, 5)) {
                 choice = Integer.parseInt(string);
             } else {
-                printer.error.reChoice();
+                printer.error.invalidData("choice");
             }
             switch (choice) {
                 case 1:
@@ -48,13 +48,13 @@ public class UserMenu extends AbstractMenu {
     private void runSearch(Scanner scanner, Manager manager, User user) {
         boolean check = true;
         while (check) {
-            int choice = -1;
+            int choice = -2;
             printer.menu.printSearch();
             String string = scanner.nextLine();
             if (input.validate.validateChoice(string, 0, 2)) {
                 choice = Integer.parseInt(string);
             } else {
-                printer.error.reChoice();
+                printer.error.invalidData("choice");
             }
             switch (choice) {
                 case 1:
@@ -85,7 +85,7 @@ public class UserMenu extends AbstractMenu {
             if (input.validate.validateChoice(string, 0, 1)) {
                 choice = Integer.parseInt(string);
             } else {
-                printer.error.reChoice();
+                printer.error.invalidData("choice");
             }
             switch (choice) {
                 case 1:
@@ -112,10 +112,10 @@ public class UserMenu extends AbstractMenu {
                 } else {
                     userCart.addToCart(product, addInput[1]);
                     manager.cart.saveUserCartList();
-                    printer.success.addToCartSuccessfully();
+                    printer.success.actionSuccessfully("Add to card");
                 }
             } else if (!manager.product.checkId(id)) {
-                printer.error.itemDoesntExist("ID");
+                printer.error.itemNotFound("ID");
             }
         }
     }
@@ -132,7 +132,7 @@ public class UserMenu extends AbstractMenu {
             if (input.validate.validateChoice(string, 0, 4)) {
                 choice = Integer.parseInt(string);
             } else {
-                printer.error.reChoice();
+                printer.error.invalidData("choice");
             }
             switch (choice) {
                 case 1:
@@ -140,16 +140,16 @@ public class UserMenu extends AbstractMenu {
                     break;
                 case 2:
                     if (cartItem.isEmpty()) {
-                        printer.notification.listIsEmpty("Cart");
+                        printer.notification.itemIsEmpty("Cart");
                     } else {
                         cartItem.clear();
                         manager.cart.saveUserCartList();
-                        printer.success.cartClearSuccessfully();
+                        printer.success.actionSuccessfully("Cart clear");
                     }
                     break;
                 case 3:
                     if (cartItem.isEmpty()) {
-                        printer.notification.listIsEmpty("Cart");
+                        printer.notification.itemIsEmpty("Cart");
                     } else {
                         if (userCart.getCartAmount() > user.getBalance()) {
                             printer.notification.notEnoughBalance();
@@ -171,12 +171,13 @@ public class UserMenu extends AbstractMenu {
                             manager.product.saveProductList();
                             manager.cart.saveUserCartList();
                             manager.bill.saveUserBillsList();
-                            printer.success.paymentSuccessfully();
+                            printer.success.actionSuccessfully("Payment");
+                            printer.table.printBill(billItem, user, "bill", time);
                         }
                     }
                     break;
                 case 4:
-                    printer.table.printBill(userBills, user, "bill");
+                    printer.table.printListBills(userBills, user, "list bills");
                     break;
                 case 0:
                     check = false;
@@ -193,14 +194,14 @@ public class UserMenu extends AbstractMenu {
             if (input.validate.validateChoice(string, 0, 4)) {
                 choice = Integer.parseInt(string);
             } else {
-                printer.error.reChoice();
+                printer.error.invalidData("choice");
             }
             switch (choice) {
                 case 1:
                     String newPassword = input.user.inputItem(scanner, printer, "new password");
                     if (newPassword != null) {
                         if (user.getPassword().equals(newPassword) || newPassword.equals("")) {
-                            printer.notification.itemNotChanged("Password");
+                            printer.notification.itemHasNotBeenUpdated("Password");
                         } else {
                             user.setPassword(newPassword);
                             manager.user.saveUserList();
@@ -222,11 +223,23 @@ public class UserMenu extends AbstractMenu {
                     }
                     break;
                 case 3:
-                    int amount = input.product.getNumberData(scanner, printer, input, "amount of money");
-                    int balance = user.getBalance();
-                    user.setBalance(balance + amount);
-                    manager.user.saveUserList();
-                    printer.success.addSuccessfully();
+                    int amount;
+                    String amountString = input.product.inputStringData(scanner, printer, "amount of money");
+                    if (amountString.equals("")) {
+                        printer.error.pleaseEnterData("amount of money");
+                    } else if (input.validate.validateNumber(amountString)) {
+                        amount = Integer.parseInt(amountString);
+                        if (amount == 0) {
+                            printer.notification.itemHasNotBeenUpdated("Your balance");
+                        } else {
+                            int balance = user.getBalance();
+                            user.setBalance(balance + amount);
+                            manager.user.saveUserList();
+                            printer.success.actionSuccessfully("Add");
+                        }
+                    } else {
+                        printer.error.invalidData("amount");
+                    }
                     break;
                 case 4:
                     printer.table.printUserInformation(user);

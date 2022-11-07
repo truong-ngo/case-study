@@ -9,11 +9,11 @@ import java.util.TreeMap;
 
 public class UserCart implements Serializable {
     private static final long serialVersionUID = 42L;
-    private final User cartId;
+    private final User cartID;
     private final Map<Product, Integer> cart;
 
     public UserCart(User user) {
-        cartId = user;
+        cartID = user;
         cart = new TreeMap<>();
     }
 
@@ -21,8 +21,8 @@ public class UserCart implements Serializable {
         return cart;
     }
 
-    public User getCartId() {
-        return cartId;
+    public User getCartID() {
+        return cartID;
     }
 
     public void addToCart(Product product, int quantity) {

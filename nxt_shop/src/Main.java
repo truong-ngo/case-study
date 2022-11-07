@@ -9,7 +9,5 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         ShopSystem system = new ShopSystem();
         system.run(scanner);
-        UserBills bills = new UserBills(new User());
-        UserBills.Bill bill = bills.new Bill();
     }
 }

@@ -25,7 +25,7 @@ public class MainMenu extends AbstractMenu {
             if (input.validate.validateChoice(string, 0, 3)) {
                 choice = Integer.parseInt(string);
             } else {
-                printer.error.reChoice();
+                printer.error.invalidData("choice");
             }
             switch (choice) {
                 case 1:
@@ -54,18 +54,18 @@ public class MainMenu extends AbstractMenu {
             if (input.validate.validateChoice(string, 0, 2)) {
                 choice = Integer.parseInt(string);
             } else {
-                printer.error.reChoice();
+                printer.error.invalidData("choice");
             }
             switch (choice) {
                 case 1:
                     String[] data = input.user.userInput(scanner, printer);
                     if (data != null) {
                         if (manager.user.checkUser(data)) {
-                            printer.success.loginSuccessfully();
+                            printer.success.actionSuccessfully("Login");
                             User user = manager.user.getUserByName(data[0]);
                             userMenu.run(scanner, manager, user);
                         } else if (manager.user.checkAdmin(data)) {
-                            printer.success.loginSuccessfully();
+                            printer.success.actionSuccessfully("Login");
                             adminMenu.runAdminMenu(scanner, manager);
                         } else {
                             printer.error.incorrectData("username or password");
@@ -118,7 +118,7 @@ public class MainMenu extends AbstractMenu {
             if (input.validate.validateChoice(string, 0, 1)) {
                 choice = Integer.parseInt(string);
             } else {
-                printer.error.reChoice();
+                printer.error.invalidData("choice");
             }
             switch (choice) {
                 case 1:

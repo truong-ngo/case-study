@@ -3,7 +3,7 @@ package printer;
 import product.Product;
 import shop_item.User;
 import shop_item.UserBills;
-
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -36,9 +36,19 @@ public class TablePrinter {
         printTable(header, content, footer, cart, sum, products);
     }
 
-    public void printBill(UserBills userBills, User user, String type) {
+    public void printBill(Map<Product, Integer> bill, User user, String type, LocalDateTime time) {
+        Set<Product> products = bill.keySet();
+        int sum = 0;
+        String header = "│ %2s │ %-15s │ %10s │ %10s │ %10s │\n";
+        String content = "│ %-2d │ %-15s │ %10d │ %10d │ %10d │\n";
+        String footer = "│ %-46s │ %10d │\n";
+        System.out.println("\uD83D\uDCCB " + user.getUserName() + " " + type + " at " + time.toString());
+        printTable(header, content, footer, bill, sum, products);
+    }
+
+    public void printListBills(UserBills userBills, User user, String type) {
         List<UserBills.Bill> bills = userBills.getBills();
-        System.out.println("\uD83E\uDDFE " + user.getUserName() + " " + type);
+        System.out.println("\uD83E\uDDFE " + user.getUserName() + " " + type + ":");
         String header = "│ %2s │ %-15s │ %10s │ %10s │ %10s │\n";
         String content = "│ %-2d │ %-15s │ %10d │ %10d │ %10d │\n";
         String footer = "│ %-46s │ %10d │\n";
@@ -47,11 +57,11 @@ public class TablePrinter {
             int sum = 0;
             Map<Product, Integer> billItem = bill.getListItem();
             Set<Product> products = billItem.keySet();
-            System.out.println("▶ Bill at " + bill.getPaymentTime());
+            System.out.println("\uD83D\uDCCB Bill at " + bill.getPaymentTime());
             sum = printTable(header, content, footer, billItem, sum, products);
             total += sum;
         }
-        System.out.println("Total spent of user " + user.getUserName() + " is " + total);
+        System.out.println("\uD83D\uDCB5 Total spent of user " + user.getUserName() + " is " + total);
     }
 
     public int printTable(String header, String content, String footer, Map<Product, Integer> billItem, int sum, Set<Product> products) {
@@ -64,7 +74,7 @@ public class TablePrinter {
             sum += product.getPrice() * billItem.get(product);
         }
         System.out.println("├─────────────────────────────────────────────────────────────┤");
-        System.out.printf(footer, "Total:", sum);
+        System.out.printf(footer, "Total amount:", sum);
         System.out.println("└─────────────────────────────────────────────────────────────┘");
         return sum;
     }

@@ -19,7 +19,7 @@ public class AdminMenu extends AbstractMenu {
             if (input.validate.validateChoice(string, 0, 6)) {
                 choice = Integer.parseInt(string);
             } else {
-                printer.error.reChoice();
+                printer.error.invalidData("choice");
             }
             switch (choice) {
                 case 1:
@@ -29,7 +29,7 @@ public class AdminMenu extends AbstractMenu {
                     id = input.product.inputId(scanner, printer, input, manager);
                     if (id != -1) {
                         if (manager.product.getProducts().isEmpty()) {
-                            printer.notification.listIsEmpty("Product list");
+                            printer.notification.itemIsEmpty("Product list");
                             // check empty list
                         } else {
                             Product product = input.product.inputUpdateProduct(id, scanner, printer, input, manager);
@@ -71,7 +71,7 @@ public class AdminMenu extends AbstractMenu {
             if (input.validate.validateChoice(string, 0, 3)) {
                 choice = Integer.parseInt(string);
             } else {
-                printer.error.reChoice();
+                printer.error.invalidData("choice");
             }
             switch (choice) {
                 case 1:
@@ -79,7 +79,7 @@ public class AdminMenu extends AbstractMenu {
                 case 3:
                     Product product = input.product.inputAddProduct(scanner, printer, input, manager, choice);
                     manager.product.add(product);
-                    printer.success.addSuccessfully();
+                    printer.success.actionSuccessfully("Add");
                     break;
                 case 0:
                     check = false;
@@ -96,7 +96,7 @@ public class AdminMenu extends AbstractMenu {
             if (input.validate.validateChoice(string, 0, 3)) {
                 choice = Integer.parseInt(string);
             } else {
-                printer.error.reChoice();
+                printer.error.invalidData("choice");
             }
             switch (choice) {
                 case 1:
@@ -111,7 +111,7 @@ public class AdminMenu extends AbstractMenu {
                         if (manager.user.checkExistUsername(username)) {
                             User user = manager.user.getUserByName(username);
                             UserBills userBills = manager.bill.getUserBillsByUser(user);
-                            printer.table.printBill(userBills, user, "bill");
+                            printer.table.printListBills(userBills, user, "list bills");
                         } else {
                             printer.error.itemNotFound("Username");
                         }

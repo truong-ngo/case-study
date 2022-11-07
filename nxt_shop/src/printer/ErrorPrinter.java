@@ -9,15 +9,8 @@ public class ErrorPrinter {
         System.out.println("⛔ " + item + " already exist");
     }
 
-    public void itemDoesntExist(String item) {
-        System.out.println("⛔ " + item + " doesn't exist");
-    }
-
     public void pleaseEnterData(String data) {
         System.out.println("⛔ Please enter " + data);
-    }
-    public void reChoice() {
-        System.out.println("⛔ Invalid choice, please re-select.");
     }
 
     public void noMatchFound() {
@@ -34,10 +27,6 @@ public class ErrorPrinter {
 
     public void exceedAmount(String data) {
         System.out.println("⛔ " + data + " exceed");
-    }
-
-    public void addToCartFail() {
-        System.out.println("⛔ Id doesnt exist or quantity exceed");
     }
 }
 

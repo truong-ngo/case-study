@@ -18,7 +18,7 @@ public class CartManager implements CRUD<UserCart> {
 
     public UserCart getCartByUser(User user) {
         for (UserCart cart : userCartList) {
-            if (cart.getCartId().getUserName().equals(user.getUserName())) {
+            if (cart.getCartID().getUserName().equals(user.getUserName())) {
                 return cart;
             }
         }

@@ -13,18 +13,18 @@ public class GuestMenu extends AbstractMenu {
             if (input.validate.validateChoice(string, 0, 3)) {
                 choice = Integer.parseInt(string);
             } else {
-                printer.error.reChoice();
+                printer.error.invalidData("choice");
             }
             switch (choice) {
                 case 1:
-                    printer.notification.productListTitle();
+                    printer.notification.itemListTitle();
                     manager.product.displayAll(printer);
                     break;
                 case 2:
                     runSearch(scanner, manager);
                     break;
                 case 3:
-                    printer.notification.productListTitle();
+                    printer.notification.itemListTitle();
                     manager.product.displayByPrice(printer);
                     break;
                 case 0:
@@ -42,7 +42,7 @@ public class GuestMenu extends AbstractMenu {
             if (input.validate.validateChoice(string, 0, 2)) {
                 choice = Integer.parseInt(string);
             } else {
-                printer.error.reChoice();
+                printer.error.invalidData("choice");
             }
             switch (choice) {
                 case 1:
@@ -50,7 +50,7 @@ public class GuestMenu extends AbstractMenu {
                     if (!name.equals("")) {
                         manager.product.searchByName(name, printer);
                     } else {
-                        printer.notification.pleaseFillName();
+                        printer.error.pleaseEnterData("name");
                     }
                     break;
                 case 2:
@@ -58,7 +58,7 @@ public class GuestMenu extends AbstractMenu {
                     if (!brand.equals("")) {
                         manager.product.searchByBrand(brand, printer);
                     } else {
-                        printer.notification.pleaseFillBrand();
+                        printer.error.pleaseEnterData("brand");
                     }
                     break;
                 case 0:

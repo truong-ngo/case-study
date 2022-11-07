@@ -11,16 +11,16 @@ import java.util.Set;
 
 public class UserBills implements Serializable {
     private static final long serialVersionUID = 42L;
-    private final User billsId;
+    private final User billsID;
     private final List<Bill> bills;
 
     public UserBills(User user) {
-        billsId = user;
+        billsID = user;
         bills = new ArrayList<>();
     }
 
-    public User getBillsId() {
-        return billsId;
+    public User getBillsID() {
+        return billsID;
     }
 
     public List<Bill> getBills() {
