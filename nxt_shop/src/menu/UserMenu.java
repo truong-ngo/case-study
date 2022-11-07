@@ -270,11 +270,14 @@ public class UserMenu extends AbstractMenu {
                 case 1:
                     printer.chat.enterMessage();
                     String message = scanner.nextLine();
+                    String notifyMess = input.bill.notificationFromUser(user);
                     if (!message.equals("")) {
                         LocalDateTime time = LocalDateTime.now();
                         message = user.getUsername() + ": " + message;
                         Messenger messenger = new Messenger(message, time);
                         chatSession.addMessenger(messenger);
+                        Messenger notify = new Messenger(notifyMess, time);
+                        admin.getNotification().add(notify);
                         printer.success.actionSuccessfully("Sent message");
                     } else {
                         printer.error.actionFailed("Sent message");
