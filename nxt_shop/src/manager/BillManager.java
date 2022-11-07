@@ -10,7 +10,7 @@ public class BillManager {
     private static BillManager instance;
     private List<UserBills> userBillsList;
     private final IOFile<UserBills> ioFile;
-    private final String path = "src/file/bills";
+    private final String path = "C:\\Learning\\Case-study\\file\\bills";
 
     private BillManager() {
         ioFile = new IOFile<>();

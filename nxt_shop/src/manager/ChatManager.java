@@ -9,7 +9,7 @@ import java.util.List;
 public class ChatManager {
     private static ChatManager instance;
     public List<ChatSession> chatSessionList;
-    private final String path = "src/file/chat_sessions";
+    private final String path = "C:\\Learning\\Case-study\\file\\chats";
     private final IOFile<ChatSession> ioFile;
 
     private ChatManager() {

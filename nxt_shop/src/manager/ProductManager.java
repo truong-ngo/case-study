@@ -12,7 +12,7 @@ public class ProductManager implements CRUD<Product> {
     private static ProductManager instance;
     private List<Product> products;
     private final IOFile<Product> ioFile;
-    private final String path = "src/file/products";
+    private final String path = "C:\\Learning\\Case-study\\file\\products";
 
     private ProductManager() {
         ioFile = new IOFile<>();
