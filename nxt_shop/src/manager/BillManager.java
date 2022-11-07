@@ -7,13 +7,21 @@ import shop_item.UserBills;
 import java.util.List;
 
 public class BillManager {
-    private final List<UserBills> userBillsList;
+    private static BillManager instance;
+    private List<UserBills> userBillsList;
     private final IOFile<UserBills> ioFile;
     private final String path = "src/file/bills";
 
-    public BillManager() {
+    private BillManager() {
         ioFile = new IOFile<>();
         userBillsList = ioFile.readFile(path);
+    }
+
+    public static BillManager getInstance() {
+        if (instance == null) {
+            instance = new BillManager();
+        }
+        return instance;
     }
 
     public UserBills getUserBillsByUser(User user) {

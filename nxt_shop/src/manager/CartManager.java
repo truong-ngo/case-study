@@ -7,13 +7,21 @@ import shop_item.User;
 import java.util.List;
 
 public class CartManager implements CRUD<UserCart> {
+    private static CartManager instance;
     private List<UserCart> userCartList;
     private final IOFile<UserCart> ioFile;
     private final String path = "src/file/carts";
 
-    public CartManager() {
+    private CartManager() {
         ioFile = new IOFile<>();
         userCartList = ioFile.readFile(path);
+    }
+
+    public static CartManager getInstance() {
+        if (instance == null) {
+            instance = new CartManager();
+        }
+        return instance;
     }
 
     public UserCart getCartByUser(User user) {

@@ -5,11 +5,12 @@ import shop_item.User;
 import java.util.List;
 
 public class UserManager {
+    private static UserManager instance;
     private List<User> users;
     private final String path = "src/file/users";
     private final IOFile<User> ioFile;
 
-    public UserManager() {
+    private UserManager() {
         ioFile = new IOFile<>();
         users = ioFile.readFile(path);
         if (users.isEmpty()) {
@@ -17,6 +18,13 @@ public class UserManager {
             ADMIN.setRole("ADMIN");
             users.add(ADMIN);
         }
+    }
+
+    public static UserManager getInstance() {
+        if (instance == null) {
+            instance = new UserManager();
+        }
+        return instance;
     }
 
     public List<User> getUsers() {

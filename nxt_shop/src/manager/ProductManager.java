@@ -9,17 +9,25 @@ import java.util.Collections;
 import java.util.List;
 
 public class ProductManager implements CRUD<Product> {
+    private static ProductManager instance;
     private List<Product> products;
     private final IOFile<Product> ioFile;
     private final String path = "src/file/products";
 
-    public ProductManager() {
+    private ProductManager() {
         ioFile = new IOFile<>();
         products = ioFile.readFile(path);
         if (!products.isEmpty()) {
             int id = getLast().getId();
             getLast().setIdCount(id);
         }
+    }
+
+    public static ProductManager getInstance() {
+        if (instance == null) {
+            instance = new ProductManager();
+        }
+        return instance;
     }
 
     public void setStaticNumber() {

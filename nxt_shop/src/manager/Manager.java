@@ -8,10 +8,10 @@ public class Manager {
     public final ChatManager chat;
 
     public Manager() {
-        product = new ProductManager();
-        user = new UserManager();
-        cart = new CartManager();
-        bill = new BillManager();
+        product = ProductManager.getInstance();
+        user = UserManager.getInstance();
+        cart = CartManager.getInstance();
+        bill = BillManager.getInstance();
         chat = ChatManager.getInstance();
     }
 }
