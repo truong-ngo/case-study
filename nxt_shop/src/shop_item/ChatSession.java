@@ -14,7 +14,7 @@ public class ChatSession implements Serializable {
     public ChatSession(User userOne, User userTwo) {
         this.userOne = userOne;
         this.userTwo = userTwo;
-        sessionID = userOne.getUserName() + "&" + userTwo.getUserName();
+        sessionID = userOne.getUsername() + "&" + userTwo.getUsername();
         messengerList = new ArrayList<>();
     }
 

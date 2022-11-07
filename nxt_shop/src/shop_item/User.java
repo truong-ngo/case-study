@@ -6,22 +6,41 @@ import java.util.List;
 
 public class User implements Serializable {
     private static final long serialVersionUID = 42L;
-    private String userName;
+    private String username;
     private String password;
     private int balance;
     private String email;
     private String phoneNumber;
     private String role;
+    private List<Messenger> notification;
 
     public User() {
 
     }
 
+
     public User(String userName, String password) {
-        this.userName = userName;
+        this.username = userName;
         this.password = password;
         balance = 0;
         role = "USER";
+        notification = new ArrayList<>();
+    }
+
+    public void addNotification(Messenger messenger) {
+        notification.add(messenger);
+    }
+
+    public void clearNotification() {
+        notification.clear();
+    }
+
+    public List<Messenger> getNotification() {
+        return notification;
+    }
+
+    public void setNotification(List<Messenger> notification) {
+        this.notification = notification;
     }
 
     public int getBalance() {
@@ -32,8 +51,8 @@ public class User implements Serializable {
         this.balance = balance;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
     public String getPassword() {

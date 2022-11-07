@@ -26,7 +26,7 @@ public class BillManager {
 
     public UserBills getUserBillsByUser(User user) {
         for (UserBills bills : userBillsList) {
-            if (bills.getBillsID().getUserName().equals(user.getUserName())) {
+            if (bills.getBillsID().getUsername().equals(user.getUsername())) {
                 return bills;
             }
         }

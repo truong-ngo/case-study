@@ -259,7 +259,7 @@ public class UserMenu extends AbstractMenu {
             ChatSession chatSession = manager.chat.getSessionByUsers(user, admin);
             printer.table.printChatBox(user, admin, chatSession);
             int choice = -1;
-            printer.menu.printUserChat(user);
+            printer.menu.printChat(user);
             String string = scanner.nextLine();
             if (input.validate.validateChoice(string, 0, 2)) {
                 choice = Integer.parseInt(string);
@@ -272,7 +272,7 @@ public class UserMenu extends AbstractMenu {
                     String message = scanner.nextLine();
                     if (!message.equals("")) {
                         LocalDateTime time = LocalDateTime.now();
-                        message = user.getUserName() + ": " + message;
+                        message = user.getUsername() + ": " + message;
                         Messenger messenger = new Messenger(message, time);
                         chatSession.addMessenger(messenger);
                         printer.success.actionSuccessfully("Sent message");

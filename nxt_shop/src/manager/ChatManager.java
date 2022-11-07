@@ -39,10 +39,10 @@ public class ChatManager {
 
     public ChatSession getSessionByUsers(User userOne, User userTwo) {
         for (ChatSession chatSession : chatSessionList) {
-            boolean conditionOne = chatSession.getUserOne().getUserName().equals(userOne.getUserName()) &&
-                                   chatSession.getUserTwo().getUserName().equals(userTwo.getUserName());
-            boolean conditionTwo = chatSession.getUserOne().getUserName().equals(userOne.getUserName()) &&
-                                   chatSession.getUserOne().getUserName().equals(userTwo.getUserName());
+            boolean conditionOne = chatSession.getUserOne().getUsername().equals(userOne.getUsername()) &&
+                                   chatSession.getUserTwo().getUsername().equals(userTwo.getUsername());
+            boolean conditionTwo = chatSession.getUserOne().getUsername().equals(userOne.getUsername()) &&
+                                   chatSession.getUserOne().getUsername().equals(userTwo.getUsername());
             if (conditionOne || conditionTwo) {
                 return chatSession;
             }

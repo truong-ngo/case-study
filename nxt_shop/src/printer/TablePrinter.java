@@ -22,7 +22,7 @@ public class TablePrinter {
                 continue;
             }
             System.out.println("├─────────────────────────────────────────────────────────────────────┤");
-            System.out.printf(content, i, user.getUserName(), user.getEmail(), user.getPhoneNumber());
+            System.out.printf(content, i, user.getUsername(), user.getEmail(), user.getPhoneNumber());
             i++;
         }
         System.out.println("└─────────────────────────────────────────────────────────────────────┘");
@@ -34,7 +34,7 @@ public class TablePrinter {
         String header = "│ %2s │ %-15s │ %10s │ %10s │ %10s │\n";
         String content = "│ %-2d │ %-15s │ %10d │ %10d │ %10d │\n";
         String footer = "│ %-46s │ %10d │\n";
-        System.out.println("\uD83D\uDED2 " + user.getUserName() + " " + type);
+        System.out.println("\uD83D\uDED2 " + user.getUsername() + " " + type);
         printTable(header, content, footer, cart, sum, products);
     }
 
@@ -44,13 +44,13 @@ public class TablePrinter {
         String header = "│ %2s │ %-15s │ %10s │ %10s │ %10s │\n";
         String content = "│ %-2d │ %-15s │ %10d │ %10d │ %10d │\n";
         String footer = "│ %-46s │ %10d │\n";
-        System.out.println("\uD83D\uDCCB " + user.getUserName() + " " + type + " at " + time.toString());
+        System.out.println("\uD83D\uDCCB " + user.getUsername() + " " + type + " at " + time.toString());
         printTable(header, content, footer, bill, sum, products);
     }
 
     public void printListBills(UserBills userBills, User user, String type) {
         List<UserBills.Bill> bills = userBills.getBills();
-        System.out.println("\uD83E\uDDFE " + user.getUserName() + " " + type + ":");
+        System.out.println("\uD83E\uDDFE " + user.getUsername() + " " + type + ":");
         String header = "│ %2s │ %-15s │ %10s │ %10s │ %10s │\n";
         String content = "│ %-2d │ %-15s │ %10d │ %10d │ %10d │\n";
         String footer = "│ %-46s │ %10d │\n";
@@ -63,7 +63,7 @@ public class TablePrinter {
             sum = printTable(header, content, footer, billItem, sum, products);
             total += sum;
         }
-        System.out.println("\uD83D\uDCB5 Total spent of user " + user.getUserName() + " is " + total);
+        System.out.println("\uD83D\uDCB5 Total spent of user " + user.getUsername() + " is " + total);
     }
 
     public int printTable(String header, String content, String footer, Map<Product, Integer> billItem, int sum, Set<Product> products) {
@@ -98,7 +98,7 @@ public class TablePrinter {
         String format = "│ %-12s │ %-30s │\n";
         System.out.println("\uD83D\uDC64 User information:");
         System.out.println("┌───────────────────────────────────────────────┐");
-        System.out.printf(format, "User name", user.getUserName());
+        System.out.printf(format, "User name", user.getUsername());
         System.out.println("├───────────────────────────────────────────────┤");
         System.out.printf(format, "Balance", user.getBalance() + " VND");
         System.out.println("├───────────────────────────────────────────────┤");
@@ -109,8 +109,8 @@ public class TablePrinter {
     }
 
     public void printChatBox(User userOne, User userTwo, ChatSession chatSession) {
-        String userOneName = userOne.getUserName();
-        String userTwoName = userTwo.getUserName();
+        String userOneName = userOne.getUsername();
+        String userTwoName = userTwo.getUsername();
         List<Messenger> messengerList = chatSession.getMessengerList();
         String userOneFormat = "│ %-70s │\n";
         String userTwoFormat = "│ %70s │\n";
@@ -123,8 +123,8 @@ public class TablePrinter {
                 System.out.printf(userOneFormat, messenger.getTime().toString());
             }
             if (messenger.getMessage().contains(userTwoName)) {
-                System.out.printf(userOneFormat, messenger.getMessage());
-                System.out.printf(userOneFormat, messenger.getTime().toString());
+                System.out.printf(userTwoFormat, messenger.getMessage());
+                System.out.printf(userTwoFormat, messenger.getTime().toString());
             }
         }
         System.out.println("└────────────────────────────────────────────────────────────────────────┘");

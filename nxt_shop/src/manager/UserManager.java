@@ -32,13 +32,12 @@ public class UserManager {
     }
 
     public User getUserByName(String name) {
-        User user = null;
-        for (User u : users) {
-            if (u.getUserName().equals(name)) {
-                user = u;
+        for (User user : users) {
+            if (user.getUsername().equals(name)) {
+                return user;
             }
         }
-        return user;
+        return null;
     }
 
     public User getAdmin() {
@@ -61,7 +60,7 @@ public class UserManager {
 
     public boolean checkExistUsername(String name) {
         for (User user : users) {
-            if (user.getUserName().equals(name)) {
+            if (user.getUsername().equals(name)) {
                 return true;
             }
         }
@@ -70,7 +69,7 @@ public class UserManager {
 
     public boolean checkAdmin(String[] data) {
         for (User user : users) {
-            if (data[0].equals(user.getUserName()) && data[1].equals(user.getPassword())
+            if (data[0].equals(user.getUsername()) && data[1].equals(user.getPassword())
                 && user.getRole().equals("ADMIN")) {
                 return true;
             }
@@ -80,7 +79,7 @@ public class UserManager {
 
     public boolean checkUser(String[] data) {
         for (User user : users) {
-            if (data[0].equals(user.getUserName()) && data[1].equals(user.getPassword())
+            if (data[0].equals(user.getUsername()) && data[1].equals(user.getPassword())
                 && user.getRole().equals("USER")) {
                 return true;
             }

@@ -29,7 +29,7 @@ public class NotificationPrinter {
     }
 
     public void sendEmailContainPassword(User user) {
-        System.out.println("✉ Mail to user: " + user.getUserName());
+        System.out.println("✉ Mail to user: " + user.getUsername());
         System.out.println("Your password is: " + user.getPassword());
         System.out.println("Please change password to ensure your privacy");
     }
