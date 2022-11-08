@@ -1,10 +1,15 @@
 package manager;
 
+import input.Input;
 import io_file.IOFile;
+import printer.Printer;
 import shop_item.ChatSession;
+import shop_item.Messenger;
 import shop_item.User;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Scanner;
 
 public class ChatManager {
     private static ChatManager instance;
@@ -48,5 +53,23 @@ public class ChatManager {
             }
         }
         return null;
+    }
+
+    public void runChatSession(Scanner scanner, Printer printer, Input input, User userOne, User userTwo) {
+        ChatSession chatSession = getSessionByUsers(userOne, userTwo);
+        printer.chat.enterMessage();
+        String message = scanner.nextLine();
+        String notifyMess = input.bill.notificationFromUser(userOne);
+        if (!message.equals("")) {
+            LocalDateTime time = LocalDateTime.now();
+            message = userOne.getUsername() + ": " + message;
+            Messenger messenger = new Messenger(message, time);
+            chatSession.addMessenger(messenger);
+            Messenger notify = new Messenger(notifyMess, time);
+            userTwo.getNotification().add(notify);
+            printer.success.actionSuccessfully("Sent message");
+        } else {
+            printer.error.actionFailed("Sent message");
+        }
     }
 }

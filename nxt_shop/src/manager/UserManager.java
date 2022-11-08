@@ -53,6 +53,10 @@ public class UserManager {
         ioFile.writeToFile(users, path);
     }
 
+    public void readUserList() {
+        users = ioFile.readFile(path);
+    }
+
     public void add(User user) {
         users.add(user);
         ioFile.writeToFile(users, path);

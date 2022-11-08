@@ -14,4 +14,25 @@ public class Manager {
         bill = BillManager.getInstance();
         chat = ChatManager.getInstance();
     }
+
+    public void saveData() {
+        product.saveProductList();
+        user.saveUserList();
+        cart.saveCartList();
+        bill.saveBillsList();
+        chat.saveSessionList();
+    }
+
+    public void loadData() {
+        product.readProductList();
+        user.readUserList();
+        cart.readCartList();
+        bill.readBillsList();
+        chat.readSessionList();
+    }
+
+    public void reload() {
+        saveData();
+        loadData();
+    }
 }

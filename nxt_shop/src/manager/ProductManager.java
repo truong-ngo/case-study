@@ -81,6 +81,10 @@ public class ProductManager implements CRUD<Product> {
         ioFile.writeToFile(products, path);
     }
 
+    public void readProductList() {
+        products = ioFile.readFile(path);
+    }
+
     public void displayAll(Printer printer) {
         printer.table.printProduct(products);
     }

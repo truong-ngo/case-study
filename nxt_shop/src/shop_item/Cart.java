@@ -7,12 +7,12 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-public class UserCart implements Serializable {
+public class Cart implements Serializable {
     private static final long serialVersionUID = 42L;
     private final User cartID;
     private final Map<Product, Integer> cart;
 
-    public UserCart(User user) {
+    public Cart(User user) {
         cartID = user;
         cart = new TreeMap<>();
     }

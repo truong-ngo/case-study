@@ -13,6 +13,7 @@ import java.util.Scanner;
 
 public class AdminMenu extends AbstractMenu {
     public void runAdminMenu(Scanner scanner, Manager manager) {
+        manager.reload();
         boolean check = true;
         int id;
         while (check) {
@@ -33,7 +34,6 @@ public class AdminMenu extends AbstractMenu {
                     if (id != -1) {
                         if (manager.product.getProducts().isEmpty()) {
                             printer.notification.itemIsEmpty("Product list");
-                            // check empty list
                         } else {
                             Product product = input.product.inputUpdateProduct(id, scanner, printer, input, manager);
                             manager.product.update(id, product);
@@ -60,6 +60,7 @@ public class AdminMenu extends AbstractMenu {
                     runUserManagerMenu(scanner, manager);
                     break;
                 case 0:
+                    manager.reload();
                     check = false;
             }
         }
@@ -128,55 +129,20 @@ public class AdminMenu extends AbstractMenu {
                     // notification
                     break;
                 case 5:
+                    manager.reload();
+                    User admin = manager.user.getAdmin();
                     printer.inputBox.printInputBox("username");
                     String name = scanner.nextLine();
                     User user = manager.user.getUserByName(name);
                     if (user != null) {
-                        runChatSessionAsAdmin(scanner, manager, user);
+                        manager.chat.runChatSession(scanner, printer, input, admin, user);
                     } else {
                         printer.error.itemNotFound("User");
                     }
+                    manager.reload();
                     break;
                 case 0:
-                    check = false;
-            }
-        }
-    }
-
-    public void runChatSessionAsAdmin(Scanner scanner, Manager manager, User user) {
-        boolean check = true;
-        while (check) {
-            manager.chat.readSessionList();
-            User admin = manager.user.getAdmin();
-            ChatSession chatSession = manager.chat.getSessionByUsers(user, admin);
-            printer.table.printChatBox(admin, user, chatSession);
-            int choice = -2;
-            printer.menu.printChat(admin);
-            String string = scanner.nextLine();
-            if (!input.validate.validateChoice(string, 0, 2)) {
-                printer.error.invalidData("choice");
-            } else {
-                choice = Integer.parseInt(string);
-            }
-            switch (choice) {
-                case 1:
-                    printer.chat.enterMessage();
-                    String message = scanner.nextLine();
-                    if (!message.equals("")) {
-                        LocalDateTime time = LocalDateTime.now();
-                        message = admin.getUsername() + ": " + message;
-                        Messenger messenger = new Messenger(message, time);
-                        chatSession.addMessenger(messenger);
-                        printer.success.actionSuccessfully("Sent message");
-                    } else {
-                        printer.error.actionFailed("Sent message");
-                    }
-                    manager.chat.saveSessionList();
-                    break;
-                case 2:
-                    manager.chat.readSessionList();
-                    break;
-                case 0:
+                    manager.reload();
                     check = false;
             }
         }

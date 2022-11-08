@@ -8,13 +8,13 @@ import java.util.List;
 
 public class BillManager {
     private static BillManager instance;
-    private List<UserBills> userBillsList;
+    private List<UserBills> billsList;
     private final IOFile<UserBills> ioFile;
     private final String path = "C:\\Learning\\Case-study\\file\\bills";
 
     private BillManager() {
         ioFile = new IOFile<>();
-        userBillsList = ioFile.readFile(path);
+        billsList = ioFile.readFile(path);
     }
 
     public static BillManager getInstance() {
@@ -25,7 +25,7 @@ public class BillManager {
     }
 
     public UserBills getUserBillsByUser(User user) {
-        for (UserBills bills : userBillsList) {
+        for (UserBills bills : billsList) {
             if (bills.getBillsID().getUsername().equals(user.getUsername())) {
                 return bills;
             }
@@ -35,18 +35,22 @@ public class BillManager {
 
     public int getTotalIncome() {
         int totalIncome = 0;
-        for (UserBills bills : userBillsList) {
+        for (UserBills bills : billsList) {
             totalIncome += bills.getUserTotalSpent();
         }
         return totalIncome;
     }
 
-    public void saveUserBillsList() {
-        ioFile.writeToFile(userBillsList,path);
+    public void saveBillsList() {
+        ioFile.writeToFile(billsList,path);
+    }
+
+    public void readBillsList() {
+        billsList = ioFile.readFile(path);
     }
 
     public void add(UserBills item) {
-        userBillsList.add(item);
-        saveUserBillsList();
+        billsList.add(item);
+        saveBillsList();
     }
 }

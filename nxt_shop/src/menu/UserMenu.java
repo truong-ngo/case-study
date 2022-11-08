@@ -9,6 +9,7 @@ import java.util.*;
 
 public class UserMenu extends AbstractMenu {
     public void run(Scanner scanner, Manager manager, User user) {
+        manager.reload();
         boolean check = true;
         while (check) {
             int choice = -1;
@@ -38,7 +39,9 @@ public class UserMenu extends AbstractMenu {
                     runAccountManager(manager, scanner, user);
                     break;
                 case 6:
+                    manager.reload();
                     runChatSession(scanner, manager, user);
+                    manager.reload();
                     break;
                 case 0:
                     check = false;
@@ -79,7 +82,7 @@ public class UserMenu extends AbstractMenu {
     public void runAddToCart(Scanner scanner, Manager manager, User user) {
         boolean check = true;
         while (check) {
-            UserCart userCart = manager.cart.getCartByUser(user);
+            Cart userCart = manager.cart.getCartByUser(user);
             printer.menu.printViewProduct(user);
             String string = scanner.nextLine();
             int choice = -1;
@@ -98,7 +101,7 @@ public class UserMenu extends AbstractMenu {
         }
     }
 
-    public void addToCartChoice(Scanner scanner, Manager manager, UserCart userCart) {
+    public void addToCartChoice(Scanner scanner, Manager manager, Cart userCart) {
         int[] addInput = input.cart.addToCartInput(scanner, printer, input);
         if (addInput == null) {
             printer.error.pleaseEnterData("ID or quantity");
@@ -112,7 +115,7 @@ public class UserMenu extends AbstractMenu {
                     printer.error.exceedAmount("Quantity");
                 } else {
                     userCart.addToCart(product, addInput[1]);
-                    manager.cart.saveUserCartList();
+                    manager.cart.saveCartList();
                     printer.success.actionSuccessfully("Add to card");
                 }
             } else if (!manager.product.checkId(id)) {
@@ -123,7 +126,7 @@ public class UserMenu extends AbstractMenu {
 
     public void runCartManager(Scanner scanner, Manager manager, User user) {
         boolean check = true;
-        UserCart userCart = manager.cart.getCartByUser(user);
+        Cart userCart = manager.cart.getCartByUser(user);
         Map<Product, Integer> cartItem = userCart.getCart();
         UserBills userBills = manager.bill.getUserBillsByUser(user);
         while (check) {
@@ -144,7 +147,7 @@ public class UserMenu extends AbstractMenu {
                         printer.notification.itemIsEmpty("Cart");
                     } else {
                         cartItem.clear();
-                        manager.cart.saveUserCartList();
+                        manager.cart.saveCartList();
                         printer.success.actionSuccessfully("Cart clear");
                     }
                     break;
@@ -170,8 +173,8 @@ public class UserMenu extends AbstractMenu {
                             cartItem.clear();
                             manager.user.saveUserList();
                             manager.product.saveProductList();
-                            manager.cart.saveUserCartList();
-                            manager.bill.saveUserBillsList();
+                            manager.cart.saveCartList();
+                            manager.bill.saveBillsList();
                             printer.success.actionSuccessfully("Payment");
                             printer.table.printBill(billItem, user, "bill", time);
                         }
@@ -268,21 +271,7 @@ public class UserMenu extends AbstractMenu {
             }
             switch (choice) {
                 case 1:
-                    printer.chat.enterMessage();
-                    String message = scanner.nextLine();
-                    String notifyMess = input.bill.notificationFromUser(user);
-                    if (!message.equals("")) {
-                        LocalDateTime time = LocalDateTime.now();
-                        message = user.getUsername() + ": " + message;
-                        Messenger messenger = new Messenger(message, time);
-                        chatSession.addMessenger(messenger);
-                        Messenger notify = new Messenger(notifyMess, time);
-                        admin.getNotification().add(notify);
-                        printer.success.actionSuccessfully("Sent message");
-                    } else {
-                        printer.error.actionFailed("Sent message");
-                    }
-                    manager.chat.saveSessionList();
+                    manager.chat.runChatSession(scanner, printer, input, user, admin);
                     break;
                 case 2:
                     manager.chat.readSessionList();

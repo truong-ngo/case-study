@@ -8,6 +8,4 @@ public class Social implements Serializable {
 
     private User SocialID;
     private List<User> friends;
-
-
 }

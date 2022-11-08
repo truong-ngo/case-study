@@ -40,6 +40,7 @@ public class MenuPrinter {
         System.out.printf(format, "▶[4]. Cart manager.");
         System.out.printf(format, "▶[5]. Account manager.");
         System.out.printf(format, "▶[6]. Chat with admin.");
+        System.out.printf(format, "▶[7]. Reload page.");
         System.out.printf(format, "▶[0]. Sign out.");
         System.out.println("└───────────────────────────────────────────────┘");
         System.out.println("☞ Enter your choice:");

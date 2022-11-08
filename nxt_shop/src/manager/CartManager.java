@@ -1,20 +1,20 @@
 package manager;
 
 import io_file.IOFile;
-import shop_item.UserCart;
+import shop_item.Cart;
 import shop_item.User;
 
 import java.util.List;
 
-public class CartManager implements CRUD<UserCart> {
+public class CartManager implements CRUD<Cart> {
     private static CartManager instance;
-    private List<UserCart> userCartList;
-    private final IOFile<UserCart> ioFile;
+    private List<Cart> cartList;
+    private final IOFile<Cart> ioFile;
     private final String path = "C:\\Learning\\Case-study\\file\\carts";
 
     private CartManager() {
         ioFile = new IOFile<>();
-        userCartList = ioFile.readFile(path);
+        cartList = ioFile.readFile(path);
     }
 
     public static CartManager getInstance() {
@@ -24,8 +24,8 @@ public class CartManager implements CRUD<UserCart> {
         return instance;
     }
 
-    public UserCart getCartByUser(User user) {
-        for (UserCart cart : userCartList) {
+    public Cart getCartByUser(User user) {
+        for (Cart cart : cartList) {
             if (cart.getCartID().getUsername().equals(user.getUsername())) {
                 return cart;
             }
@@ -33,18 +33,22 @@ public class CartManager implements CRUD<UserCart> {
         return null;
     }
 
-    public void saveUserCartList() {
-        ioFile.writeToFile(userCartList,path);
+    public void saveCartList() {
+        ioFile.writeToFile(cartList,path);
+    }
+
+    public void readCartList() {
+        cartList = ioFile.readFile(path);
     }
 
     @Override
-    public void add(UserCart item) {
-        userCartList.add(item);
-        ioFile.writeToFile(userCartList, path);
+    public void add(Cart item) {
+        cartList.add(item);
+        ioFile.writeToFile(cartList, path);
     }
 
     @Override
-    public void update(int id, UserCart cart) {
+    public void update(int id, Cart cart) {
 
     }
 

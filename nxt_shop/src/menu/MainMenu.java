@@ -4,7 +4,7 @@ import manager.Manager;
 import shop_item.ChatSession;
 import shop_item.User;
 import shop_item.UserBills;
-import shop_item.UserCart;
+import shop_item.Cart;
 import java.util.List;
 import java.util.Scanner;
 
@@ -131,7 +131,7 @@ public class MainMenu extends AbstractMenu {
                         } else {
                             User admin = manager.user.getAdmin();
                             User newUser = new User(userInput[0], userInput[1]);
-                            UserCart userCart = new UserCart(newUser);
+                            Cart userCart = new Cart(newUser);
                             UserBills userBills = new UserBills(newUser);
                             ChatSession chatSession = new ChatSession(newUser, admin);
                             manager.user.add(newUser);
