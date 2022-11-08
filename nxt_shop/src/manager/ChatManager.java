@@ -55,8 +55,7 @@ public class ChatManager {
         return null;
     }
 
-    public void runChatSession(Scanner scanner, Printer printer, Input input, User userOne, User userTwo) {
-        ChatSession chatSession = getSessionByUsers(userOne, userTwo);
+    public void runChatSession(Scanner scanner, Printer printer, Input input, User userOne, User userTwo, ChatSession chatSession) {
         printer.chat.enterMessage();
         String message = scanner.nextLine();
         String notifyMess = input.bill.notificationFromUser(userOne);

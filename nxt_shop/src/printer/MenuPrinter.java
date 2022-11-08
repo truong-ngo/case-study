@@ -39,8 +39,7 @@ public class MenuPrinter {
         System.out.printf(format, "▶[3]. Sort by price.");
         System.out.printf(format, "▶[4]. Cart manager.");
         System.out.printf(format, "▶[5]. Account manager.");
-        System.out.printf(format, "▶[6]. Chat with admin.");
-        System.out.printf(format, "▶[7]. Reload page.");
+        System.out.printf(format, "▶[6]. Messenger.");
         System.out.printf(format, "▶[0]. Sign out.");
         System.out.println("└───────────────────────────────────────────────┘");
         System.out.println("☞ Enter your choice:");
@@ -55,7 +54,7 @@ public class MenuPrinter {
         System.out.printf(format, "▶[2]. View bill by user.");
         System.out.printf(format, "▶[3]. Display total income.");
         System.out.printf(format, "▶[4]. Check notification.");
-        System.out.printf(format, "▶[5]. Chat with user.");
+        System.out.printf(format, "▶[5]. Messenger.");
         System.out.printf(format, "▶[0]. Return.");
         System.out.println("└───────────────────────────────────────────────┘");
         System.out.println("☞ Enter your choice:");
@@ -131,6 +130,7 @@ public class MenuPrinter {
         System.out.printf(format, "▶[2]. Update information.");
         System.out.printf(format, "▶[3]. Add money to your account.");
         System.out.printf(format, "▶[4]. User information.");
+        System.out.printf(format, "▶[5]. Check notification.");
         System.out.printf(format, "▶[0]. Return.");
         System.out.println("└───────────────────────────────────────────────┘");
         System.out.println("☞ Enter your choice:");

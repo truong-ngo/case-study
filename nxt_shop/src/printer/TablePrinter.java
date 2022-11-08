@@ -129,4 +129,17 @@ public class TablePrinter {
         }
         System.out.println("└────────────────────────────────────────────────────────────────────────┘");
     }
+
+    public void printNotification(User user) {
+        List<Messenger> notification = user.getNotification();
+        String format = "│ %-70s │\n";
+        System.out.println("┌────────────────────────────────────────────────────────────────────────┐");
+        System.out.printf(format, "\uD83D\uDC64 " + user.getUsername() + " notification:");
+        System.out.println("├────────────────────────────────────────────────────────────────────────┤");
+        for (Messenger messenger : notification) {
+            System.out.printf(format, messenger.getMessage());
+            System.out.printf(format, messenger.getTime());
+        }
+        System.out.println("└────────────────────────────────────────────────────────────────────────┘");
+    }
 }

@@ -9,7 +9,6 @@ import java.util.*;
 
 public class UserMenu extends AbstractMenu {
     public void run(Scanner scanner, Manager manager, User user) {
-        manager.reload();
         boolean check = true;
         while (check) {
             int choice = -1;
@@ -39,9 +38,7 @@ public class UserMenu extends AbstractMenu {
                     runAccountManager(manager, scanner, user);
                     break;
                 case 6:
-                    manager.reload();
                     runChatSession(scanner, manager, user);
-                    manager.reload();
                     break;
                 case 0:
                     check = false;
@@ -158,25 +155,41 @@ public class UserMenu extends AbstractMenu {
                         if (userCart.getCartAmount() > user.getBalance()) {
                             printer.notification.notEnoughBalance();
                         } else {
-                            int newBalance = user.getBalance() - userCart.getCartAmount();
-                            user.setBalance(newBalance);
-                            LocalDateTime time = LocalDateTime.now();
-                            Map<Product, Integer> billItem = new TreeMap<>(cartItem);
-                            UserBills.Bill bill = userBills.new Bill();
-                            bill.add(billItem, time);
-                            userBills.addBill(bill);
-                            Set<Product> products = cartItem.keySet();
-                            for (Product product : products) {
-                                int quantity = product.getQuantity() - cartItem.get(product);
-                                product.setQuantity(quantity);
+                            String address = user.getAddress();
+                            boolean checkAddress = true;
+                            if (address == null) {
+                                printer.inputBox.printInputBox("address");
+                                address = scanner.nextLine();
+                                if (address.equals("")) {
+                                    checkAddress = false;
+                                    printer.error.pleaseEnterData("email");
+                                }
                             }
-                            cartItem.clear();
-                            manager.user.saveUserList();
-                            manager.product.saveProductList();
-                            manager.cart.saveCartList();
-                            manager.bill.saveBillsList();
-                            printer.success.actionSuccessfully("Payment");
-                            printer.table.printBill(billItem, user, "bill", time);
+                            if (checkAddress) {
+                                user.setAddress(address);
+                                int newBalance = user.getBalance() - userCart.getCartAmount();
+                                user.setBalance(newBalance);
+                                LocalDateTime time = LocalDateTime.now();
+                                Map<Product, Integer> billItem = new TreeMap<>(cartItem);
+                                UserBills.Bill bill = userBills.new Bill();
+                                bill.add(billItem, time);
+                                userBills.addBill(bill);
+                                Set<Product> products = cartItem.keySet();
+                                for (Product product : products) {
+                                    int quantity = product.getQuantity() - cartItem.get(product);
+                                    product.setQuantity(quantity);
+                                }
+                                ShipSession shipSession = new ShipSession(user, bill);
+                                Thread thread = new Thread(shipSession);
+                                thread.start();
+                                cartItem.clear();
+                                manager.user.saveUserList();
+                                manager.product.saveProductList();
+                                manager.cart.saveCartList();
+                                manager.bill.saveBillsList();
+                                printer.success.actionSuccessfully("Payment");
+                                printer.table.printBill(billItem, user, "bill", time);
+                            }
                         }
                     }
                     break;
@@ -195,7 +208,7 @@ public class UserMenu extends AbstractMenu {
             int choice = -1;
             printer.menu.printAccountManager(user);
             String string = scanner.nextLine();
-            if (input.validate.validateChoice(string, 0, 4)) {
+            if (input.validate.validateChoice(string, 0, 5)) {
                 choice = Integer.parseInt(string);
             } else {
                 printer.error.invalidData("choice");
@@ -248,6 +261,10 @@ public class UserMenu extends AbstractMenu {
                 case 4:
                     printer.table.printUserInformation(user);
                     break;
+                case 5:
+                    printer.table.printNotification(user);
+                    manager.user.saveUserList();
+                    break;
                 case 0:
                     check = false;
             }
@@ -257,7 +274,6 @@ public class UserMenu extends AbstractMenu {
     public void runChatSession(Scanner scanner, Manager manager, User user) {
         boolean check = true;
         while (check) {
-            manager.chat.readSessionList();
             User admin = manager.user.getAdmin();
             ChatSession chatSession = manager.chat.getSessionByUsers(user, admin);
             printer.table.printChatBox(user, admin, chatSession);
@@ -271,7 +287,8 @@ public class UserMenu extends AbstractMenu {
             }
             switch (choice) {
                 case 1:
-                    manager.chat.runChatSession(scanner, printer, input, user, admin);
+                    manager.chat.runChatSession(scanner, printer, input, user, admin, chatSession);
+                    manager.chat.saveSessionList();
                     break;
                 case 2:
                     manager.chat.readSessionList();

@@ -11,13 +11,28 @@ import java.util.Set;
 
 public class UserBills implements Serializable {
     private static final long serialVersionUID = 42L;
+    private static Integer COUNT_BILL = 0;
     private final User billsID;
     private final List<Bill> bills;
+    private final List<ShipSession> shipHistory;
 
 
     public UserBills(User user) {
         billsID = user;
         bills = new ArrayList<>();
+        shipHistory = new ArrayList<>();
+    }
+
+    public List<ShipSession> getShipHistory() {
+        return shipHistory;
+    }
+
+    public void addShipSession(ShipSession shipSession) {
+        shipHistory.add(shipSession);
+    }
+
+    public Bill getLastBill() {
+        return bills.get(bills.size() - 1);
     }
 
     public User getBillsID() {
@@ -42,10 +57,24 @@ public class UserBills implements Serializable {
 
     public class Bill implements Serializable {
         private static final long serialVersionUID = 42L;
+        private int number;
+        private String billNo;
         Map<Product, Integer> listItem;
         LocalDateTime paymentTime;
         public Bill() {
+            if (!shipHistory.isEmpty()) {
+                COUNT_BILL = getLastBill().getNumber();
+            }
+            number = ++COUNT_BILL;
+            billNo = billsID.getUsername() + number;
+        }
 
+        public int getNumber() {
+            return number;
+        }
+
+        public String getBillNo() {
+            return billNo;
         }
 
         public Map<Product, Integer> getListItem() {

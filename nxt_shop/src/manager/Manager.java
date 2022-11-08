@@ -20,7 +20,6 @@ public class Manager {
         user.saveUserList();
         cart.saveCartList();
         bill.saveBillsList();
-        chat.saveSessionList();
     }
 
     public void loadData() {
@@ -28,7 +27,6 @@ public class Manager {
         user.readUserList();
         cart.readCartList();
         bill.readBillsList();
-        chat.readSessionList();
     }
 
     public void reload() {

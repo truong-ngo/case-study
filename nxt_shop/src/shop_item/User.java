@@ -9,6 +9,7 @@ public class User implements Serializable {
     private String username;
     private String password;
     private int balance;
+    private String address;
     private String email;
     private String phoneNumber;
     private String role;
@@ -41,6 +42,14 @@ public class User implements Serializable {
 
     public void setNotification(List<Messenger> notification) {
         this.notification = notification;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public int getBalance() {
