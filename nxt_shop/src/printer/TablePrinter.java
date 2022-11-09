@@ -21,9 +21,9 @@ public class TablePrinter {
             if (user.getRole().equals("ADMIN")) {
                 continue;
             }
-            String email = (user.getEmail() == null ) ? "" : user.getEmail();
-            String address = (user.getAddress() == null ) ? "" : user.getAddress();
-            String phoneNUmber = (user.getPhoneNumber() == null ) ? "" : user.getPhoneNumber();
+            String email = (user.getEmail() == null ) ? "Not updated yet" : user.getEmail();
+            String address = (user.getAddress() == null ) ? "Not updated yet" : user.getAddress();
+            String phoneNUmber = (user.getPhoneNumber() == null ) ? "Not updated yet" : user.getPhoneNumber();
             System.out.println("├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤");
             System.out.printf(content, i, user.getUsername(), email, phoneNUmber, address);
             i++;
@@ -99,9 +99,9 @@ public class TablePrinter {
     }
 
     public void printUserInformation(User user) {
-        String email = (user.getEmail() == null ) ? "" : user.getEmail();
-        String address = (user.getAddress() == null ) ? "" : user.getAddress();
-        String phoneNUmber = (user.getPhoneNumber() == null ) ? "" : user.getPhoneNumber();
+        String email = (user.getEmail() == null ) ? "Not updated yet" : user.getEmail();
+        String address = (user.getAddress() == null ) ? "Not updated yet" : user.getAddress();
+        String phoneNUmber = (user.getPhoneNumber() == null ) ? "Not updated yet" : user.getPhoneNumber();
         String format = "│ %-12s │ %-30s │\n";
         System.out.println("\uD83D\uDC64 User information:");
         System.out.println("┌───────────────────────────────────────────────┐");

@@ -76,7 +76,7 @@ public class MainMenu extends AbstractMenu {
                     }
                     break;
                 case 2:
-                    String email = input.user.inputItem(scanner, printer, "email");
+                    String email = input.user.inputItem(scanner, printer, "email (email format is xxx@gmail.com, begin with letter)");
                     if (email == null) {
                         printer.error.pleaseEnterData("email");
                     } else {

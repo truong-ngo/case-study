@@ -18,9 +18,9 @@ public class UserInput {
     }
 
     public String[] userInformationInput(Scanner scanner, Printer printer, Input input, User user) {
-        printer.inputBox.printInputBox("new email");
+        printer.inputBox.printInputBox("new email (email format is xxx@gmail.com, begin with letter)");
         String email = scanner.nextLine();
-        printer.inputBox.printInputBox("new phone number");
+        printer.inputBox.printInputBox("new phone number (10 number, begin with 0 followed by 3 or 5 or 7 or 8 or 9)");
         String phoneNumber = scanner.nextLine();
         printer.inputBox.printInputBox("new address");
         String address = scanner.nextLine();

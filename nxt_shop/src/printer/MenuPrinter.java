@@ -84,13 +84,14 @@ public class MenuPrinter {
         System.out.println("☞ Enter your choice:");
     }
 
-    public void printSearch() {
+    public void printSearch(String type) {
         String format = "│ %-45s │\n";
         System.out.println("┌───────────────────────────────────────────────┐");
-        System.out.printf(format, "\uD83D\uDC64 GUEST");
+        System.out.printf(format, "\uD83D\uDC64 " + type);
         System.out.println("├───────────────────────────────────────────────┤");
         System.out.printf(format, "▶[1]. Search by name.");
         System.out.printf(format, "▶[2]. Search by brand.");
+        System.out.printf(format, "▶[3]. Search by category.");
         System.out.printf(format, "▶[0]. Return.");
         System.out.println("└───────────────────────────────────────────────┘");
         System.out.println("☞ Enter your choice:");
@@ -145,8 +146,9 @@ public class MenuPrinter {
         System.out.printf(format, "▶[2]. Update product.");
         System.out.printf(format, "▶[3]. Delete product.");
         System.out.printf(format, "▶[4]. View all product.");
-        System.out.printf(format, "▶[5]. Sort product by price.");
-        System.out.printf(format, "▶[6]. User manager.");
+        System.out.printf(format, "▶[5]. Search product.");
+        System.out.printf(format, "▶[6]. Sort product by price.");
+        System.out.printf(format, "▶[7]. User manager.");
         System.out.printf(format, "▶[0]. Sign out.");
         System.out.println("└───────────────────────────────────────────────┘");
         System.out.println("☞ Enter your choice:");

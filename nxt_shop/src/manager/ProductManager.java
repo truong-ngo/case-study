@@ -107,8 +107,20 @@ public class ProductManager implements CRUD<Product> {
         }
     }
 
-    public boolean searchByBrand(String name, Printer printer) {
-        List<Product> searchLists = checkBrand(name);
+    public boolean searchByBrand(String brand, Printer printer) {
+        List<Product> searchLists = checkBrand(brand);
+        if (searchLists.isEmpty()) {
+            printer.error.noMatchFound();
+            return false;
+        } else {
+            printer.notification.searchResult();
+            printer.table.printProduct(searchLists);
+            return true;
+        }
+    }
+
+    public boolean searchByCategory(String category, Printer printer) {
+        List<Product> searchLists = checkCategory(category);
         if (searchLists.isEmpty()) {
             printer.error.noMatchFound();
             return false;
@@ -164,6 +176,18 @@ public class ProductManager implements CRUD<Product> {
             String value = name.toLowerCase();
             String brand = product.getBrand().toLowerCase();
             if (brand.contains(value)) {
+                searchLists.add(product);
+            }
+        }
+        return searchLists;
+    }
+
+    public List<Product> checkCategory(String name) {
+        List<Product> searchLists = new ArrayList<>();
+        for (Product product : products) {
+            String value = name.toLowerCase();
+            String category = product.getCategory().getName().toLowerCase();
+            if (category.contains(value)) {
                 searchLists.add(product);
             }
         }

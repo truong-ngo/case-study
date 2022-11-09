@@ -33,7 +33,7 @@ public class GuestMenu extends AbstractMenu {
                     manager.product.displayAll(printer);
                     break;
                 case 2:
-                    runSearch(scanner, manager);
+                    runSearch(scanner, manager, "GUEST");
                     break;
                 case 3:
                     printer.notification.itemListTitle();
@@ -45,13 +45,13 @@ public class GuestMenu extends AbstractMenu {
         }
     }
 
-    public void runSearch(Scanner scanner, Manager manager) {
+    public void runSearch(Scanner scanner, Manager manager, String type) {
         boolean check = true;
         while (check) {
             int choice = -1;
-            printer.menu.printSearch();
+            printer.menu.printSearch(type);
             String string = scanner.nextLine();
-            if (input.validate.validateChoice(string, 0, 2)) {
+            if (input.validate.validateChoice(string, 0, 3)) {
                 choice = Integer.parseInt(string);
             } else {
                 printer.error.invalidData("choice");
@@ -71,6 +71,14 @@ public class GuestMenu extends AbstractMenu {
                         manager.product.searchByBrand(brand, printer);
                     } else {
                         printer.error.pleaseEnterData("brand");
+                    }
+                    break;
+                case 3:
+                    String category = input.product.inputStringData(scanner, printer, "brand");
+                    if (!category.equals("")) {
+                        manager.product.searchByCategory(category, printer);
+                    } else {
+                        printer.error.pleaseEnterData("category");
                     }
                     break;
                 case 0:

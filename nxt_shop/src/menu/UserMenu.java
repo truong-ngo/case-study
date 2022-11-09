@@ -64,9 +64,9 @@ public class UserMenu extends AbstractMenu {
         boolean check = true;
         while (check) {
             int choice = -2;
-            printer.menu.printSearch();
+            printer.menu.printSearch("USER " + user.getUsername().toUpperCase());
             String string = scanner.nextLine();
-            if (input.validate.validateChoice(string, 0, 2)) {
+            if (input.validate.validateChoice(string, 0, 3)) {
                 choice = Integer.parseInt(string);
             } else {
                 printer.error.invalidData("choice");
@@ -81,6 +81,12 @@ public class UserMenu extends AbstractMenu {
                 case 2:
                     String brand = input.product.inputStringData(scanner, printer, "brand");
                     if (manager.product.searchByBrand(brand, printer)) {
+                        runAddToCart(scanner, manager, user);
+                    }
+                    break;
+                case 3:
+                    String category = input.product.inputStringData(scanner, printer, "category");
+                    if (manager.product.searchByCategory(category, printer)) {
                         runAddToCart(scanner, manager, user);
                     }
                     break;

@@ -32,7 +32,7 @@ public class AdminMenu extends AbstractMenu {
             int choice = -1;
             printer.menu.printAdminPage();
             String string = scanner.nextLine();
-            if (input.validate.validateChoice(string, 0, 6)) {
+            if (input.validate.validateChoice(string, 0, 7)) {
                 choice = Integer.parseInt(string);
             } else {
                 printer.error.invalidData("choice");
@@ -66,9 +66,13 @@ public class AdminMenu extends AbstractMenu {
                     manager.product.displayAll(printer);
                     break;
                 case 5:
-                    manager.product.displayByPrice(printer);
+                    GuestMenu guest = GuestMenu.getInstance();
+                    guest.runSearch(scanner, manager, "ADMIN");
                     break;
                 case 6:
+                    manager.product.displayByPrice(printer);
+                    break;
+                case 7:
                     runUserManager(scanner, manager);
                     break;
                 case 0:
