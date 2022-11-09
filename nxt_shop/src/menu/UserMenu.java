@@ -8,6 +8,18 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class UserMenu extends AbstractMenu {
+    private static UserMenu instance;
+    private UserMenu() {
+
+    }
+
+    public static UserMenu getInstance() {
+        if (instance == null) {
+            instance = new UserMenu();
+        }
+        return instance;
+    }
+
     public void run(Scanner scanner, Manager manager, User user) {
         boolean check = true;
         while (check) {
@@ -38,7 +50,9 @@ public class UserMenu extends AbstractMenu {
                     runAccountManager(manager, scanner, user);
                     break;
                 case 6:
-                    runChatSession(scanner, manager, user);
+                    AdminMenu adminMenu = AdminMenu.getInstance();
+                    User admin = manager.user.getAdmin();
+                    adminMenu.runChatSession(scanner, manager, user, admin);
                     break;
                 case 0:
                     check = false;
@@ -182,13 +196,14 @@ public class UserMenu extends AbstractMenu {
                                 ShipSession shipSession = new ShipSession(user, bill);
                                 Thread thread = new Thread(shipSession);
                                 thread.start();
+                                userBills.addShipSession(shipSession);
                                 cartItem.clear();
                                 manager.user.saveUserList();
                                 manager.product.saveProductList();
                                 manager.cart.saveCartList();
                                 manager.bill.saveBillsList();
                                 printer.success.actionSuccessfully("Payment");
-                                printer.table.printBill(billItem, user, "bill", time);
+                                printer.table.printBill(bill, user, "bill", time);
                             }
                         }
                     }
@@ -229,12 +244,12 @@ public class UserMenu extends AbstractMenu {
                     }
                     break;
                 case 2:
-                    String[] newInformation = input.user.userInformationInput(scanner, printer, input);
+                    String[] newInformation = input.user.userInformationInput(scanner, printer, input, user);
                     if (newInformation == null) {
                         printer.notification.itemHasNotBeenUpdated("User information");
                     } else if (newInformation.length == 0) {
                         printer.error.invalidData("information");
-                    } else if (newInformation.length == 2) {
+                    } else if (newInformation.length == 3) {
                         manager.user.update(newInformation, user);
                         printer.success.actionSuccessfully("User information update");
                     }
@@ -259,39 +274,13 @@ public class UserMenu extends AbstractMenu {
                     }
                     break;
                 case 4:
+                    manager.user.readUserList();
                     printer.table.printUserInformation(user);
                     break;
                 case 5:
+                    manager.user.readUserList();
+                    user = manager.user.getUserByName(user.getUsername());
                     printer.table.printNotification(user);
-                    manager.user.saveUserList();
-                    break;
-                case 0:
-                    check = false;
-            }
-        }
-    }
-
-    public void runChatSession(Scanner scanner, Manager manager, User user) {
-        boolean check = true;
-        while (check) {
-            User admin = manager.user.getAdmin();
-            ChatSession chatSession = manager.chat.getSessionByUsers(user, admin);
-            printer.table.printChatBox(user, admin, chatSession);
-            int choice = -1;
-            printer.menu.printChat(user);
-            String string = scanner.nextLine();
-            if (input.validate.validateChoice(string, 0, 2)) {
-                choice = Integer.parseInt(string);
-            } else {
-                printer.error.invalidData("choice");
-            }
-            switch (choice) {
-                case 1:
-                    manager.chat.runChatSession(scanner, printer, input, user, admin, chatSession);
-                    manager.chat.saveSessionList();
-                    break;
-                case 2:
-                    manager.chat.readSessionList();
                     break;
                 case 0:
                     check = false;

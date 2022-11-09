@@ -1,6 +1,8 @@
 package input;
 
 import printer.Printer;
+import shop_item.User;
+
 import java.util.Scanner;
 
 public class UserInput {
@@ -15,17 +17,28 @@ public class UserInput {
         return new String[]{userName, password};
     }
 
-    public String[] userInformationInput(Scanner scanner, Printer printer, Input input) {
+    public String[] userInformationInput(Scanner scanner, Printer printer, Input input, User user) {
         printer.inputBox.printInputBox("new email");
         String email = scanner.nextLine();
         printer.inputBox.printInputBox("new phone number");
         String phoneNumber = scanner.nextLine();
+        printer.inputBox.printInputBox("new address");
+        String address = scanner.nextLine();
         if ((input.validate.validatePhoneNumber(phoneNumber) || phoneNumber.equals("")) &&
             (input.validate.validateEmail(email) || email.equals(""))) {
-            if (email.equals("") && phoneNumber.equals("")) {
+            if (email.equals("") && phoneNumber.equals("") && address.equals("")) {
                 return null;
             } else {
-                return new String[]{email, phoneNumber};
+                if (email.equals("")) {
+                    email = user.getEmail();
+                }
+                if (phoneNumber.equals("")) {
+                    phoneNumber = user.getPhoneNumber();
+                }
+                if (address.equals("")) {
+                    address = user.getAddress();
+                }
+                return new String[]{email, phoneNumber, address};
             }
         } else {
             return new String[0];

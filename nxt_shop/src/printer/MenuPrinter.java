@@ -104,7 +104,7 @@ public class MenuPrinter {
         System.out.printf(format, "▶[1]. Display cart.");
         System.out.printf(format, "▶[2]. Clear cart.");
         System.out.printf(format, "▶[3]. Checkout your cart.");
-        System.out.printf(format, "▶[4]. Display bill.");
+        System.out.printf(format, "▶[4]. Print bill.");
         System.out.printf(format, "▶[0]. Return.");
         System.out.println("└───────────────────────────────────────────────┘");
         System.out.println("☞ Enter your choice:");

@@ -46,29 +46,12 @@ public class ChatManager {
         for (ChatSession chatSession : chatSessionList) {
             boolean conditionOne = chatSession.getUserOne().getUsername().equals(userOne.getUsername()) &&
                                    chatSession.getUserTwo().getUsername().equals(userTwo.getUsername());
-            boolean conditionTwo = chatSession.getUserOne().getUsername().equals(userOne.getUsername()) &&
-                                   chatSession.getUserOne().getUsername().equals(userTwo.getUsername());
+            boolean conditionTwo = chatSession.getUserOne().getUsername().equals(userTwo.getUsername()) &&
+                                   chatSession.getUserTwo().getUsername().equals(userOne.getUsername());
             if (conditionOne || conditionTwo) {
                 return chatSession;
             }
         }
         return null;
-    }
-
-    public void runChatSession(Scanner scanner, Printer printer, Input input, User userOne, User userTwo, ChatSession chatSession) {
-        printer.chat.enterMessage();
-        String message = scanner.nextLine();
-        String notifyMess = input.bill.notificationFromUser(userOne);
-        if (!message.equals("")) {
-            LocalDateTime time = LocalDateTime.now();
-            message = userOne.getUsername() + ": " + message;
-            Messenger messenger = new Messenger(message, time);
-            chatSession.addMessenger(messenger);
-            Messenger notify = new Messenger(notifyMess, time);
-            userTwo.getNotification().add(notify);
-            printer.success.actionSuccessfully("Sent message");
-        } else {
-            printer.error.actionFailed("Sent message");
-        }
     }
 }

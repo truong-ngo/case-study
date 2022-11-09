@@ -96,6 +96,7 @@ public class UserManager {
             if (u.equals(user)) {
                 u.setEmail(newInformation[0]);
                 u.setPhoneNumber(newInformation[1]);
+                u.setAddress(newInformation[2]);
             }
         }
         saveUserList();

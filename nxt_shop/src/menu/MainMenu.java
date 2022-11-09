@@ -9,13 +9,13 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MainMenu extends AbstractMenu {
-    private final GuestMenu guestMenu;
-    private final UserMenu userMenu;
-    private final AdminMenu adminMenu;
+    private final GuestMenu guest;
+    private final UserMenu user;
+    private final AdminMenu admin;
     public MainMenu() {
-        guestMenu = new GuestMenu();
-        userMenu = new UserMenu();
-        adminMenu = new AdminMenu();
+        guest = GuestMenu.getInstance();
+        user = UserMenu.getInstance();
+        admin = AdminMenu.getInstance();
     }
     public void run(Scanner scanner, Manager manager) {
         String string;
@@ -30,7 +30,7 @@ public class MainMenu extends AbstractMenu {
             }
             switch (choice) {
                 case 1:
-                    guestMenu.run(scanner, manager);
+                    guest.run(scanner, manager);
                     break;
                 case 2:
                     runLoginMenu(scanner, manager);
@@ -64,10 +64,10 @@ public class MainMenu extends AbstractMenu {
                         if (manager.user.checkUser(data)) {
                             printer.success.actionSuccessfully("Login");
                             User user = manager.user.getUserByName(data[0]);
-                            userMenu.run(scanner, manager, user);
+                            this.user.run(scanner, manager, user);
                         } else if (manager.user.checkAdmin(data)) {
                             printer.success.actionSuccessfully("Login");
-                            adminMenu.runAdminMenu(scanner, manager);
+                            admin.runAdminMenu(scanner, manager);
                         } else {
                             printer.error.incorrectData("username or password");
                         }

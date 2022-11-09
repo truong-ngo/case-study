@@ -4,6 +4,18 @@ import manager.Manager;
 import java.util.Scanner;
 
 public class GuestMenu extends AbstractMenu {
+    private static GuestMenu instance;
+
+    private GuestMenu() {
+
+    }
+
+    public static GuestMenu getInstance() {
+        if (instance == null) {
+            instance = new GuestMenu();
+        }
+        return instance;
+    }
     public void run(Scanner scanner, Manager manager) {
         boolean check = true;
         while (check) {

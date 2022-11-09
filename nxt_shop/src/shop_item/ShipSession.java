@@ -16,7 +16,7 @@ public class ShipSession implements Serializable, Runnable {
     @Override
     public void run() {
         try {
-            String prepareContext = "The seller is preparing the order";
+            String prepareContext = "The seller is preparing the order, bill ID: " + bill.getBillNo();
             LocalDateTime prepareTime = LocalDateTime.now();
             Messenger prepareMess = new Messenger(prepareContext, prepareTime);
             shipID.addNotification(prepareMess);
