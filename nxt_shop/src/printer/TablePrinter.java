@@ -34,9 +34,9 @@ public class TablePrinter {
     public void printCart(Map<Product, Integer> cart, User user, String type) {
         Set<Product> products = cart.keySet();
         int sum = 0;
-        String header = "│ %2s │ %-15s │ %10s │ %10s │ %10s │\n";
-        String content = "│ %-2d │ %-15s │ %10d │ %10d │ %10d │\n";
-        String footer = "│ %-46s │ %10d │\n";
+        String header = "│ %2s │ %-20s │ %10s │ %10s │ %15s │\n";
+        String content = "│ %-2d │ %-20s │ %10d │ %10d │ %15d │\n";
+        String footer = "│ %-51s │ %15d │\n";
         System.out.println("\uD83D\uDED2 " + user.getUsername() + " " + type);
         printTable(header, content, footer, cart, sum, products);
     }
@@ -45,9 +45,9 @@ public class TablePrinter {
         Map<Product, Integer> billItem = bill.getListItem();
         Set<Product> products = billItem.keySet();
         int sum = 0;
-        String header = "│ %2s │ %-20s │ %10s │ %10s │ %10s │\n";
-        String content = "│ %-2d │ %-20s │ %10d │ %10d │ %10d │\n";
-        String footer = "│ %-46s │ %10d │\n";
+        String header = "│ %2s │ %-30s │ %10s │ %10s │ %15s │\n";
+        String content = "│ %-2d │ %-30s │ %10d │ %10d │ %15d │\n";
+        String footer = "│ %-61s │ %15d │\n";
         System.out.println("\uD83D\uDCCB " + user.getUsername() + " " + type + " ID: " + bill.getBillNo() + " at " + time.toString());
         printTable(header, content, footer, billItem, sum, products);
     }
@@ -55,9 +55,9 @@ public class TablePrinter {
     public void printListBills(UserBills userBills, User user, String type) {
         List<UserBills.Bill> bills = userBills.getBills();
         System.out.println("\uD83E\uDDFE " + user.getUsername() + " " + type + ":");
-        String header = "│ %2s │ %-20s │ %10s │ %10s │ %10s │\n";
-        String content = "│ %-2d │ %-20s │ %10d │ %10d │ %10d │\n";
-        String footer = "│ %-51s │ %10d │\n";
+        String header = "│ %2s │ %-30s │ %10s │ %10s │ %10s │\n";
+        String content = "│ %-2d │ %-30s │ %10d │ %10d │ %10d │\n";
+        String footer = "│ %-61s │ %10d │\n";
         int total = 0;
         for (UserBills.Bill bill : bills) {
             int sum = 0;
@@ -71,17 +71,17 @@ public class TablePrinter {
     }
 
     public int printTable(String header, String content, String footer, Map<Product, Integer> billItem, int sum, Set<Product> products) {
-        System.out.println("┌──────────────────────────────────────────────────────────────────┐");
+        System.out.println("┌─────────────────────────────────────────────────────────────────────────────────┐");
         System.out.printf(header, "ID", "Product", "Quantity", "Price", "Total");
         for (Product product : products) {
-            System.out.println("├──────────────────────────────────────────────────────────────────┤");
+            System.out.println("├─────────────────────────────────────────────────────────────────────────────────┤");
             System.out.printf(content, product.getId(), product.getName(), billItem.get(product),
                     product.getPrice(), product.getPrice() * billItem.get(product));
             sum += product.getPrice() * billItem.get(product);
         }
-        System.out.println("├──────────────────────────────────────────────────────────────────┤");
+        System.out.println("├─────────────────────────────────────────────────────────────────────────────────┤");
         System.out.printf(footer, "Total amount:", sum);
-        System.out.println("└──────────────────────────────────────────────────────────────────┘");
+        System.out.println("└─────────────────────────────────────────────────────────────────────────────────┘");
         return sum;
     }
 

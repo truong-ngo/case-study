@@ -1,5 +1,8 @@
 package shop_item;
 
+import manager.UserManager;
+import menu.UserMenu;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -27,11 +30,14 @@ public class ShipSession implements Serializable, Runnable {
             Messenger shipMess = new Messenger(shipContext, shipTime);
             Messenger addressMess = new Messenger(address, shipTime);
             shipID.addNotification(shipMess);
+            shipID.addNotification(addressMess);
             Thread.sleep(10000);
             String completeContext = "Delivery successful";
             LocalDateTime completeTime = LocalDateTime.now();
             Messenger completeMess = new Messenger(completeContext, completeTime);
             shipID.addNotification(completeMess);
+            UserManager userManager = UserManager.getInstance();
+            userManager.saveUserList();
         } catch (InterruptedException exception) {
             String failContext = "Shipping fail";
             LocalDateTime failTime = LocalDateTime.now();

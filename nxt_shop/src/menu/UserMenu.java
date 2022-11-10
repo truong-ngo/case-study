@@ -280,12 +280,9 @@ public class UserMenu extends AbstractMenu {
                     }
                     break;
                 case 4:
-                    manager.user.readUserList();
                     printer.table.printUserInformation(user);
                     break;
                 case 5:
-                    manager.user.readUserList();
-                    user = manager.user.getUserByName(user.getUsername());
                     printer.table.printNotification(user);
                     break;
                 case 0:

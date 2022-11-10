@@ -119,12 +119,10 @@ public class AdminMenu extends AbstractMenu {
             }
             switch (choice) {
                 case 1:
-                    manager.user.readUserList();
                     List<User> users = manager.user.getUsers();
                     printer.table.printUserList(users);
                     break;
                 case 2:
-                    manager.bill.readBillsList();
                     String username = input.user.inputItem(scanner, printer, "username");
                     if (username == null) {
                         printer.error.pleaseEnterData("username");
@@ -139,7 +137,6 @@ public class AdminMenu extends AbstractMenu {
                     }
                     break;
                 case 3:
-                    manager.bill.readBillsList();
                     int totalIncome = manager.bill.getTotalIncome();
                     printer.notification.totalIncomeDisplay(totalIncome);
                     break;
