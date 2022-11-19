@@ -22,10 +22,72 @@ html {
     color: #fff;
 }
 
+.text-left {
+    text-align: left !important;
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+.row {
+    margin: 0 -8px;
+}
+
+.row::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.no-pad {
+    padding: 0 !important;
+}
+
+.no-mar {
+    margin: 0 !important;
+}
+
+.col {
+    float: left;
+    padding: 0 8px;
+}
+
+.col-third {
+    width: 33.33333%;
+}
+
+.col-half {
+    width: 50%;
+}
+
+.col-full {
+    width: 100%;
+}
+
 /* Clear float */
 
 .clear {
     clear: both;
+}
+
+.input {
+    padding: 8px;
+    border: #cccccc solid 1px;
+    line-height: 22px;
+    font-size: 15px;
+}
+
+.full-input {
+    width: 100%;
+}
+
+.inadequacy-input {
+    width: 96%;
 }
 
 /* Main */
@@ -111,9 +173,13 @@ html {
 
 #content .slider {
     margin-top: 46px;
-    padding-top: 50%;
-    background: url('/assets/img/slider/slider1.jpg') top center / cover no-repeat;
+    /*padding-top: 50%;*/
+    /*background: url('/assets/img/slider/slider1.jpg') top center / cover no-repeat;*/
     position: relative;
+}
+
+#content .slider-img {
+    width: 100%;
 }
 
 #content .slider-content {
@@ -139,21 +205,21 @@ html {
 /* The band */
 /* Band section */
 
-#content .content-section {
+.content-section {
     width: 800px;
     padding: 64px 16px;
     margin: 0 auto;
     text-align: center;
 }
 
-#content .content-heading {
+.content-heading {
     margin: 10px 0;
     font-size: 30px;
     font-weight: 400;
     letter-spacing: 4px;
 }
 
-#content .content-desc {
+.content-desc {
     margin: 15px 0;
     opacity: 0.6;
     font-style: italic;
@@ -166,13 +232,12 @@ html {
 
 /* Band member */
 
-#content .member-list {
-    padding: 32px 0;
+#content .member-item {
+    margin-bottom: 16px;
 }
 
-#content .member-item {
-    float: left;
-    width: 33.33333%;
+#content .member-list {
+    padding: 32px 0;
 }
 
 #content .member-name {
@@ -227,14 +292,10 @@ html {
 /* Tour place list */
 
 #content .place-list {
-    padding: 32px 0px;
-    margin: 0 -8px;
+    padding: 32px 0;
 }
 
 #content .place-item {
-    width: 33.33333%;
-    float: left;
-    padding: 0 8px;
     margin-bottom: 16px;
 }
 
@@ -288,10 +349,62 @@ html {
 }
 
 
-/* Footer */
+/* Contact */
 
-#footer {
+#contact .contact-list {
+    padding: 32px 0;
+}
 
+#contact .input-item {
+    margin-bottom: 8px;
+}
+
+#contact .info {
+    font-size: 18px;
+}
+
+#contact .submit {
+    margin: 16px 0;
+    padding: 8px 16px;
+    background-color: black;
+    color: #ffffff;
+    font-size: 15px;
+    border: none;
+    line-height: 22px;
+}
+
+#contact .submit:hover {
+    cursor: pointer;
+    background-color: #cccccc;
+    color: black;
+}
+
+#contact .info i[class*="fa-"] {
+    width: 30px;
+}
+
+.map-section .map-img {
+    width: 100%;
+}
+
+.footer .social:hover {
+    color: rgba(0,0,0,0.3);
+}
+
+.footer .social {
+    font-size: 23px;
+    color: rgba(0,0,0,0.6);
+}
+
+.footer .f-note {
+    font-size: 15px;
+    line-height: 22px;
+    color: rgba(0,0,0,0.6);
+    margin: 15px 0;
+}
+
+.footer .f-note a {
+    color: rgba(0,0,0,0.6);
 }
 
 .modal.open {

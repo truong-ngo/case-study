@@ -39,9 +39,24 @@
         <div id="content">
             <!-- Slider -->
             <div class="slider">
+                <img class="slider-img" src="/assets/img/slider/slider1.jpg" alt="">
                 <div class="slider-content">
                     <h2 class="slider-heading">Chicago</h2>
                     <p class="slider-desc">Thank you, Chicago - A night we won't forget.</p>
+                </div>
+            </div>
+            <div class="slider">
+                <img class="slider-img" src="/assets/img/slider/slider2.jpg" alt="">
+                <div class="slider-content">
+                    <h2 class="slider-heading">Los Angeles</h2>
+                    <p class="slider-desc">We had the best time playing at Venice Beach!</p>
+                </div>
+            </div>
+            <div class="slider">
+                <img class="slider-img" src="/assets/img/slider/slider3.jpg" alt="">
+                <div class="slider-content">
+                    <h2 class="slider-heading">New York</h2>
+                    <p class="slider-desc">The atmosphere in New York is lorem ipsum.</p>
                 </div>
             </div>
             <!-- The band -->
@@ -54,20 +69,19 @@
                     We have created a fictional band website. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                 </p>
                 <!-- Band member list -->
-                <div class="member-list">
-                    <div class="member-item">
+                <div class="row member-list">
+                    <div class="col col-third member-item">
                         <p class="member-name">Name</p>
                         <img src="./assets/img/band/member/member1.jpg" alt="" class="member-img">
                     </div>
-                    <div class="member-item">
+                    <div class="col col-third member-item">
                         <p class="member-name">Name</p>
                         <img src="./assets/img/band/member/member1.jpg" alt="" class="member-img">
                     </div>
-                    <div class="member-item">
+                    <div class="col col-third member-item">
                         <p class="member-name">Name</p>
                         <img src="./assets/img/band/member/member1.jpg" alt="" class="member-img">
                     </div>
-                    <div class="clear"></div>
                 </div>
             </div>
             <!-- Tour date -->
@@ -85,8 +99,8 @@
                         <li>November <span class="quantity">3</span></li>
                     </ul>
                     <!-- Tour place list -->
-                    <div class="place-list">
-                        <div class="place-item">
+                    <div class="row place-list">
+                        <div class="col col-third place-item">
                             <img class="place-img" src="./assets/img/places/newyork.jpg" alt="New York">
                             <div class="place-content">
                                 <h2 class="place-heading">New York</h2>
@@ -97,7 +111,7 @@
                                 <button class="buy-ticket js-buy-ticket">Buy Tickets</button>
                             </div>
                         </div>
-                        <div class="place-item">
+                        <div class="col col-third place-item">
                             <img class="place-img" src="./assets/img/places/paris.jpg" alt="New York">
                             <div class="place-content">
                                 <h2 class="place-heading">Paris</h2>
@@ -108,7 +122,7 @@
                                 <button class="buy-ticket js-buy-ticket">Buy Tickets</button>
                             </div>
                         </div>
-                        <div class="place-item">
+                        <div class="col col-third place-item">
                             <img class="place-img" src="./assets/img/places/sanfran.jpg" alt="New York">
                             <div class="place-content">
                                 <h2 class="place-heading">San Francisco</h2>
@@ -119,16 +133,64 @@
                                 <button class="buy-ticket js-buy-ticket">Buy Tickets</button>
                             </div>
                         </div>
-                        <div class="clear"></div>
                     </div>
                 </div>
             </div>
+            <!-- Contact -->
+            <div id="contact">
+                <div class="content-section">
+                    <h2 class="content-heading">CONTACT</h2>
+                    <p class="content-desc">Fan? Drop a note!</p>
+                    <div class="row contact-list">
+                        <div class="col col-half text-left">
+                            <p class="info"><i class="fa-solid fa-location-dot"></i> Chicago, US</p>
+                            <p class="info"><i class="fa-solid fa-phone"></i> Phone: +00 151515</p>
+                            <p class="info"><i class="fa-solid fa-envelope"></i> Email: mail@mail.com</p>
+                        </div>
+                        <div class="col col-half text-left">
+                            <form action="#!">
+                                <div class="row input-item">
+                                    <div class="col col-half no-pad text-left">
+                                        <input class="form-control input inadequacy-input" required type="text" placeholder="Name">
+                                    </div>
+                                    <div class="col col-half no-pad text-right">
+                                        <input class="form-control input inadequacy-input" required type="email" placeholder="Email">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col col-full no-pad">
+                                        <input class="form-control input full-input" required type="text" placeholder="Message">
+                                    </div>
+                                </div>
+                                <div class="row text-right">
+                                    <input class="submit" type="submit" value="SEND">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Map -->
+            <div class="map-section">
+                <img class="map-img" src="assets/img/map/map.jpg" alt="map">
+            </div>
         </div>
         <!-- Footer -->
-        <div id="footer">
-
+        <div class="footer text-center content-section">
+            <div class="socials-list">
+                <a href="" class="social"><i class="fa-brands fa-square-facebook"></i></a>
+                <a href="" class="social"><i class="fa-brands fa-instagram"></i></a>
+                <a href="" class="social"><i class="fa-brands fa-square-youtube"></i></a>
+                <a href="" class="social"><i class="fa-brands fa-pinterest-p"></i></a>
+                <a href="" class="social"><i class="fa-brands fa-twitter"></i></a>
+                <a href="" class="social"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+            <p class="f-note">
+                Powered by
+                <a href="https://www.w3schools.com/w3css/default.asp">w3.css</a>
+            </p>
         </div>
-
+        <!-- Modal -->
         <div class="modal js-modal">
             <div class="modal-body">
                 <header class="modal-header">
@@ -138,17 +200,17 @@
                 <div class="modal-close js-modal-close">×</div>
 
                 <div class="modal-content">
-                    <label for="" class="modal-label">
+                    <label for="quantity" class="modal-label">
                         <i class="fa-solid fa-cart-shopping"></i>
                         Tickets, $15 per person
                     </label>
-                    <input type="text" class="modal-input" placeholder="How many?">
+                    <input id="quantity" type="text" class="modal-input" placeholder="How many?">
 
-                    <label for="" class="modal-label">
+                    <label for="user" class="modal-label">
                         <i class="fa-solid fa-user"></i>
                         Send To
                     </label>
-                    <input type="text" class="modal-input" placeholder="Enter email">
+                    <input id="user" type="text" class="modal-input" placeholder="Enter email">
                     <button id="buy-ticket">
                         Pay <i class="fa-solid fa-check"></i>
                     </button>   
@@ -183,7 +245,23 @@
         // chạy chức năng đóng modal
         for (const closeBtn of closeBtns) {
             closeBtn.addEventListener('click', closeBuyTicket)
-        }           
+        }
+
+        let index = 0;
+        slider();
+
+        function slider() {
+            let x = document.getElementsByClassName("slider");
+            for (let i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            index++;
+            if (index > x.length) {
+                index = 1;
+            }
+            x[index-1].style.display = "block";
+            setTimeout(slider, 5000);
+        }
     </script>
 </body>
 </html>
