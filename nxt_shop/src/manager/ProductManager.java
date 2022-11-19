@@ -12,15 +12,12 @@ public class ProductManager implements CRUD<Product> {
     private static ProductManager instance;
     private List<Product> products;
     private final IOFile<Product> ioFile;
-    private final String path = "C:\\Learning\\Case-study\\file\\products";
+    private final String path = "../file/products";
 
     private ProductManager() {
         ioFile = new IOFile<>();
         products = ioFile.readFile(path);
-        if (!products.isEmpty()) {
-            int id = getLast().getId();
-            getLast().setIdCount(id);
-        }
+        setStaticNumber();
     }
 
     public static ProductManager getInstance() {

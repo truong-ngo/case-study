@@ -7,7 +7,7 @@ import java.util.List;
 public class UserManager {
     private static UserManager instance;
     private List<User> users;
-    private final String path = "C:\\Learning\\Case-study\\file\\users";
+    private final String path = "../file/users";
     private final IOFile<User> ioFile;
 
     private UserManager() {
