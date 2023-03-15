@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+.no-border-radius {
+  border-radius: 0 !important;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.font-12 {
+  font-size: 12px;
+}

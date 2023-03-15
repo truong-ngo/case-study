@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 offset-md-3 mt-3">
+      <h3>Name: {{ product?.name }}</h3>
+      <p style="color: red">Price: {{ product?.price }}</p>
+      <p>Description: {{ product?.description }}</p>
+      <p>Category: {{ product?.category?.name }}</p>
+      <button class="btn btn-dark no-border-radius" routerLink="/products">Back</button>
+    </div>
+    <div class="col-md-6 mt-3">
+      <div style="width: 100%">
+        <img [src]="product?.image" alt="" style="object-fit: contain">
+      </div>
+    </div>
+  </div>
+</div>

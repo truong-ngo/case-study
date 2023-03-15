@@ -1,0 +1,58 @@
+<div class="modal">
+  <div class="modal-dialogue">
+    <form id="login-form" class="modal-tab-active"
+          [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col col-md-4">
+          <div class="image-filed d-flex align-items-center" style="width: 100%; height: 100%">
+            <div class="modal-image mb-3">
+              <img class="modal-img product-img" [src]="editMode ? productForm.get('image')?.value : defaultImage" alt="">
+              <button class="upload-box upload-btn d-inline-block" type="button">
+                <span (click)="openUpload('.input-product-img')" class="py-1 px-2 d-flex justify-content-center">
+                  <fa-icon style="font-size: 13px" class="me-2" [icon]="faCamera"></fa-icon>
+                  <span class="m-0" style="font-size: 13px">Upload image</span>
+                </span>
+                <input (change)="renderImagePath($event)" class="input-product-img" type="file" hidden>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col col-md-8">
+          <div class="input-field">
+            <h2 class="d-block text-center modal-header m-0">{{ !editMode ? 'Add product' : 'Edit product' }}</h2>
+            <div class="modal-body p-0 mb-5">
+              <div class="form-group">
+                <label class="modal-label my-1" for="name">Name:</label><br>
+                <input class="modal-input no-border-radius" name="name" type="text" id="name" placeholder="Name"
+                       autocomplete="off" formControlName="name">
+                <span class="form-message font-12"></span>
+              </div>
+              <div class="form-group">
+                <label class="modal-label my-1" for="price">Price:</label><br>
+                <input class="modal-input no-border-radius" name="price" type="text" id="price" placeholder="Price"
+                       autocomplete="off" formControlName="price">
+                <span class="form-message font-12"></span>
+              </div>
+              <div class="form-group">
+                <label class="modal-label my-1" for="description">Description:</label><br>
+                <input class="modal-input no-border-radius" name="description" type="text" id="description"
+                       placeholder="Description" autocomplete="off" formControlName="description">
+                <span class="form-message font-12"></span>
+              </div>
+              <div class="form-group" formGroupName="category">
+                <label class="modal-label my-1" for="category">Category:</label><br>
+                <select name="category" id="category" class="modal-input no-border-radius" formControlName="id">
+                  <option class="modal-input no-border-radius" *ngFor="let c of categories" [value]="c.id">{{ c.name }}</option>
+                </select>
+              </div>
+            </div>
+            <div class="modal-footer p-0 d-flex justify-content-between mb-3">
+              <button class="modal-close m-0" type="button" routerLink="/products">Close</button>
+              <button class="modal-submit m-0" type="submit">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

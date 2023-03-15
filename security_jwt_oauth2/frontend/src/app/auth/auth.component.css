@@ -1,0 +1,90 @@
+.modal-header {
+  border-bottom: none !important;
+  text-align: center !important;
+  display: block;
+}
+
+.modal-footer {
+  border-top: none !important;
+}
+
+.modal-input {
+  padding: 6px 8px;
+  width: 100%;
+  border: none;
+  background-color: #f2f2f2;
+  outline: none;
+}
+
+.modal-submit {
+  border: none;
+  width: 100%;
+  background-color: black;
+  color: white;
+  padding: 8px 0 !important;
+}
+
+.auth {
+  width: 400px;
+  background-color: white;
+  padding: 16px 24px;
+  margin: auto;
+}
+
+/*.modal-tab {*/
+/*  margin: -16px -24px 0 -24px;*/
+/*}*/
+
+.tab {
+  width: 50%;
+  text-align: center;
+  padding: 10px 0;
+  cursor: pointer;
+  background-color: #cccccc;
+}
+
+.active {
+  background-color: white;
+}
+
+.facebook {
+  color: rgb(41, 41, 218);
+  cursor: pointer;
+}
+
+.google {
+  color: red;
+  cursor: pointer;
+}
+
+.form-group.invalid .modal-input {
+  background-color: #ffe5e9;
+}
+
+.form-group.invalid .form-message {
+  color: #f33a58;
+}
+
+.modal-btn {
+  padding: 6px 12px !important;
+  width: 100px;
+  border-radius: 0 !important;
+}
+
+.modal-close {
+  margin-right: 4px !important;
+}
+
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+  background-color: mistyrose;
+}
+
+input.ng-invalid.ng-touched.clear {
+  border: none;
+  background-color: #f2f2f2;
+}
+
+.hide {
+  display: none;
+}

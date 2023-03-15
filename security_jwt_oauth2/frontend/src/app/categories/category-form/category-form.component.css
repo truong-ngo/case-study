@@ -1,0 +1,40 @@
+.modal-header {
+  border-bottom: none !important;
+  text-align: center !important;
+  display: block;
+}
+
+.modal-footer {
+  border-top: none !important;
+}
+
+.modal-input {
+  padding: 6px 8px;
+  width: 100%;
+  border: none;
+  background-color: #f2f2f2;
+  outline: none;
+}
+
+.modal-submit, .modal-close {
+  border: none;
+  width: 20%;
+  color: white;
+  padding: 8px 0 !important;
+}
+
+.modal-submit {
+  background-color: black;
+}
+
+.modal-close {
+  background-color: red;
+}
+
+.form-group.invalid .modal-input {
+  background-color: #ffe5e9;
+}
+
+.form-group.invalid .form-message {
+  color: #f33a58;
+}

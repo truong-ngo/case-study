@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="row">
+    <div class="col col-md-12 mt-3">
+      <div class="d-flex justify-content-between">
+        <button class="btn btn-dark no-border-radius" routerLink="new">Add new product</button>
+        <div class="d-flex">
+          <select style="width: auto" class="form-select no-border-radius me-1" [(ngModel)]="prop">
+            <option value="">Sort by:</option>
+            <option value="name">Name</option>
+            <option value="price">Price</option>
+          </select>
+          <select style="width: auto" class="form-select no-border-radius me-1" [(ngModel)]="order">
+            <option value="">Order:</option>
+            <option value="asc">Ascending</option>
+            <option value="desc">Descending</option>
+          </select>
+          <select style="width: auto" class="form-select no-border-radius" [(ngModel)]="categoryName">
+            <option value="">Filter by category:</option>
+            <option *ngFor="let c of categories" [value]="c.name">{{ c.name }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Description</th>
+      <th>Image</th>
+      <th>Category</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let p of products | sort:order:prop | filter:categoryName">
+      <td>{{ p.id }}</td>
+      <td><a [routerLink]="[p.id]">{{ p.name }}</a></td>
+      <td>{{ p['price'] }}</td>
+      <td>{{ p.description }}</td>
+      <td><div style="width: 100px"><img class="p-image" [src]="p.image" [alt]="p.name"></div></td>
+      <td>{{ p['category'].name }}</td>
+      <td>
+        <fa-icon class="me-4" [icon]="editIcon" [routerLink]="[p.id, 'edit']"></fa-icon>
+        <fa-icon class="pointer" [icon]="deleteIcon" (click)="deleteProduct(p)"></fa-icon>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<router-outlet></router-outlet>

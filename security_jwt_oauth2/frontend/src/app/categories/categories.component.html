@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div class="col col-md-12 mt-3">
+      <button class="btn btn-dark no-border-radius" routerLink="new">Add new categories</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let c of categories">
+          <td>{{ c.id }}</td>
+          <td><a [routerLink]="[c.id]">{{ c.name }}</a></td>
+          <td>
+            <fa-icon class="me-4 pointer" [icon]="editIcon" [routerLink]="[c.id, 'edit']"></fa-icon>
+            <fa-icon class="pointer" [icon]="deleteIcon" (click)="deleteCategories(c)"></fa-icon>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-6">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

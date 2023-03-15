@@ -1,0 +1,5 @@
+.p-image {
+  width: 100%;
+  object-fit: contain;
+  aspect-ratio: 1/1;
+}

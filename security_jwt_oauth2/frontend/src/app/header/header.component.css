@@ -1,0 +1,30 @@
+.header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 50px;
+  background-color: black;
+  z-index: 1;
+}
+
+.c-link {
+  height: 100%;
+}
+
+.c-link a {
+  display: block;
+  line-height: 50px;
+  text-decoration: none;
+  padding: 0 16px;
+}
+
+.c-link:hover a {
+  background-color: #3d3d3d;
+  cursor: pointer;
+}
+
+.active-link {
+  background-color: #3d3d3d;
+}
+

@@ -1,0 +1,169 @@
+<div class="container text-center">
+  <div class="auth" style="margin-top: 70px;">
+    <div class="modal-tab d-flex">
+      <div class="tab" [class.active]="isLogin" (click)="switchToLogin()">Login</div>
+      <div class="tab" [class.active]="!isLogin" (click)="switchToRegister()">Register</div>
+    </div>
+    <form id="login-form" class="modal-tab-active" *ngIf="isLogin" [formGroup]="loginForm" (ngSubmit)="login()">
+      <h2 class="d-block text-center modal-header my-3">Login</h2>
+      <div class="modal-body p-0 mb-5">
+        <div class="form-group text-start">
+          <label class="modal-label my-1" for="username">Username:</label><br>
+          <input (input)="clearValid($event, checkLoginUser)" (blur)="checkValid($event, checkLoginUser)" class="modal-input no-border-radius" name="username" type="text" id="username"
+                 placeholder="Username" autocomplete="off" formControlName="username">
+          <div #checkLoginUser>
+            <span class="form-message font-12 text-danger"
+                  *ngIf="loginForm.get('username')!.errors !== null
+                  && loginForm.get('username')!.errors!['required']
+                  && loginForm.get('username')!.touched">
+                  Username must not be left blank
+            </span>
+            <span class="form-message font-12 text-danger"
+                  *ngIf="loginForm.get('username')!.errors !== null
+                  && loginForm.get('username')!.errors!['minlength']
+                  && loginForm.get('username')!.touched">
+                  Must be at least 6 character
+            </span>
+          </div>
+        </div>
+        <div class="form-group text-start">
+          <label class="modal-label my-1" for="password">Password:</label><br>
+          <input (input)="clearValid($event, checkLoginPass)" (blur)="checkValid($event, checkLoginPass)" class="modal-input no-border-radius" name="password" type="password" id="password"
+                 placeholder="Password" autocomplete="off" formControlName="password">
+          <div #checkLoginPass>
+            <span class="form-message font-12 text-danger"
+                  *ngIf="loginForm.get('password')!.errors !== null
+                  && loginForm.get('password')!.errors!['required']
+                  && loginForm.get('password')!.touched">
+                  Password must not be left blank
+            </span>
+            <span class="form-message font-12 text-danger"
+                  *ngIf="loginForm.get('password')!.errors !== null
+                  && loginForm.get('password')!.errors!['minlength']
+                  && loginForm.get('password')!.touched">
+                  Must be at least 6 character
+            </span>
+          </div>
+        </div>
+        <div class="form-group d-flex justify-content-between mt-2">
+          <div class="remember-me d-flex align-items-center">
+            <input value="true" type="checkbox"
+                   [(ngModel)]="rememberMe" [ngModelOptions]="{standalone: true}">
+            <span class="font-12 ms-1">Remember me</span>
+          </div>
+          <a class="font-12 pointer">Forgot password</a>
+        </div>
+      </div>
+      <div class="modal-footer p-0">
+        <button class="modal-submit m-0" type="submit">Login</button>
+      </div>
+      <div class="social-login">
+        <h6 style="font-size: 13.5px;" class="text-center mt-4 mb-0">Or</h6>
+        <p class="text-center font-12 m-0">Login with social media</p>
+        <div class="social-media d-flex justify-content-center mb-3" style="font-size: 30px">
+          <div class="me-2 social-item font-30 facebook"><fa-icon [icon]="faFacebook"></fa-icon></div>
+          <div class="ms-2 social-item font-30 google"><fa-icon [icon]="faGoogle"></fa-icon></div>
+        </div>
+      </div>
+    </form>
+
+
+    <form id="register-form" class="modal-tab-other" *ngIf="!isLogin" [formGroup]="registerForm" (ngSubmit)="createAccount()">
+      <h2 class="d-block text-center modal-header my-3">Register</h2>
+      <div class="modal-body p-0 mb-3">
+        <div class="form-group text-start">
+          <label class="modal-label my-1" for="c-username">Username:</label><br>
+          <input (input)="clearValid($event, checkUserName)" (blur)="checkValid($event, checkUserName)" class="modal-input no-border-radius" name="username" type="text" id="c-username"
+                 placeholder="Username" autocomplete="off" formControlName="username">
+          <div #checkUserName>
+            <span class="form-message font-12 text-danger"
+                  *ngIf="registerForm.get('username')!.errors !== null
+                  && registerForm.get('username')!.errors!['required']
+                  && registerForm.get('username')!.touched">
+                  Username must not be left blank
+            </span>
+            <span class="form-message font-12 text-danger"
+                  *ngIf="registerForm.get('username')!.errors !== null
+                  && registerForm.get('username')!.errors!['minlength']
+                  && registerForm.get('username')!.touched">
+                  Must be at least 6 character
+            </span>
+            <span class="form-message font-12 text-danger"
+                  *ngIf="registerForm.get('username')!.errors !== null
+                  && registerForm.get('username')!.errors!['usernameExist']
+                  && registerForm.get('username')!.touched">
+                  Username already exist
+            </span>
+          </div>
+        </div>
+        <div class="form-group text-start">
+          <label class="modal-label my-1" for="c-password">Password:</label><br>
+          <input (input)="clearValid($event, checkPass)" (blur)="checkValid($event, checkPass)" class="modal-input no-border-radius" name="password" type="password" id="c-password"
+                 placeholder="Password" autocomplete="off" formControlName="password">
+          <div #checkPass>
+            <span class="form-message font-12 text-danger"
+                  *ngIf="registerForm.get('password')!.errors !== null
+                  && registerForm.get('password')!.errors!['required']
+                  && registerForm.get('password')!.touched">
+                  Password must not be left blank
+            </span>
+            <span class="form-message font-12 text-danger"
+                  *ngIf="registerForm.get('password')!.errors !== null
+                  && registerForm.get('password')!.errors!['minlength']
+                  && registerForm.get('password')!.touched">
+                  Must be at least 6 character
+            </span>
+          </div>
+        </div>
+        <div class="form-group text-start">
+          <label class="modal-label my-1" for="re-password">Re-password:</label><br>
+          <input (input)="clearValid($event, checkPassMess)" (blur)="checkValid($event, checkPassMess)" class="modal-input no-border-radius" name="re-password" type="password" id="re-password"
+                 placeholder="Re-password" autocomplete="off" formControlName="confirmPassword">
+          <div #checkPassMess>
+            <span class="form-message font-12 text-danger"
+                  *ngIf="registerForm.get('confirmPassword')!.errors !== null
+                  && registerForm.get('confirmPassword')!.errors!['notMatch']
+                  && registerForm.get('confirmPassword')!.touched">
+                  Confirm password must be matched
+            </span>
+            <span class="form-message font-12 text-danger"
+                  *ngIf="registerForm.get('confirmPassword')!.errors !== null
+                  && registerForm.get('confirmPassword')!.errors!['required']
+                  && registerForm.get('confirmPassword')!.touched">
+                  Confirm password must not be left blank
+            </span>
+          </div>
+        </div>
+        <div class="form-group text-start">
+          <label class="modal-label my-1" for="email">Email:</label><br>
+          <input (input)="clearValid($event, checkEmail)" (blur)="checkValid($event, checkEmail)" class="modal-input no-border-radius" name="email" type="text" id="email"
+                 placeholder="Email" autocomplete="off" formControlName="email">
+          <div #checkEmail>
+            <span class="form-message font-12 text-danger"
+                  *ngIf="registerForm.get('email')!.errors !== null
+                  && registerForm.get('email')!.errors!['email']
+                  && registerForm.get('email')!.touched">
+                  Must be email
+            </span>
+            <span class="form-message font-12 text-danger"
+                  *ngIf="registerForm.get('email')!.errors !== null
+                  && registerForm.get('email')!.errors!['required']
+                  && registerForm.get('email')!.touched">
+                  Email must not be left blank
+            </span>
+            <span class="form-message font-12 text-danger"
+                  *ngIf="registerForm.get('email')!.errors !== null
+                  && registerForm.get('email')!.errors!['emailExist']
+                  && registerForm.get('email')!.touched">
+                  Email already exist
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer p-0">
+        <button class="modal-submit m-0" type="submit">Create account</button>
+        <div class="p-2 mb-0"></div>
+      </div>
+    </form>
+  </div>
+</div>

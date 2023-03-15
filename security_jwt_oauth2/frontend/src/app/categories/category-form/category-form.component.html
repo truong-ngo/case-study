@@ -1,0 +1,15 @@
+<form id="login-form" class="modal-tab-active"
+      [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+  <h2 class="d-block text-center modal-header m-0">{{ !editMode ? 'Add category' : 'Edit category' }}</h2>
+  <div class="modal-body p-0 mb-3">
+    <div class="form-group">
+      <label class="modal-label my-1" for="name">Name:</label><br>
+      <input class="modal-input no-border-radius" name="name" type="text" id="name" placeholder="Name"
+             autocomplete="off" formControlName="name">
+      <span class="form-message font-12"></span>
+    </div>
+  </div>
+  <div class="modal-footer p-0 d-flex justify-content-between mb-3">
+    <button class="modal-submit m-0" type="submit">Save</button>
+  </div>
+</form>
