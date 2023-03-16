@@ -1,7 +1,9 @@
 import {Injectable} from "@angular/core";
 import {HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest} from "@angular/common/http";
-import {AuthResponse, AuthService} from "./auth.service";
+import {AuthService} from "./auth.service";
 import {exhaustMap, take} from "rxjs";
+import {SocialUser} from "../model/social-user";
+import {AuthResponse} from "../model/auth-response";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -10,7 +12,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     return this.authService.userChange.pipe(take(1), exhaustMap(
-      (data: AuthResponse | null) => {
+      (data: AuthResponse | SocialUser | null) => {
         if (!data) {
           return next.handle(req);
         } else {

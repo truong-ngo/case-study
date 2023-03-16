@@ -1,24 +1,17 @@
 import {Injectable} from "@angular/core";
 import {environment} from "../../environments/environment";
-import {Role} from "../model/role";
 import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, Subject, tap} from "rxjs";
 import {Registration} from "../model/registration";
+import {SocialUser} from "../model/social-user";
+import {AuthResponse} from "../model/auth-response";
 
 const url = environment.apiUrl;
-
-export interface AuthResponse {
-  id: string,
-  username: string,
-  roles: Role[],
-  tokenType: string,
-  accessToken: string
-}
 
 @Injectable()
 export class AuthService {
   token?: string
-  userChange = new BehaviorSubject<AuthResponse | null>(null);
+  userChange = new BehaviorSubject<AuthResponse | SocialUser | null>(null);
   usernameSub = new Subject<string[]>();
   emailSub = new Subject<string[]>();
 
@@ -27,6 +20,10 @@ export class AuthService {
 
   login(username: string, password: string) {
     return this.http.post<AuthResponse>(`${url}/auth/login`, {username: username, password: password})
+  }
+
+  googleLogin(user: SocialUser) {
+    return this.http.post<SocialUser>(`${url}/auth/google-login`, user);
   }
 
   register(register: Registration) {

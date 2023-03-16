@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from "../auth/auth.service";
 import {Subscription} from "rxjs";
 import {Router} from "@angular/router";
+import {GoogleLoginProvider, SocialAuthService} from "@abacritt/angularx-social-login";
 
 @Component({
   selector: 'app-header',
@@ -13,7 +14,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   loginSub = new Subscription()
 
   constructor(private authService: AuthService,
-              private router: Router) {
+              private router: Router,
+              private socialAuthService: SocialAuthService) {
 
   }
 
@@ -33,8 +35,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   logout() {
     this.authService.userChange.next(null);
+    this.socialAuthService.signOut(true).then();
     sessionStorage.removeItem('userData')
     localStorage.removeItem('userData')
-    this.router.navigate(['/home'])
+    this.router.navigate(['/home']).finally()
   }
 }

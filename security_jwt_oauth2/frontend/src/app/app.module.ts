@@ -31,6 +31,12 @@ import {AngularFireModule} from "@angular/fire/compat";
 import {environment} from "../environments/environment";
 import {ScreenTrackingService,UserTrackingService} from '@angular/fire/analytics';
 import {FileUploadService} from "./service/file-upload.service";
+import {
+    GoogleLoginProvider,
+    GoogleSigninButtonModule,
+    SocialAuthServiceConfig,
+    SocialLoginModule
+} from "@abacritt/angularx-social-login";
 
 @NgModule({
   declarations: [
@@ -47,21 +53,40 @@ import {FileUploadService} from "./service/file-upload.service";
     SortPipe,
     FilterPipe,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FontAwesomeModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    [SweetAlert2Module.forRoot()],
-    FormsModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireStorageModule,
-    AngularFireDatabaseModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FontAwesomeModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        [SweetAlert2Module.forRoot()],
+        FormsModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireStorageModule,
+        AngularFireDatabaseModule,
+        SocialLoginModule,
+        GoogleSigninButtonModule
+    ],
   providers: [ProductService, CategoryService, ProductResolver, CategoryResolver, AuthService, AuthGuard,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
-    ScreenTrackingService,UserTrackingService, FileUploadService
+    ScreenTrackingService,UserTrackingService, FileUploadService,
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '620692137780-v6p6mghd2ea2t5hh8i5sqr1roe226361.apps.googleusercontent.com'
+            )
+          },
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig,
+    }
   ],
   bootstrap: [AppComponent]
 })

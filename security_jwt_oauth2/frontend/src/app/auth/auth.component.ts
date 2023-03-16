@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {
   faFacebookF,
   faGooglePlusG,
@@ -11,8 +11,11 @@ import {
 } from "@angular/forms";
 import {AuthService} from "./auth.service";
 import {Router} from "@angular/router";
-import {map, Observable} from "rxjs";
+import {map, Observable, Subscription} from "rxjs";
 import {Registration} from "../model/registration";
+import {GoogleLoginProvider, SocialAuthService} from "@abacritt/angularx-social-login";
+import {SocialUser} from "../model/social-user";
+import * as $ from "jquery"
 
 
 @Component({
@@ -20,10 +23,11 @@ import {Registration} from "../model/registration";
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css']
 })
-export class AuthComponent implements OnInit {
+export class AuthComponent implements OnInit, OnDestroy {
   rememberMe?: string;
   username?: string[];
   email?: string[]
+  socialSub = new Subscription();
 
   isLogin = true
   faFacebook = faFacebookF
@@ -50,10 +54,28 @@ export class AuthComponent implements OnInit {
 
   constructor(private authService: AuthService,
               private router: Router,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private socialAuthService: SocialAuthService) {
   }
 
   ngOnInit() {
+    this.socialSub = this.socialAuthService.authState.subscribe((user) => {
+      if (user) {
+        let socialUser = user as SocialUser;
+        socialUser.tokenType = 'Google'
+        socialUser.accessToken = socialUser.idToken;
+        this.authService.userChange.next(socialUser)
+        this.authService.googleLogin(socialUser).subscribe(
+          (data) => {
+            let saveData = data as SocialUser
+            saveData.tokenType = 'Google'
+            saveData.accessToken = socialUser.idToken;
+            localStorage.setItem('userData', JSON.stringify(saveData))
+            this.router.navigate(['/products']).finally()
+          }
+        )
+      }
+    });
     this.registerForm.controls.password.valueChanges.subscribe(
       () => {
         this.registerForm.controls.confirmPassword.updateValueAndValidity();
@@ -85,7 +107,7 @@ export class AuthComponent implements OnInit {
     if (!this.loginForm.valid) {
       Object.keys(this.loginForm.controls).forEach(field => {
         const control = this.loginForm.get(field);
-        control?.markAsTouched({ onlySelf: true });
+        control?.markAsTouched({onlySelf: true});
       });
       return
     }
@@ -101,13 +123,11 @@ export class AuthComponent implements OnInit {
         }
         this.router.navigate(['/products']).finally()
       }, error => {
-        console.log(error)
       }
     )
   }
 
   createAccount() {
-    console.log(this.registerForm)
     if (this.registerForm.invalid) {
       Object.keys(this.registerForm.controls).forEach(field => {
         const control = this.registerForm.get(field);
@@ -184,6 +204,10 @@ export class AuthComponent implements OnInit {
         return null;
       }
     ))
+  }
+
+  ngOnDestroy(): void {
+    this.socialSub.unsubscribe();
   }
 }
 
