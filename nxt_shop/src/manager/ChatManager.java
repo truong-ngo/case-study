@@ -1,15 +1,10 @@
 package manager;
 
-import input.Input;
 import io_file.IOFile;
-import printer.Printer;
 import shop_item.ChatSession;
-import shop_item.Messenger;
 import shop_item.User;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Scanner;
 
 public class ChatManager {
     private static ChatManager instance;
